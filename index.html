@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journeys to DevConnect</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {}
+            }
+        }
+    </script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="h-screen w-screen overflow-hidden">
+    <div id="map" class="h-full w-full"></div>
+    <div id="loading" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg hidden">
+        Loading events...
+    </div>
+    <div id="error" class="absolute top-4 left-4 bg-red-100 p-4 rounded-lg shadow-lg hidden">
+        Error loading events. Please try again later.
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+</html> 

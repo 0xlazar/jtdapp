@@ -1,0 +1,52 @@
+{
+    "events": [
+        {
+            "id": 1,
+            "name": "EthCC",
+            "date": "2024-07-08",
+            "location": {
+                "lat": 48.8566,
+                "lng": 2.3522,
+                "city": "Paris",
+                "country": "France"
+            },
+            "link": "https://ethcc.io/"
+        },
+        {
+            "id": 2,
+            "name": "EthCluj",
+            "date": "2024-06-20",
+            "location": {
+                "lat": 46.7712,
+                "lng": 23.6236,
+                "city": "Cluj-Napoca",
+                "country": "Romania"
+            },
+            "link": "https://ethcluj.com/"
+        },
+        {
+            "id": 3,
+            "name": "Eth Belgrade",
+            "date": "2024-06-03",
+            "location": {
+                "lat": 44.7866,
+                "lng": 20.4489,
+                "city": "Belgrade",
+                "country": "Serbia"
+            },
+            "link": "https://ethbelgrade.rs/"
+        },
+        {
+            "id": 4,
+            "name": "DevConnect",
+            "date": "2024-11-18",
+            "location": {
+                "lat": -34.6037,
+                "lng": -58.3816,
+                "city": "Buenos Aires",
+                "country": "Argentina"
+            },
+            "link": "https://devconnect.org/"
+        }
+    ]
+} 
