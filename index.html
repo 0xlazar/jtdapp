@@ -30,11 +30,40 @@
         <div id="error" class="absolute top-4 left-4 bg-red-100 p-4 rounded-lg shadow-lg hidden z-20">
             Error loading events. Please try again later.
         </div>
+        <!-- View Toggle Button -->
+        <button id="view-toggle" class="absolute top-4 right-4 bg-white p-2 rounded-lg shadow-lg z-20 flex items-center space-x-2 hover:bg-gray-50 transition-colors">
+            <span id="view-icon">📋</span>
+            <span id="view-text">List View</span>
+        </button>
         <!-- Map container -->
         <div id="map-area" class="absolute inset-0 z-0">
             <div id="map" class="w-full h-full"></div>
         </div>
-        <!-- Overlay container for future UI (list view, filters, etc.) -->
+        <!-- List View -->
+        <div id="list-view" class="absolute inset-0 bg-white z-10 transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="h-full flex flex-col">
+                <!-- List Header -->
+                <div class="p-4 border-b flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <h2 class="text-xl font-bold">Events</h2>
+                        <button id="sort-toggle" class="flex items-center space-x-1 text-gray-600 hover:text-gray-800 transition-colors">
+                            <span id="sort-icon">↓</span>
+                            <span id="sort-text">Latest First</span>
+                        </button>
+                    </div>
+                    <button id="close-list" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Events List -->
+                <div id="events-list" class="flex-1 overflow-y-auto">
+                    <!-- Events will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        <!-- Overlay container for future UI (filters, etc.) -->
         <div id="ui-overlay" class="absolute inset-0 z-10 pointer-events-none"></div>
     </main>
     <!-- Event Details Popup -->
@@ -50,20 +79,89 @@
             <div id="popup-content" class="mt-2"></div>
         </div>
     </div>
+
+    <!-- Coming Soon Popup -->
+    <div id="coming-soon-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4 text-center">
+            <h3 class="text-xl font-bold mb-2">Coming Soon!</h3>
+            <p class="text-gray-600 mb-4">This feature is under development.</p>
+            <button id="close-coming-soon" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Ecosystem Hub Popup -->
+    <div id="ecosystem-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-2xl mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Ecosystem Hub <span class="text-sm font-normal text-gray-500">(Coming Soon)</span></h3>
+                <button id="close-ecosystem" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-6">
+                <section>
+                    <h4 class="font-semibold text-lg mb-2">📢 Latest Updates</h4>
+                    <p class="text-gray-600">Stay informed about new events added to the map, ecosystem announcements, and exciting opportunities in the community.</p>
+                </section>
+                <section>
+                    <h4 class="font-semibold text-lg mb-2">🎯 Host Your Event</h4>
+                    <p class="text-gray-600">Learn how to organize and host your own events and gatherings leading up to DevConnect. Get support, resources, and connect with other organizers.</p>
+                </section>
+                <section>
+                    <h4 class="font-semibold text-lg mb-2">💼 Opportunities</h4>
+                    <p class="text-gray-600">Discover active grants, internships, and other opportunities in the ecosystem. Stay updated on new openings and application deadlines.</p>
+                </section>
+                <section>
+                    <h4 class="font-semibold text-lg mb-2">🤝 Community Support</h4>
+                    <p class="text-gray-600">Find resources, guidelines, and support for organizing community events. Connect with experienced organizers and get your questions answered.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Popup -->
+    <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Welcome traveler!</h3>
+                <button id="close-welcome" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <p class="text-gray-600">Your gateway to the Ethereum ecosystem:</p>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                    <li>Discover Ethereum aligned, grassroots and community organized events across the globe leading up to DevConnect</li>
+                    <li>Stay updated on everything Ethereum ecosystem related (opportunities, grants, announcements)</li>
+                    <li>Connect with the community</li>
+                </ul>
+            </div>
+            <button id="got-it-button" class="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                Start Your Journey to DevConnect
+            </button>
+        </div>
+    </div>
+
     <footer class="w-full h-12 bg-white shadow flex justify-around items-center fixed bottom-0 left-0 z-40">
         <button class="flex flex-col items-center text-blue-600">
             <span>🗺️</span>
             <span class="text-xs">Map</span>
         </button>
-        <button class="flex flex-col items-center text-gray-400" disabled>
-            <span>📚</span>
-            <span class="text-xs">Resources</span>
+        <button id="ecosystem-button" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors">
+            <span>🌱</span>
+            <span class="text-xs">Ecosystem</span>
         </button>
-        <button class="flex flex-col items-center text-gray-400" disabled>
+        <a href="https://t.me/+127miY3a6mU0Y2E0" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors">
             <span>👥</span>
             <span class="text-xs">Community</span>
-        </button>
-        <button class="flex flex-col items-center text-gray-400" disabled>
+        </a>
+        <button id="profile-button" class="flex flex-col items-center text-gray-400">
             <span>👤</span>
             <span class="text-xs">Profile</span>
         </button>

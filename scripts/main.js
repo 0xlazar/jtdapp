@@ -1,5 +1,34 @@
 // scripts/main.js
 
+// Welcome Popup functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if user has seen the welcome popup before
+    if (!localStorage.getItem('welcomeSeen')) {
+        const welcomePopup = document.getElementById('welcome-popup');
+        welcomePopup.classList.remove('hidden');
+
+        // Close button functionality
+        document.getElementById('close-welcome').addEventListener('click', function() {
+            welcomePopup.classList.add('hidden');
+            localStorage.setItem('welcomeSeen', 'true');
+        });
+
+        // Got it button functionality
+        document.getElementById('got-it-button').addEventListener('click', function() {
+            welcomePopup.classList.add('hidden');
+            localStorage.setItem('welcomeSeen', 'true');
+        });
+
+        // Close when clicking outside
+        welcomePopup.addEventListener('click', function(e) {
+            if (e.target === welcomePopup) {
+                welcomePopup.classList.add('hidden');
+                localStorage.setItem('welcomeSeen', 'true');
+            }
+        });
+    }
+});
+
 // Register service worker
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -12,6 +41,42 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// Coming Soon Popup functionality
+document.getElementById('profile-button').addEventListener('click', function() {
+    const popup = document.getElementById('coming-soon-popup');
+    popup.classList.remove('hidden');
+});
+
+document.getElementById('close-coming-soon').addEventListener('click', function() {
+    const popup = document.getElementById('coming-soon-popup');
+    popup.classList.add('hidden');
+});
+
+// Close popup when clicking outside
+document.getElementById('coming-soon-popup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.add('hidden');
+    }
+});
+
+// Ecosystem Hub Popup functionality
+document.getElementById('ecosystem-button').addEventListener('click', function() {
+    const popup = document.getElementById('ecosystem-popup');
+    popup.classList.remove('hidden');
+});
+
+document.getElementById('close-ecosystem').addEventListener('click', function() {
+    const popup = document.getElementById('ecosystem-popup');
+    popup.classList.add('hidden');
+});
+
+// Close ecosystem popup when clicking outside
+document.getElementById('ecosystem-popup').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.add('hidden');
+    }
+});
 
 // Get UI elements
 const loadingElement = document.getElementById('loading');
@@ -63,11 +128,108 @@ document.getElementById('close-popup').addEventListener('click', function() {
     popup.classList.add('pointer-events-none');
 });
 
-// Function to load events from JSON
+// List View functionality
+let currentView = 'map'; // 'map' or 'list'
+let currentSort = 'latest'; // 'latest' or 'earliest'
+const viewToggle = document.getElementById('view-toggle');
+const viewIcon = document.getElementById('view-icon');
+const viewText = document.getElementById('view-text');
+const listView = document.getElementById('list-view');
+const closeList = document.getElementById('close-list');
+const eventsList = document.getElementById('events-list');
+const sortToggle = document.getElementById('sort-toggle');
+const sortIcon = document.getElementById('sort-icon');
+const sortText = document.getElementById('sort-text');
+
+// Toggle between map and list views
+viewToggle.addEventListener('click', function() {
+    if (currentView === 'map') {
+        // Switch to list view
+        listView.classList.remove('translate-x-full');
+        viewIcon.textContent = '🗺️';
+        viewText.textContent = 'Map View';
+        currentView = 'list';
+    } else {
+        // Switch to map view
+        listView.classList.add('translate-x-full');
+        viewIcon.textContent = '📋';
+        viewText.textContent = 'List View';
+        currentView = 'map';
+    }
+});
+
+// Toggle sort order
+sortToggle.addEventListener('click', function() {
+    if (currentSort === 'latest') {
+        currentSort = 'earliest';
+        sortIcon.textContent = '↑';
+        sortText.textContent = 'Earliest First';
+    } else {
+        currentSort = 'latest';
+        sortIcon.textContent = '↓';
+        sortText.textContent = 'Latest First';
+    }
+    // Re-render the list with new sort order
+    renderEventList(window.currentEvents);
+});
+
+// Close list view
+closeList.addEventListener('click', function() {
+    listView.classList.add('translate-x-full');
+    viewIcon.textContent = '📋';
+    viewText.textContent = 'List View';
+    currentView = 'map';
+});
+
+// Function to parse date string to Date object
+function parseDate(dateStr) {
+    // Assuming date format is "Month DD, YYYY"
+    return new Date(dateStr);
+}
+
+// Function to render event list
+function renderEventList(events) {
+    // Store events globally for re-sorting
+    window.currentEvents = events;
+    
+    // Sort events based on current sort order
+    const sortedEvents = [...events].sort((a, b) => {
+        const dateA = parseDate(a.date);
+        const dateB = parseDate(b.date);
+        return currentSort === 'latest' ? dateB - dateA : dateA - dateB;
+    });
+
+    eventsList.innerHTML = sortedEvents.map(event => `
+        <div class="p-4 border-b hover:bg-gray-50 cursor-pointer transition-colors" 
+             data-lat="${event.location.lat}" 
+             data-lng="${event.location.lng}">
+            <h3 class="font-semibold">${event.name}</h3>
+            <p class="text-gray-600 text-sm">${event.date}</p>
+            <p class="text-gray-600 text-sm">${event.location.city}, ${event.location.country}</p>
+            <a href="${event.link}" target="_blank" class="text-blue-500 text-sm hover:text-blue-600">Visit Website</a>
+        </div>
+    `).join('');
+
+    // Add click handlers to list items
+    eventsList.querySelectorAll('div').forEach(item => {
+        item.addEventListener('click', function() {
+            const lat = parseFloat(this.dataset.lat);
+            const lng = parseFloat(this.dataset.lng);
+            map.setView([lat, lng], 12);
+            
+            // Switch to map view
+            listView.classList.add('translate-x-full');
+            viewIcon.textContent = '📋';
+            viewText.textContent = 'List View';
+            currentView = 'map';
+        });
+    });
+}
+
+// Modify the loadEvents function to also render the list
 async function loadEvents() {
     setLoading(true);
     try {
-        // Add timestamp and random number to prevent caching
         const cacheBuster = `t=${Date.now()}&r=${Math.random()}`;
         console.log('Fetching events with cache buster:', cacheBuster);
         const response = await fetch(`data/events.json?${cacheBuster}`, {
@@ -95,6 +257,10 @@ async function loadEvents() {
             });
         });
         setLoading(false);
+        
+        // Render the list view
+        renderEventList(data.events);
+        
         return data.events;
     } catch (err) {
         console.error('Error loading events:', err);
@@ -138,11 +304,6 @@ function addEventMarkers(events) {
             const popupContent = document.getElementById('popup-content');
             popupContent.innerHTML = `
                 <div class="text-center">
-                    <img src="${event.logo}" 
-                         alt="${event.name} logo" 
-                         class="mx-auto mb-2" 
-                         style="width:64px;height:64px;object-fit:contain;"
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/64?text=${encodeURIComponent(event.name)}';">
                     <h3 class="font-bold text-lg">${event.name}</h3>
                     <p class="text-gray-600">${event.date}</p>
                     <p class="text-gray-600">${event.location.city}, ${event.location.country}</p>
