@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
   - Interactive event items
   - Smooth transitions
   - Automatic map centering on event click
+  - Responsive design (30% width on desktop, full width on mobile)
 
 ### Changed
 - Modified event marker click behavior
@@ -46,6 +47,10 @@ All notable changes to this project will be documented in this file.
   - Improved mobile responsiveness
   - Enhanced accessibility
   - Better visual hierarchy
+- Enhanced list view layout:
+  - Optimized for desktop viewing
+  - Added shadow for depth
+  - Improved visual separation from map
 
 ### Technical Details
 - Added CSS classes for popup transitions:
@@ -70,6 +75,7 @@ All notable changes to this project will be documented in this file.
   - Date parsing and sorting
   - Event list rendering
   - Map integration
+  - Responsive layout using Tailwind breakpoints
 
 ### Files Modified
 - index.html
