@@ -2,18 +2,20 @@
 
 ## 🧱 Tech Stack Summary
 
-- **Frontend:** Vanilla JavaScript, Tailwind CSS, HTML
+- **Frontend:** HTML + Tailwind CSS
 - **Map:** Leaflet.js
-- **Backend (Optional for Phase 1):** Supabase (Auth, DB)
-- **Hosting:** Netlify (default; free, simple, and reliable for static PWAs)
+- **Data:** JSON (→ Supabase later)
+- **Search/Filter:** Vanilla JS filtering
+- **Auth (later):** Supabase auth
+- **Hosting:** Netlify
 - **Dev Environment:** Cursor.dev
 
-## 🔄 Development Workflow (in Cursor)
+## 🔄 Development Workflow
 
-1. Use `todo:` comments to generate UI and logic for each step
-2. Start each feature with a minimal version
-3. Use Supabase only when needed (start with static JSON)
-4. Deploy regularly to test real-world usability using **Netlify**
+1. Use `// todo:` comments in Cursor to generate components and logic
+2. Start small (map + markers), build confidence, then expand
+3. Use ChatGPT or Cursor for help with UI, filters, and event loading logic
+4. Prioritize UI and UX polish (hover states, mobile view, etc.)
 
 ## 🚫 Out of Scope (for now)
 - User authentication (before Phase 3)
@@ -22,118 +24,166 @@
 
 ---
 
-## 🧭 Goal of the App
+## 🧭 App Structure (UI Layout)
 
-Create a simple and fast progressive web app that shows curated Ethereum events around the world leading up to **DevConnect**, in Buenos Aires. Users can view these events on a map. Later stages will allow them to curate their own "journeys," create profiles, and connect with others.
-
----
-
-## 💡 Phase 1 – "Event Discovery Map" (MVP)
-### Core Features
-- [x] Full-screen Leaflet.js map
-- [x] Load static JSON with Ethereum event data
-- [x] Place map pins for each event
-- [x] On pin click: show event details (name, logo icon, date, location, link)
-- [x] Tailwind CSS styling for responsiveness
-
-### Map Restrictions
-- [x] Disable map world wrapping and restrict panning to a single global map view
-- [x] Restrict map zoom so user cannot zoom out of the map's intended scope
-- [x] Map displays only English labeling
-
-### Validation
-- [x] Test and validate all features in this phase
+```
++--------------------------------------------------+
+| Journey to DevConnect                            | ← App Title (top center)
++--------------------------------------------------+
+|                                                  |
+|  🗺️ Map View or 📄 List View (Toggle - top right)  |
+|                                                  |
+|  📍 Map with event markers                        |
+|                                                  |
+|  🗂️ List view with filters and search (optional)  |
+|                                                  |
++--------------------------------------------------+
+| 🗺️ Map | 👥 Community | 📚 Resources | 👤 Profile     | ← Bottom Nav Bar
++--------------------------------------------------+
+```
 
 ---
 
-## 🛠️ Phase 1.5 – Map & UI Improvements (Pre-Journey)
+## ✅ Phase 1 – Foundation & Map View MVP
 
-Before starting user journeys and profiles, implement the following:
-- [ ] Add a togglable list view in the top right corner; clicking it slides in a list from the right
-- [ ] List view shows all events (sorted by date), with a filter bar for event filtering
-- [ ] Add a footer bar with two icons: one for map/list (event discovery), one for profiles (future use)
-- [ ] Add a hamburger menu in the top right corner that expands to show:
-    - [ ] Community (link to Telegram)
-    - [ ] News/Resources (list grants, news, etc.)
-- [ ] Update map to have a futuristic and minimalistic look (custom tile style, UI polish)
-- [ ] Use small glowing orb markers for events (custom SVG/CSS)
-- [ ] Implement marker clustering: markers merge/unmerge based on zoom, with a count indicator
-- [ ] Highlight Argentina on the map with a neon or colored polygon outline (GeoJSON layer)
-- [ ] Add the DevConnect logo as a special marker for Buenos Aires/Argentina
+### 🎯 Goal
+A fully working map-based view with clickable markers and event info.
 
----
-
-## 🆕 PWA Enhancement (after Phase 1.5, before Phase 2)
-- [ ] Make it a PWA (manifest + service worker)
-
----
-
-## 🆕 Optional Backend Enhancement (after PWA, before Phase 2)
-- [ ] Use Supabase to fetch event data from a table
+### 🔧 What to Build
+- [x] Map view using Leaflet.js
+- [x] Static event data from JSON file
+- [x] Markers on map for each event
+- [x] Click marker → show floating window with:
+  - [x] Name
+  - [x] Dates
+  - [x] Tags
+  - [x] City + Country
+  - [x] Website URL
+- [x] App title at top: Journey to DevConnect
+- [x] Footer navbar (non-functional for now):
+  - [x] Map 🗺️ (active)
+  - [x] Community 👥 (greyed out)
+  - [x] Resources 📚 (greyed out)
+  - [x] Profile 👤 (greyed out)
 
 ---
 
-## ✈️ Phase 2 – "Create Your Journey"
-### Core Features
-- [ ] "Add to Journey" button on each event popup
-- [ ] Save selected events in localStorage (no login)
-- [ ] Create a "My Journey" view that displays selected events
-- [ ] Generate a shareable URL (use query string or short ID)
+## 🔁 Phase 2 – List View + Filters + Search
 
-### Optional Features
-- [ ] Store journey data in Supabase
-- [ ] Allow editing/removing events from journey
-- [ ] Add event to calendar (e.g. Google Calendar)
+### 🎯 Goal
+Enable users to explore the same events in a searchable, filterable list view.
 
-### Validation
-- [ ] Test and validate all features in this phase
-
----
-
-## 🧑‍🚀 Phase 3 – "User Profiles & Login"
-
-### 🎯 Objective:
-Let users create accounts to save and sync their journeys across devices.
-
-### 🧰 Features to Build in Cursor:
-- [ ] Email or wallet-based sign-up/login (via Supabase)
-- [ ] Profile page with photo, display name, social link
-- [ ] Save journey in user account (not just localStorage)
-- [ ] Public profile with shareable link (e.g. `/profile/username`)
-- [ ] Calendar view in the user's profile
+### 🔧 What to Build
+- [ ] Toggle button to switch between Map ↔ List
+- [ ] List view of events, sorted by date
+- [ ] Top filter/search bar with:
+  - [ ] Month selector (e.g. May, June, July)
+  - [ ] Region filter (e.g. Europe, Asia)
+  - [ ] Cost (free/paid)
+  - [ ] Volunteership opportunities
+  - [ ] Search box (by keyword/title)
 
 ---
 
-## 🌍 Phase 4 – "Social Layer"
+## 👥 Phase 3 – User Profiles & Journeys (Optional)
 
-### 🎯 Objective:
-Enable users to connect with others on similar journeys.
+Build this once you're comfortable with frontend and want to dive into auth, state, and databases.
 
-### 🧰 Features to Build in Cursor:
-- [ ] See who else is attending the same events
-- [ ] Follow/Request to connect with others
-- [ ] Optional: Add a chat or message feature for mutual attendees
-- [ ] Notifications (event reminders, friend updates)
+### 🔧 Features
+- [ ] "Add to Journey" button on event cards
+- [ ] Save selected events to localStorage
+- [ ] Profile page with journey list
+- [ ] Shareable journey view (/j/username123)
+- [ ] Supabase login with email or wallet
 
 ---
 
-## ✅ Priority Notes
+## 🤝 Phase 4 – Community & Social Layer
 
-- Start small and ship fast: just a map + static events first
-- Build one feature per phase, validate and test it
-- Avoid premature complexity (auth, messaging, etc.)
+Only tackle this once basic discovery + profile features are done.
+
+### 🔧 Features
+- [ ] See others attending the same events
+- [ ] View shared journeys
+- [ ] Connect via DM, Telegram links, or Discord usernames
+
+---
+
+## 💡 Development Tips
+
+1. Start small and ship fast: just a map + static events first
+2. Build one feature per phase, validate and test it
+3. Avoid premature complexity (auth, messaging, etc.)
+4. Focus on UI/UX polish from the start
+5. Test thoroughly on mobile devices
+6. Keep the codebase clean and well-documented
 
 ---
 
 ## 🆕 General Enhancements & Future Considerations
 
-- [ ] Ensure accessibility (a11y) for all features (keyboard navigation, screen reader support, color contrast)
-- [ ] Implement robust error and loading state handling for all async actions (e.g., Supabase, PWA, etc.)
-- [ ] Manual and (optional) automated testing for critical user flows
-- [ ] (Optional) Add basic analytics/usage tracking (privacy-friendly, opt-in)
-- [ ] (Optional) Admin/event submission and management features
-- [ ] (Optional) Internationalization (i18n) for multi-language support
+- [ ] Ensure accessibility (a11y) for all features
+- [ ] Implement robust error and loading state handling
+- [ ] Manual and automated testing for critical user flows
+- [ ] Add basic analytics/usage tracking (privacy-friendly, opt-in)
+- [ ] Admin/event submission and management features
+- [ ] Internationalization (i18n) for multi-language support
 - [ ] Explicitly test and optimize for mobile/touch devices
 
+---
+
+## 📦 Event Data Schema & Extensibility
+
+### Minimal Event Fields (MVP)
+- `name` (string)
+- `date` (string, ISO format recommended)
+- `location` (object)
+  - `city` (string)
+  - `country` (string)
+- `link` (string)
+- `logo` (URL string)
+
+### Planned/Optional Future Fields
+- `cost` (string: "free", "paid", or both)
+- `volunteership` (boolean or string: true/false or "yes"/"no")
+- `region` (string: e.g., "Europe", "Asia")
+- `blockchain` (array of strings: ["Ethereum", "Polygon", ...])
+- `tags` (array of strings: ["conference", "hackathon", ...])
+- `description` (string)
+- `socials` (object: e.g., `{ "twitter": "...", "telegram": "...", "discord": "..." }`)
+
+### Approach
+- Start with the minimal schema for MVP.
+- Add new fields as needed; old events can omit them.
+- Code should handle missing fields gracefully.
+- When moving to a database (e.g., Supabase), add new columns as needed (nullable).
+- For multi-value fields, use arrays.
+
+### Example (future-ready event object)
+```json
+{
+  "id": 1,
+  "name": "EthCC",
+  "date": "2024-07-08",
+  "location": {
+    "city": "Paris",
+    "country": "France",
+    "lat": 48.8566,
+    "lng": 2.3522
+  },
+  "link": "https://ethcc.io/",
+  "logo": "https://ethcc.io/assets/img/logo.svg",
+  "cost": "paid",
+  "volunteership": false,
+  "region": "Europe",
+  "blockchain": ["Ethereum"],
+  "tags": ["conference"],
+  "description": "The largest annual Ethereum conference in Europe.",
+  "socials": {
+    "twitter": "https://twitter.com/ethcc",
+    "telegram": "https://t.me/ethcc"
+  }
+}
+```
 ---
 

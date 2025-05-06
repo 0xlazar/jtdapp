@@ -3,31 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journeys to DevConnect</title>
-    <!-- Tailwind CSS -->
+    <title>Journey to DevConnect</title>
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="description" content="Track and discover blockchain events around the world">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {}
-            }
-        }
-    </script>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+</head>
+<body class="h-screen w-screen bg-gray-50">
+    <header class="w-full py-4 bg-white shadow text-center text-2xl font-bold">
+        Journey to DevConnect
+    </header>
+    <main id="app" class="h-[calc(100vh-112px)] w-full relative overflow-hidden">
+        <!-- Loading indicator -->
+        <div id="loading" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg hidden z-20">
+            Loading events...
+        </div>
+        <!-- Error message -->
+        <div id="error" class="absolute top-4 left-4 bg-red-100 p-4 rounded-lg shadow-lg hidden z-20">
+            Error loading events. Please try again later.
+        </div>
+        <!-- Map container -->
+        <div id="map-area" class="absolute inset-0 z-0">
+            <div id="map" class="w-full h-full"></div>
+        </div>
+        <!-- Overlay container for future UI (list view, filters, etc.) -->
+        <div id="ui-overlay" class="absolute inset-0 z-10 pointer-events-none"></div>
+    </main>
+    <!-- Event Details Popup -->
+    <div id="event-popup" class="fixed bottom-12 left-0 right-0 bg-white shadow-lg rounded-t-2xl transform translate-y-full transition-all duration-300 ease-in-out z-30 opacity-0 pointer-events-none">
+        <div class="p-4">
+            <!-- Close button -->
+            <button id="close-popup" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <!-- Content will be dynamically inserted here -->
+            <div id="popup-content" class="mt-2"></div>
+        </div>
+    </div>
+    <footer class="w-full h-12 bg-white shadow flex justify-around items-center fixed bottom-0 left-0 z-40">
+        <button class="flex flex-col items-center text-blue-600">
+            <span>🗺️</span>
+            <span class="text-xs">Map</span>
+        </button>
+        <button class="flex flex-col items-center text-gray-400" disabled>
+            <span>📚</span>
+            <span class="text-xs">Resources</span>
+        </button>
+        <button class="flex flex-col items-center text-gray-400" disabled>
+            <span>👥</span>
+            <span class="text-xs">Community</span>
+        </button>
+        <button class="flex flex-col items-center text-gray-400" disabled>
+            <span>👤</span>
+            <span class="text-xs">Profile</span>
+        </button>
+    </footer>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-<body class="h-screen w-screen overflow-hidden">
-    <div id="map" class="h-full w-full"></div>
-    <div id="loading" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg hidden">
-        Loading events...
-    </div>
-    <div id="error" class="absolute top-4 left-4 bg-red-100 p-4 rounded-lg shadow-lg hidden">
-        Error loading events. Please try again later.
-    </div>
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <!-- Main JS -->
     <script src="scripts/main.js"></script>
 </body>
 </html> 

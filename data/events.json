@@ -1,52 +1,1044 @@
 {
-    "events": [
-        {
-            "id": 1,
-            "name": "EthCC",
-            "date": "2024-07-08",
-            "location": {
-                "lat": 48.8566,
-                "lng": 2.3522,
-                "city": "Paris",
-                "country": "France"
-            },
-            "link": "https://ethcc.io/"
-        },
-        {
-            "id": 2,
-            "name": "EthCluj",
-            "date": "2024-06-20",
-            "location": {
-                "lat": 46.7712,
-                "lng": 23.6236,
-                "city": "Cluj-Napoca",
-                "country": "Romania"
-            },
-            "link": "https://ethcluj.com/"
-        },
-        {
-            "id": 3,
-            "name": "Eth Belgrade",
-            "date": "2024-06-03",
-            "location": {
-                "lat": 44.7866,
-                "lng": 20.4489,
-                "city": "Belgrade",
-                "country": "Serbia"
-            },
-            "link": "https://ethbelgrade.rs/"
-        },
-        {
-            "id": 4,
-            "name": "DevConnect",
-            "date": "2024-11-18",
-            "location": {
-                "lat": -34.6037,
-                "lng": -58.3816,
-                "city": "Buenos Aires",
-                "country": "Argentina"
-            },
-            "link": "https://devconnect.org/"
-        }
-    ]
+  "events": [
+    {
+      "id": 1,
+      "name": "Zugrama India",
+      "date": "2025-01-05",
+      "location": {
+        "lat": 8.524139,
+        "lng": 76.936638,
+        "city": "Thiruvananthapuram",
+        "country": "India"
+      },
+      "link": "https://zugrama.org/",
+      "logo": null
+    },
+    {
+      "id": 2,
+      "name": "BUIDL Europe",
+      "date": "2025-01-09",
+      "location": {
+        "lat": 38.722252,
+        "lng": -9.139337,
+        "city": "Lisbon",
+        "country": "Portugal"
+      },
+      "link": "https://buidleurope.com",
+      "logo": null
+    },
+    {
+      "id": 3,
+      "name": "ETHiopia",
+      "date": "2025-01-21",
+      "location": {
+        "lat": 9.032055,
+        "lng": 38.751293,
+        "city": "Addis Ababa",
+        "country": "Ethiopia"
+      },
+      "link": "https://eth-iopia.xyz",
+      "logo": null
+    },
+    {
+      "id": 4,
+      "name": "EthereumZuri.ch",
+      "date": "2025-01-30",
+      "location": {
+        "lat": 47.376886,
+        "lng": 8.541694,
+        "city": "Zurich",
+        "country": "Switzerland"
+      },
+      "link": "https://ethereumzuri.ch/ethereumzurich",
+      "logo": null
+    },
+    {
+      "id": 5,
+      "name": "EthOxford",
+      "date": "2025-02-07",
+      "location": {
+        "lat": 51.752021,
+        "lng": -1.25785,
+        "city": "Oxford",
+        "country": "United Kingdom"
+      },
+      "link": "https://ethoxford.io/",
+      "logo": null
+    },
+    {
+      "id": 6,
+      "name": "NFT Paris*",
+      "date": "2025-02-13",
+      "location": {
+        "lat": 48.856614,
+        "lng": 2.352222,
+        "city": "Paris",
+        "country": "France"
+      },
+      "link": "https://nftparis.xyz",
+      "logo": null
+    },
+    {
+      "id": 7,
+      "name": "RWA Paris Summit*",
+      "date": "2025-02-13",
+      "location": {
+        "lat": 48.856614,
+        "lng": 2.352222,
+        "city": "Paris",
+        "country": "France"
+      },
+      "link": "https://rwaparis.xyz",
+      "logo": null
+    },
+    {
+      "id": 8,
+      "name": "Consensus HK*",
+      "date": "2025-02-18",
+      "location": {
+        "lat": 22.396428,
+        "lng": 114.109497,
+        "city": "Hong Kong",
+        "country": "Hong Kong"
+      },
+      "link": "https://consensus-hongkong.coindesk.com",
+      "logo": null
+    },
+    {
+      "id": 9,
+      "name": "ZKDay",
+      "date": "2025-02-20",
+      "location": {
+        "lat": 39.739236,
+        "lng": -104.990251,
+        "city": "Denver",
+        "country": "United States"
+      },
+      "link": "https://zklab.systems/zkday",
+      "logo": null
+    },
+    {
+      "id": 10,
+      "name": "ETHDenver",
+      "date": "2025-02-23",
+      "location": {
+        "lat": 39.739236,
+        "lng": -104.990251,
+        "city": "Denver",
+        "country": "United States"
+      },
+      "link": "https://ethdenver.com",
+      "logo": null
+    },
+    {
+      "id": 11,
+      "name": "Pragma Denver",
+      "date": "2025-02-25",
+      "location": {
+        "lat": 39.739236,
+        "lng": -104.990251,
+        "city": "Denver",
+        "country": "United States"
+      },
+      "link": "https://ethglobal.com/events/pragma-denver",
+      "logo": null
+    },
+    {
+      "id": 12,
+      "name": "Modular Carnival",
+      "date": "2025-02-25",
+      "location": {
+        "lat": -19.920817,
+        "lng": -43.937789,
+        "city": "Belo Horizonte",
+        "country": "Brazil"
+      },
+      "link": null,
+      "logo": null
+    },
+    {
+      "id": 13,
+      "name": "Edge City Austin",
+      "date": "2025-03-02",
+      "location": {
+        "lat": 30.267153,
+        "lng": -97.743061,
+        "city": "Austin",
+        "country": "United States"
+      },
+      "link": "https://www.edgecity.live/",
+      "logo": null
+    },
+    {
+      "id": 14,
+      "name": "Crecimiento",
+      "date": "2025-03-28",
+      "location": {
+        "lat": -34.603684,
+        "lng": -58.381559,
+        "city": "Buenos Aires",
+        "country": "Argentina"
+      },
+      "link": null,
+      "logo": null
+    },
+    {
+      "id": 15,
+      "name": "EthereumSF",
+      "date": "2025-03-10",
+      "location": {
+        "lat": 37.7749,
+        "lng": -122.4194,
+        "city": "San Francisco",
+        "country": "United States"
+      },
+      "link": "https://ethereumsf.org/",
+      "logo": null
+    },
+    {
+      "id": 16,
+      "name": "Building Blocks",
+      "date": "2025-03-25",
+      "location": {
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "city": "Tel Aviv",
+        "country": "Israel"
+      },
+      "link": null,
+      "logo": null
+    },
+    {
+      "id": 17,
+      "name": "ETH Pondy",
+      "date": "2025-03-28",
+      "location": {
+        "lat": 11.9414,
+        "lng": 79.8083,
+        "city": "Pondicherry",
+        "country": "India"
+      },
+      "link": "https://ethpondy.xyz",
+      "logo": null
+    },
+    {
+      "id": 18,
+      "name": "ETHTaipei",
+      "date": "2025-04-01",
+      "location": {
+        "lat": 25.032969,
+        "lng": 121.565418,
+        "city": "Taipei",
+        "country": "Taiwan"
+      },
+      "link": "https://ethtaipei.org",
+      "logo": null
+    },
+    {
+      "id": 19,
+      "name": "ETH Bucharest",
+      "date": "2025-04-02",
+      "location": {
+        "lat": 44.426767,
+        "lng": 26.102538,
+        "city": "Bucharest",
+        "country": "Romania"
+      },
+      "link": "https://ethbucharest.xyz",
+      "logo": null
+    },
+    {
+      "id": 20,
+      "name": "Pragma Taipei",
+      "date": "2025-04-03",
+      "location": {
+        "lat": 25.032969,
+        "lng": 121.565418,
+        "city": "Taipei",
+        "country": "Taiwan"
+      },
+      "link": "https://ethglobal.com/events/pragma-taipei",
+      "logo": null
+    },
+    {
+      "id": 21,
+      "name": "Edge Expedition South Africa",
+      "date": "2025-04-03",
+      "location": {
+        "lat": -33.924869,
+        "lng": 18.424055,
+        "city": "Capetown",
+        "country": "South Africa"
+      },
+      "link": "https://www.edgecity.live/",
+      "logo": null
+    },
+    {
+      "id": 22,
+      "name": "ETHGlobal Taipei",
+      "date": "2025-04-04",
+      "location": {
+        "lat": 25.032969,
+        "lng": 121.565418,
+        "city": "Taipei",
+        "country": "Taiwan"
+      },
+      "link": "https://ethglobal.com/events/taipei",
+      "logo": null
+    },
+    {
+      "id": 23,
+      "name": "Appcon",
+      "date": "2025-04-07",
+      "location": {
+        "lat": 45.464203,
+        "lng": 9.189982,
+        "city": "Milan",
+        "country": "Italy"
+      },
+      "link": "https://appcon.org",
+      "logo": null
+    },
+    {
+      "id": 24,
+      "name": "zkHack",
+      "date": "2025-04-11",
+      "location": {
+        "lat": 37.5665,
+        "lng": 126.9780,
+        "city": "Seoul",
+        "country": "South Korea"
+      },
+      "link": "https://zkhack.dev",
+      "logo": null
+    },
+    {
+      "id": 25,
+      "name": "ETH Seoul",
+      "date": "2025-04-14",
+      "location": {
+        "lat": 37.5665,
+        "lng": 126.9780,
+        "city": "Seoul",
+        "country": "South Korea"
+      },
+      "link": "https://ethseoul.org",
+      "logo": null
+    },
+    {
+      "id": 26,
+      "name": "BUIDL Asia",
+      "date": "2025-04-15",
+      "location": {
+        "lat": 37.5665,
+        "lng": 126.9780,
+        "city": "Seoul",
+        "country": "South Korea"
+      },
+      "link": null,
+      "logo": null
+    },
+    {
+      "id": 27,
+      "name": "Invisible Garden",
+      "date": "2025-10-27",
+      "location": {
+        "lat": -34.603684,
+        "lng": -58.381559,
+        "city": "Buenos Aires",
+        "country": "Argentina"
+      },
+      "link": "https://invisible.garden",
+      "logo": null
+    },
+    {
+      "id": 28,
+      "name": "ETH Canal",
+      "date": "2025-04-22",
+      "location": {
+        "lat": 8.537981,
+        "lng": -80.782127,
+        "city": "Panama City",
+        "country": "Panama"
+      },
+      "link": "https://ethcanal.xyz",
+      "logo": null
+    },
+    {
+      "id": 29,
+      "name": "Staking Summit*",
+      "date": "2025-04-28",
+      "location": {
+        "lat": 25.204849,
+        "lng": 55.270783,
+        "city": "Dubai",
+        "country": "United Arab Emirates"
+      },
+      "link": "https://stakingsummit.com/",
+      "logo": null
+    },
+    {
+      "id": 30,
+      "name": "ETHDubai",
+      "date": "2025-04-28",
+      "location": {
+        "lat": 25.204849,
+        "lng": 55.270783,
+        "city": "Dubai",
+        "country": "United Arab Emirates"
+      },
+      "link": "https://ethdubaiconf.org",
+      "logo": null
+    },
+    {
+      "id": 31,
+      "name": "TOKEN2049 Dubai*",
+      "date": "2025-04-30",
+      "location": {
+        "lat": 25.204849,
+        "lng": 55.270783,
+        "city": "Dubai",
+        "country": "United Arab Emirates"
+      },
+      "link": "https://token2049.com",
+      "logo": null
+    },
+    {
+      "id": 32,
+      "name": "ETH Cinco de Mayo",
+      "date": "2025-05-01",
+      "location": {
+        "lat": 23.6345,
+        "lng": -102.5528,
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "link": "https://ethcdm.com/",
+      "logo": null
+    },
+    {
+      "id": 33,
+      "name": "FarCon",
+      "date": "2025-05-01",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.0060,
+        "city": "New York, NYC",
+        "country": "United States"
+      },
+      "link": "https://farcon.nyc",
+      "logo": null
+    },
+    {
+      "id": 34,
+      "name": "ETHDam",
+      "date": "2025-05-09",
+      "location": {
+        "lat": 52.366697,
+        "lng": 4.89454,
+        "city": "Amsterdam",
+        "country": "Netherlands"
+      },
+      "link": "https://ethdam.com",
+      "logo": null
+    },
+    {
+      "id": 35,
+      "name": "ETH Lisbon",
+      "date": "2025-05-09",
+      "location": {
+        "lat": 38.722252,
+        "lng": -9.139337,
+        "city": "Lisbon",
+        "country": "Portugal"
+      },
+      "link": "https://ethlisbon.org",
+      "logo": null
+    },
+    {
+      "id": 36,
+      "name": "World Expo on Blockchain*",
+      "date": "2025-05-10",
+      "location": {
+        "lat": 34.6937,
+        "lng": 135.5023,
+        "city": "Osaka",
+        "country": "Japan"
+      },
+      "link": "https://web2025.world/web25",
+      "logo": null
+    },
+    {
+      "id": 37,
+      "name": "Consensus Toronto*",
+      "date": "2025-05-14",
+      "location": {
+        "lat": 22.396428,
+        "lng": 114.109497,
+        "city": "Hong Kong",
+        "country": "Hong Kong"
+      },
+      "link": "https://consensus2025.coindesk.com",
+      "logo": null
+    },
+    {
+      "id": 38,
+      "name": "Code Africa Conference",
+      "date": "2025-05-19",
+      "location": {
+        "lat": -1.286389,
+        "lng": 36.817223,
+        "city": "Nairobi",
+        "country": "Kenya"
+      },
+      "link": "https://codeafrica.io",
+      "logo": null
+    },
+    {
+      "id": 39,
+      "name": "ETHVietnam 2025",
+      "date": "2025-05-24",
+      "location": {
+        "lat": 10.7764,
+        "lng": 106.7025,
+        "city": "HCMC",
+        "country": "Vietnam"
+      },
+      "link": "https://eth-vietnam.com",
+      "logo": null
+    },
+    {
+      "id": 40,
+      "name": "ETHDublin 2025",
+      "date": "2025-05-23",
+      "location": {
+        "lat": 53.344104,
+        "lng": -6.267494,
+        "city": "Dublin",
+        "country": "Ireland"
+      },
+      "link": "https://lu.ma/hkl5jcre",
+      "logo": null
+    },
+    {
+      "id": 41,
+      "name": "ETHBratislava",
+      "date": "2025-05-23",
+      "location": {
+        "lat": 48.1486,
+        "lng": 17.1077,
+        "city": "Bratislava",
+        "country": "Slovakia"
+      },
+      "link": "https://ethbratislava.com",
+      "logo": null
+    },
+    {
+      "id": 42,
+      "name": "Edge Esmeralda",
+      "date": "2025-05-24",
+      "location": {
+        "lat": 38.6106,
+        "lng": -122.8697,
+        "city": "Healdsburg",
+        "country": "United States"
+      },
+      "link": "https://edgeesmeralda.com",
+      "logo": null
+    },
+    {
+      "id": 43,
+      "name": "ETHPrague",
+      "date": "2025-05-27",
+      "location": {
+        "lat": 50.0874,
+        "lng": 14.4212,
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "link": "https://ethprague.com/",
+      "logo": null
+    },
+    {
+      "id": 44,
+      "name": "ETHGlobal Prague",
+      "date": "2025-05-30",
+      "location": {
+        "lat": 50.0874,
+        "lng": 14.4212,
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "link": "https://ethglobal.com/events/prague",
+      "logo": null
+    },
+    {
+      "id": 45,
+      "name": "Pragma Prague",
+      "date": "2025-05-29",
+      "location": {
+        "lat": 50.0874,
+        "lng": 14.4212,
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "link": "https://ethglobal.com/events/pragma-prague",
+      "logo": null
+    },
+    {
+      "id": 46,
+      "name": "ETH Belgrade",
+      "date": "2025-06-03",
+      "location": {
+        "lat": 44.7866,
+        "lng": 20.4489,
+        "city": "Belgrade",
+        "country": "Serbia"
+      },
+      "link": "https://ethbelgrade.rs/",
+      "logo": null
+    },
+    {
+      "id": 47,
+      "name": "Non Fungible Conference*",
+      "date": "2025-06-04",
+      "location": {
+          "lat": 38.722252,
+        "lng": -9.139337,
+        "city": "Lisbon",
+        "country": "Portugal"
+      },
+      "link": "https://nonfungibleconference.com",
+      "logo": null
+    },
+      {
+      "id": 48,
+      "name": "ETHMilan",
+      "date": "2025-06-24",
+      "location": {
+        "lat": 45.4642,
+        "lng": 9.1900,
+        "city": "Milan",
+        "country": "Italy"
+      },
+      "link": "https://ethmilan.xyz",
+      "logo": null
+    },
+    {
+      "id": 49,
+      "name": "Ethereum Brasil",
+      "date": "2025-06-09",
+      "location": {
+        "lat": -23.5505,
+        "lng": -46.6333,
+        "city": "São Paulo",
+        "country": "Brazil"
+      },
+      "link": "https://ethereumbrasil.com/",
+      "logo": null
+    },
+    {
+      "id": 50,
+      "name": "Offscript",
+      "date": "2025-06-11",
+      "location": {
+        "lat": 20.9139,
+        "lng": -100.7486,
+        "city": "San Miguel de Allende",
+        "country": "Mexico"
+      },
+      "link": "https://offscript.web3creatives.com",
+      "logo": null
+    },
+    {
+      "id": 51,
+      "name": "ProtocolBerg",
+      "date": "2025-06-12",
+      "location": {
+        "lat": 52.520008,
+        "lng": 13.404954,
+        "city": "Berlin",
+        "country": "Germany"
+      },
+      "link": "https://protocol.berlin",
+      "logo": null
+    },
+    {
+      "id": 52,
+      "name": "ETHKyiv",
+      "date": "2025-06-13",
+      "location": {
+        "lat": 50.4501,
+        "lng": 30.5234,
+        "city": "Kyiv",
+        "country": "Ukraine"
+      },
+      "link": "https://ethkyiv.com",
+      "logo": null
+    },
+    {
+      "id": 53,
+      "name": "DappCon",
+      "date": "2025-06-16",
+      "location": {
+        "lat": 52.520008,
+        "lng": 13.404954,
+        "city": "Berlin",
+        "country": "Germany"
+      },
+      "link": "https://dappcon.io",
+      "logo": null
+    },
+    {
+      "id": 54,
+      "name": "NFT NYC*",
+      "date": "2025-06-23",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.0060,
+        "city": "NYC",
+        "country": "United States"
+      },
+      "link": "https://nft.nyc",
+      "logo": null
+    },
+    {
+      "id": 55,
+      "name": "Permissionless IV",
+      "date": "2025-06-24",
+      "location": {
+        "lat": 40.7128,
+        "lng": -73.9442,
+        "city": "Brooklyn, NYC",
+        "country": "United States"
+      },
+      "link": "https://blockworks.co/event/permissionless-iv",
+      "logo": null
+    },
+    {
+      "id": 56,
+      "name": "ETHCluj",
+      "date": "2025-06-26",
+      "location": {
+        "lat": 46.7712,
+        "lng": 23.5886,
+        "city": "Cluj-Napoca",
+        "country": "Romania"
+      },
+      "link": "https://ethcluj.org",
+      "logo": null
+    },
+    {
+      "id": 57,
+      "name": "EthCC",
+      "date": "2025-06-30",
+      "location": {
+        "lat": 43.5528,
+        "lng": 7.0174,
+        "city": "Cannes",
+        "country": "France"
+      },
+      "link": "https://ethcc.io",
+      "logo": null
+    },
+    {
+      "id": 58,
+      "name": "EthCCweek",
+      "date": "2025-07-01",
+      "location": {
+        "lat": 43.5528,
+        "lng": 7.0174,
+        "city": "Cannes",
+        "country": "France"
+      },
+      "link": "https://ethccweek.fr/",
+      "logo": null
+    },
+    {
+      "id": 59,
+      "name": "Pragma Cannes",
+      "date": "2025-07-03",
+      "location": {
+        "lat": 43.5528,
+        "lng": 7.0174,
+        "city": "Cannes",
+        "country": "France"
+      },
+      "link": "https://ethglobal.com/events/pragma-cannes",
+      "logo": null
+    },
+    {
+      "id": 60,
+      "name": "ETHGlobal Cannes",
+      "date": "2025-07-04",
+      "location": {
+        "lat": 43.5528,
+        "lng": 7.0174,
+        "city": "Cannes",
+        "country": "France"
+      },
+      "link": "https://ethglobal.com/events/cannes",
+      "logo": null
+    },
+    {
+      "id": 61,
+      "name": "Pragma New York",
+      "date": "2025-08-14",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.0060,
+        "city": "New York, NYC",
+        "country": "United States"
+      },
+      "link": "https://ethglobal.com/events/pragma-newyork",
+      "logo": null
+    },
+    {
+      "id": 62,
+      "name": "NapulETH",
+      "date": "2025-07-16",
+      "location": {
+        "lat": 40.8518,
+        "lng": 14.2681,
+        "city": "Naples",
+        "country": "Italy"
+      },
+      "link": "https://napuleth.org/",
+      "logo": null
+    },
+    {
+      "id": 63,
+      "name": "SBC (The Science of Blockchain Conference)",
+      "date": "2025-08-04",
+      "location": {
+        "lat": 37.8716,
+        "lng": -122.2728,
+        "city": "Berkeley",
+        "country": "United States"
+      },
+      "link": "https://sbc-conference.org/",
+      "logo": null
+    },
+    {
+      "id": 64,
+      "name": "Frontiers 2025",
+      "date": "2025-08-01",
+      "location": {
+        "lat": 37.7749,
+        "lng": -122.4194,
+        "city": "San Francisco",
+        "country": "United States"
+      },
+      "link": "https://frontiers.paradigm.xyz/",
+      "logo": null
+    },
+    {
+      "id": 65,
+      "name": "ETH Latam",
+      "date": "2025-11-08",
+      "location": {
+        "lat": -23.5505,
+        "lng": -46.6333,
+        "city": "São Paulo",
+        "country": "Brazil"
+      },
+      "link": "https://ethlatam.com",
+      "logo": null
+    },
+    {
+      "id": 66,
+      "name": "ETHGlobal New York",
+      "date": "2025-08-15",
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.0060,
+        "city": "New York, NYC",
+        "country": "United States"
+      },
+      "link": "https://ethglobal.com/events/newyork",
+      "logo": null
+    },
+    {
+      "id": 67,
+      "name": "Web3 Lagos Conference",
+      "date": "2025-08-28",
+      "location": {
+        "lat": 6.5244,
+        "lng": 3.3792,
+        "city": "Lagos",
+        "country": "Nigeria"
+      },
+      "link": "https://event.web3bridge.com",
+      "logo": null
+    },
+    {
+      "id": 68,
+      "name": "EthAccra",
+      "date": "2025-09-03",
+      "location": {
+        "lat": 5.6037,
+        "lng": -0.1870,
+        "city": "Accra",
+        "country": "Ghana"
+      },
+      "link": "https://ethaccra.xyz",
+      "logo": null
+    },
+    {
+      "id": 69,
+      "name": "ETHWarsaw",
+      "date": "2025-09-04",
+      "location": {
+        "lat": 52.237049,
+        "lng": 21.017532,
+        "city": "Warsaw",
+        "country": "Poland"
+      },
+      "link": "https://ethwarsaw.dev",
+      "logo": null
+    },
+    {
+      "id": 70,
+      "name": "Ethsafari",
+      "date": "2025-09-07",
+      "location": {
+        "lat": -1.286389,
+        "lng": 36.817223,
+        "city": "Nairobi",
+        "country": "Kenya"
+      },
+      "link": null,
+      "logo": null
+    },
+    {
+      "id": 71,
+      "name": "Boston Blockchain Week",
+      "date": "2025-09-08",
+      "location": {
+        "lat": 42.2529,
+        "lng": -71.0023,
+        "city": "Quincy, Massachusetts",
+        "country": "United States"
+      },
+      "link": "https://bostonblockchainweek.com/",
+      "logo": null
+    },
+    {
+      "id": 72,
+      "name": "ETH Boston",
+      "date": "2025-09-09",
+      "location": {
+        "lat": 42.3601,
+        "lng": -71.0589,
+        "city": "Boston",
+        "country": "United States"
+      },
+      "link": "https://bostonblockchainweek.com/",
+      "logo": null
+    },
+    {
+      "id": 73,
+      "name": "ETHTokyo",
+      "date": "2025-09-12",
+      "location": {
+        "lat": 35.6762,
+        "lng": 139.6503,
+        "city": "Tokyo",
+        "country": "Japan"
+      },
+      "link": "https://lu.ma/eth-tokyo",
+      "logo": null
+    },
+    {
+      "id": 74,
+      "name": "ETHSofia",
+      "date": "2025-09-23",
+      "location": {
+        "lat": 42.6977,
+        "lng": 23.3219,
+        "city": "Sofia",
+        "country": "Bulgaria"
+      },
+      "link": "https://ethsofia.com",
+      "logo": null
+    },
+    {
+      "id": 75,
+      "name": "Pragma New Delhi",
+      "date": "2025-09-25",
+      "location": {
+        "lat": 28.6139,
+        "lng": 77.2090,
+        "city": "New Delhi",
+        "country": "India"
+      },
+      "link": "https://ethglobal.com/events/pragma-newdelhi",
+      "logo": null
+    },
+    {
+      "id": 76,
+      "name": "ETHGlobal New Delhi",
+      "date": "2025-09-26",
+      "location": {
+        "lat": 28.6139,
+        "lng": 77.2090,
+        "city": "New Delhi",
+        "country": "India"
+      },
+      "link": "https://ethglobal.com/events/newdelhi",
+      "logo": null
+    },
+    {
+      "id": 77,
+      "name": "TOKEN2049 Singapore*",
+      "date": "2025-10-01",
+      "location": {
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "city": "Singapore",
+        "country": "Singapore"
+      },
+      "link": "https://asia.token2049.com",
+      "logo": null
+    },
+    {
+      "id": 78,
+      "name": "ProtoLayers Conference",
+      "date": "2025-10-11",
+      "location": {
+        "lat": 50.0874,
+        "lng": 14.4212,
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "link": "https://lu.ma/protolayers",
+      "logo": null
+    },
+    {
+      "id": 79,
+      "name": "Encode London 2025",
+      "date": "2025-10-24",
+      "location": {
+        "lat": 51.5074,
+        "lng": 0.1278,
+        "city": "London",
+        "country": "United Kingdom"
+      },
+      "link": "https://lu.ma/Encode-London",
+      "logo": null
+    },
+    {
+      "id": 80,
+      "name": "ETHRome Hackathon",
+      "date": "2025-10-01",
+      "location": {
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "city": "Rome",
+        "country": "Italy"
+      },
+      "link": "https://ethrome.org",
+      "logo": null
+    }
+  ]
 } 
