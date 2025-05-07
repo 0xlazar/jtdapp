@@ -1,5 +1,9 @@
 # Journey to DevConnect
 
+<p align="center">
+  <img src="icons/logo.png" alt="Journey to DevConnect Logo" width="120" height="120" />
+</p>
+
 A Progressive Web App (PWA) that helps you discover and track blockchain events around the world.
 
 ## Features

@@ -11,7 +11,8 @@
         "country": "India"
       },
       "link": "https://zugrama.org/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 2,
@@ -24,7 +25,8 @@
         "country": "Portugal"
       },
       "link": "https://buidleurope.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 3,
@@ -37,7 +39,8 @@
         "country": "Ethiopia"
       },
       "link": "https://eth-iopia.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 4,
@@ -50,7 +53,8 @@
         "country": "Switzerland"
       },
       "link": "https://ethereumzuri.ch/ethereumzurich",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 5,
@@ -63,7 +67,8 @@
         "country": "United Kingdom"
       },
       "link": "https://ethoxford.io/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 6,
@@ -76,7 +81,8 @@
         "country": "France"
       },
       "link": "https://nftparis.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 7,
@@ -89,7 +95,8 @@
         "country": "France"
       },
       "link": "https://rwaparis.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 8,
@@ -102,7 +109,8 @@
         "country": "Hong Kong"
       },
       "link": "https://consensus-hongkong.coindesk.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 9,
@@ -115,7 +123,8 @@
         "country": "United States"
       },
       "link": "https://zklab.systems/zkday",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 10,
@@ -128,7 +137,8 @@
         "country": "United States"
       },
       "link": "https://ethdenver.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 11,
@@ -141,7 +151,8 @@
         "country": "United States"
       },
       "link": "https://ethglobal.com/events/pragma-denver",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 12,
@@ -154,7 +165,8 @@
         "country": "Brazil"
       },
       "link": null,
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 13,
@@ -167,7 +179,8 @@
         "country": "United States"
       },
       "link": "https://www.edgecity.live/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 14,
@@ -180,7 +193,8 @@
         "country": "Argentina"
       },
       "link": null,
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 15,
@@ -193,7 +207,8 @@
         "country": "United States"
       },
       "link": "https://ethereumsf.org/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 16,
@@ -206,7 +221,8 @@
         "country": "Israel"
       },
       "link": null,
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 17,
@@ -219,7 +235,8 @@
         "country": "India"
       },
       "link": "https://ethpondy.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 18,
@@ -232,7 +249,8 @@
         "country": "Taiwan"
       },
       "link": "https://ethtaipei.org",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 19,
@@ -245,7 +263,8 @@
         "country": "Romania"
       },
       "link": "https://ethbucharest.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 20,
@@ -258,7 +277,8 @@
         "country": "Taiwan"
       },
       "link": "https://ethglobal.com/events/pragma-taipei",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 21,
@@ -271,7 +291,8 @@
         "country": "South Africa"
       },
       "link": "https://www.edgecity.live/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 22,
@@ -284,7 +305,8 @@
         "country": "Taiwan"
       },
       "link": "https://ethglobal.com/events/taipei",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 23,
@@ -297,7 +319,8 @@
         "country": "Italy"
       },
       "link": "https://appcon.org",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 24,
@@ -310,7 +333,8 @@
         "country": "South Korea"
       },
       "link": "https://zkhack.dev",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 25,
@@ -323,7 +347,8 @@
         "country": "South Korea"
       },
       "link": "https://ethseoul.org",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 26,
@@ -336,7 +361,8 @@
         "country": "South Korea"
       },
       "link": null,
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 27,
@@ -349,7 +375,8 @@
         "country": "Argentina"
       },
       "link": "https://invisible.garden",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 28,
@@ -362,11 +389,12 @@
         "country": "Panama"
       },
       "link": "https://ethcanal.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 29,
-      "name": "Staking Summit*",
+      "name": "Staking Summit",
       "date": "2025-04-28",
       "location": {
         "lat": 25.204849,
@@ -375,7 +403,8 @@
         "country": "United Arab Emirates"
       },
       "link": "https://stakingsummit.com/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 30,
@@ -388,20 +417,8 @@
         "country": "United Arab Emirates"
       },
       "link": "https://ethdubaiconf.org",
-      "logo": null
-    },
-    {
-      "id": 31,
-      "name": "TOKEN2049 Dubai*",
-      "date": "2025-04-30",
-      "location": {
-        "lat": 25.204849,
-        "lng": 55.270783,
-        "city": "Dubai",
-        "country": "United Arab Emirates"
-      },
-      "link": "https://token2049.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 32,
@@ -414,7 +431,8 @@
         "country": "Mexico"
       },
       "link": "https://ethcdm.com/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 33,
@@ -427,7 +445,8 @@
         "country": "United States"
       },
       "link": "https://farcon.nyc",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 34,
@@ -440,7 +459,8 @@
         "country": "Netherlands"
       },
       "link": "https://ethdam.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 35,
@@ -453,33 +473,8 @@
         "country": "Portugal"
       },
       "link": "https://ethlisbon.org",
-      "logo": null
-    },
-    {
-      "id": 36,
-      "name": "World Expo on Blockchain*",
-      "date": "2025-05-10",
-      "location": {
-        "lat": 34.6937,
-        "lng": 135.5023,
-        "city": "Osaka",
-        "country": "Japan"
-      },
-      "link": "https://web2025.world/web25",
-      "logo": null
-    },
-    {
-      "id": 37,
-      "name": "Consensus Toronto*",
-      "date": "2025-05-14",
-      "location": {
-        "lat": 22.396428,
-        "lng": 114.109497,
-        "city": "Hong Kong",
-        "country": "Hong Kong"
-      },
-      "link": "https://consensus2025.coindesk.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 38,
@@ -492,7 +487,8 @@
         "country": "Kenya"
       },
       "link": "https://codeafrica.io",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 39,
@@ -505,7 +501,8 @@
         "country": "Vietnam"
       },
       "link": "https://eth-vietnam.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 40,
@@ -518,7 +515,8 @@
         "country": "Ireland"
       },
       "link": "https://lu.ma/hkl5jcre",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 41,
@@ -531,7 +529,8 @@
         "country": "Slovakia"
       },
       "link": "https://ethbratislava.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 42,
@@ -544,7 +543,8 @@
         "country": "United States"
       },
       "link": "https://edgeesmeralda.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 43,
@@ -557,7 +557,8 @@
         "country": "Czech Republic"
       },
       "link": "https://ethprague.com/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 44,
@@ -570,7 +571,8 @@
         "country": "Czech Republic"
       },
       "link": "https://ethglobal.com/events/prague",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 45,
@@ -583,7 +585,8 @@
         "country": "Czech Republic"
       },
       "link": "https://ethglobal.com/events/pragma-prague",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 46,
@@ -596,22 +599,10 @@
         "country": "Serbia"
       },
       "link": "https://ethbelgrade.rs/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
-      "id": 47,
-      "name": "Non Fungible Conference*",
-      "date": "2025-06-04",
-      "location": {
-          "lat": 38.722252,
-        "lng": -9.139337,
-        "city": "Lisbon",
-        "country": "Portugal"
-      },
-      "link": "https://nonfungibleconference.com",
-      "logo": null
-    },
-      {
       "id": 48,
       "name": "ETHMilan",
       "date": "2025-06-24",
@@ -622,7 +613,8 @@
         "country": "Italy"
       },
       "link": "https://ethmilan.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 49,
@@ -635,7 +627,8 @@
         "country": "Brazil"
       },
       "link": "https://ethereumbrasil.com/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 50,
@@ -648,7 +641,8 @@
         "country": "Mexico"
       },
       "link": "https://offscript.web3creatives.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 51,
@@ -661,7 +655,8 @@
         "country": "Germany"
       },
       "link": "https://protocol.berlin",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 52,
@@ -674,7 +669,8 @@
         "country": "Ukraine"
       },
       "link": "https://ethkyiv.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 53,
@@ -687,20 +683,8 @@
         "country": "Germany"
       },
       "link": "https://dappcon.io",
-      "logo": null
-    },
-    {
-      "id": 54,
-      "name": "NFT NYC*",
-      "date": "2025-06-23",
-      "location": {
-        "lat": 40.7128,
-        "lng": -74.0060,
-        "city": "NYC",
-        "country": "United States"
-      },
-      "link": "https://nft.nyc",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 55,
@@ -713,7 +697,8 @@
         "country": "United States"
       },
       "link": "https://blockworks.co/event/permissionless-iv",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 56,
@@ -726,7 +711,8 @@
         "country": "Romania"
       },
       "link": "https://ethcluj.org",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 57,
@@ -739,7 +725,8 @@
         "country": "France"
       },
       "link": "https://ethcc.io",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 58,
@@ -752,7 +739,8 @@
         "country": "France"
       },
       "link": "https://ethccweek.fr/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 59,
@@ -765,7 +753,8 @@
         "country": "France"
       },
       "link": "https://ethglobal.com/events/pragma-cannes",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 60,
@@ -778,7 +767,8 @@
         "country": "France"
       },
       "link": "https://ethglobal.com/events/cannes",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 61,
@@ -791,7 +781,8 @@
         "country": "United States"
       },
       "link": "https://ethglobal.com/events/pragma-newyork",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 62,
@@ -804,7 +795,8 @@
         "country": "Italy"
       },
       "link": "https://napuleth.org/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 63,
@@ -817,7 +809,8 @@
         "country": "United States"
       },
       "link": "https://sbc-conference.org/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 64,
@@ -830,7 +823,8 @@
         "country": "United States"
       },
       "link": "https://frontiers.paradigm.xyz/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 65,
@@ -843,7 +837,8 @@
         "country": "Brazil"
       },
       "link": "https://ethlatam.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 66,
@@ -856,7 +851,8 @@
         "country": "United States"
       },
       "link": "https://ethglobal.com/events/newyork",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 67,
@@ -869,7 +865,8 @@
         "country": "Nigeria"
       },
       "link": "https://event.web3bridge.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 68,
@@ -882,7 +879,8 @@
         "country": "Ghana"
       },
       "link": "https://ethaccra.xyz",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 69,
@@ -895,7 +893,8 @@
         "country": "Poland"
       },
       "link": "https://ethwarsaw.dev",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 70,
@@ -908,7 +907,8 @@
         "country": "Kenya"
       },
       "link": null,
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 71,
@@ -921,7 +921,8 @@
         "country": "United States"
       },
       "link": "https://bostonblockchainweek.com/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 72,
@@ -934,7 +935,8 @@
         "country": "United States"
       },
       "link": "https://bostonblockchainweek.com/",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 73,
@@ -947,7 +949,8 @@
         "country": "Japan"
       },
       "link": "https://lu.ma/eth-tokyo",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 74,
@@ -960,7 +963,8 @@
         "country": "Bulgaria"
       },
       "link": "https://ethsofia.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 75,
@@ -973,7 +977,8 @@
         "country": "India"
       },
       "link": "https://ethglobal.com/events/pragma-newdelhi",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 76,
@@ -986,20 +991,8 @@
         "country": "India"
       },
       "link": "https://ethglobal.com/events/newdelhi",
-      "logo": null
-    },
-    {
-      "id": 77,
-      "name": "TOKEN2049 Singapore*",
-      "date": "2025-10-01",
-      "location": {
-        "lat": 1.3521,
-        "lng": 103.8198,
-        "city": "Singapore",
-        "country": "Singapore"
-      },
-      "link": "https://asia.token2049.com",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 78,
@@ -1012,7 +1005,8 @@
         "country": "Czech Republic"
       },
       "link": "https://lu.ma/protolayers",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 79,
@@ -1025,7 +1019,8 @@
         "country": "United Kingdom"
       },
       "link": "https://lu.ma/Encode-London",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     },
     {
       "id": 80,
@@ -1038,7 +1033,8 @@
         "country": "Italy"
       },
       "link": "https://ethrome.org",
-      "logo": null
+      "logo": null,
+      "short_description": "Short description coming soon."
     }
   ]
 } 

@@ -102,16 +102,20 @@ function showError() {
     }
 }
 
+// Set strict world bounds for OpenStreetMap
+const southWest = L.latLng(-85.0511, -180);
+const northEast = L.latLng(85.0511, 180);
+const bounds = L.latLngBounds(southWest, northEast);
+
 // Initialize the Leaflet map in the dedicated map container
 const map = L.map('map', {
-    center: [20, 0], // Center of the world
+    center: [30, 0],
     zoom: 2,
     minZoom: 2,
-    maxBounds: [
-        [-85, -180],
-        [85, 180]
-    ],
-    maxBoundsViscosity: 1.0
+    maxZoom: 18,
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0,
+    worldCopyJump: true
 });
 
 // Add a basic tile layer (OpenStreetMap)
@@ -130,76 +134,41 @@ document.getElementById('close-popup').addEventListener('click', function() {
 
 // List View functionality
 let currentView = 'map'; // 'map' or 'list'
-let currentSort = 'latest'; // 'latest' or 'earliest'
 const viewToggle = document.getElementById('view-toggle');
 const viewIcon = document.getElementById('view-icon');
 const viewText = document.getElementById('view-text');
 const listView = document.getElementById('list-view');
 const closeList = document.getElementById('close-list');
 const eventsList = document.getElementById('events-list');
-const sortToggle = document.getElementById('sort-toggle');
-const sortIcon = document.getElementById('sort-icon');
-const sortText = document.getElementById('sort-text');
 
 // Toggle between map and list views
 viewToggle.addEventListener('click', function() {
     if (currentView === 'map') {
         // Switch to list view
         listView.classList.remove('translate-x-full');
+        viewToggle.classList.add('hidden');
         viewIcon.textContent = '🗺️';
         viewText.textContent = 'Map View';
         currentView = 'list';
-    } else {
-        // Switch to map view
-        listView.classList.add('translate-x-full');
-        viewIcon.textContent = '📋';
-        viewText.textContent = 'List View';
-        currentView = 'map';
     }
+    // No else block: toggle cannot close the list view
 });
 
-// Toggle sort order
-sortToggle.addEventListener('click', function() {
-    if (currentSort === 'latest') {
-        currentSort = 'earliest';
-        sortIcon.textContent = '↑';
-        sortText.textContent = 'Earliest First';
-    } else {
-        currentSort = 'latest';
-        sortIcon.textContent = '↓';
-        sortText.textContent = 'Latest First';
-    }
-    // Re-render the list with new sort order
-    renderEventList(window.currentEvents);
-});
-
-// Close list view
+// Close list view (X button)
 closeList.addEventListener('click', function() {
     listView.classList.add('translate-x-full');
+    viewToggle.classList.remove('hidden');
     viewIcon.textContent = '📋';
     viewText.textContent = 'List View';
     currentView = 'map';
 });
 
-// Function to parse date string to Date object
-function parseDate(dateStr) {
-    // Assuming date format is "Month DD, YYYY"
-    return new Date(dateStr);
-}
-
 // Function to render event list
 function renderEventList(events) {
-    // Store events globally for re-sorting
+    // Store events globally
     window.currentEvents = events;
     
-    // Sort events based on current sort order
-    const sortedEvents = [...events].sort((a, b) => {
-        const dateA = parseDate(a.date);
-        const dateB = parseDate(b.date);
-        return currentSort === 'latest' ? dateB - dateA : dateA - dateB;
-    });
-
-    eventsList.innerHTML = sortedEvents.map(event => `
+    eventsList.innerHTML = events.map(event => `
         <div class="p-4 border-b hover:bg-gray-50 cursor-pointer transition-colors" 
              data-lat="${event.location.lat}" 
              data-lng="${event.location.lng}">
@@ -269,6 +238,28 @@ async function loadEvents() {
     }
 }
 
+// Helper function to determine if an event is ongoing
+function isEventOngoing(eventDate) {
+    const now = new Date();
+    const event = new Date(eventDate);
+    // Consider an event ongoing if it's today
+    return event.toDateString() === now.toDateString();
+}
+
+// Helper function to determine if an event is in the future
+function isEventFuture(eventDate) {
+    const now = new Date();
+    const event = new Date(eventDate);
+    return event > now;
+}
+
+// Helper function to determine if an event is in the past
+function isEventPast(eventDate) {
+    const now = new Date();
+    const event = new Date(eventDate);
+    return event < now && !isEventOngoing(eventDate);
+}
+
 // Function to add markers to the map
 function addEventMarkers(events) {
     console.log('Adding markers for events:', events.length);
@@ -289,29 +280,59 @@ function addEventMarkers(events) {
     events.forEach(event => {
         console.log('Processing event:', event.name);
 
-        // Create a circle marker
+        // Skip past events
+        if (isEventPast(event.date)) {
+            return;
+        }
+
+        // Create a circle marker with different styles based on event status
         const marker = L.circleMarker([event.location.lat, event.location.lng], {
             radius: 8,
-            fillColor: "#3B82F6", // Tailwind blue-500
+            fillColor: isEventOngoing(event.date) ? "#10B981" : "#3B82F6", // Green for ongoing, blue for future
             color: "#fff",
             weight: 2,
             opacity: 1,
             fillOpacity: 0.8
         });
 
+        // Add pulsating effect for ongoing events
+        if (isEventOngoing(event.date)) {
+            marker.setStyle({
+                className: 'pulsating-marker'
+            });
+        }
+
         // Add click handler to show floating window
         marker.on('click', function() {
             const popupContent = document.getElementById('popup-content');
+            // Format date as 'Month Day'
+            const eventDate = new Date(event.date);
+            const options = { month: 'long', day: 'numeric' };
+            const formattedDate = eventDate.toLocaleDateString(undefined, options);
             popupContent.innerHTML = `
-                <div class="text-center">
-                    <h3 class="font-bold text-lg">${event.name}</h3>
-                    <p class="text-gray-600">${event.date}</p>
-                    <p class="text-gray-600">${event.location.city}, ${event.location.country}</p>
-                    <a href="${event.link}" target="_blank" class="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">Visit Website</a>
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-2xl font-bold">Logo</div>
+                    <div>
+                        <h3 class="font-bold text-xl mb-1">${event.name}</h3>
+                        <p class="text-gray-600 text-sm mb-1">${event.short_description || ''}</p>
+                        <p class="text-blue-700 text-base font-semibold mb-2">${formattedDate} &bull; ${event.location.city}, ${event.location.country}</p>
+                        <div class="flex flex-wrap gap-2 mb-1">
+                            <!-- Tags placeholder -->
+                            <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Tag</span>
+                            <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Conference</span>
+                            <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Free</span>
+                            <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Volunteership</span>
+                            <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Community Hub</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <a href="${event.link}" target="_blank" class="text-blue-500 hover:underline text-sm">Visit Website</a>
+                    <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">Add To Journey</button>
                 </div>
             `;
-            
             const popup = document.getElementById('event-popup');
+           
             popup.classList.remove('translate-y-full');
             popup.classList.remove('opacity-0');
             popup.classList.remove('pointer-events-none');
@@ -320,13 +341,13 @@ function addEventMarkers(events) {
         // Add hover effect
         marker.on('mouseover', function() {
             this.setStyle({
-                fillColor: "#2563EB", // Tailwind blue-600
+                fillColor: isEventOngoing(event.date) ? "#059669" : "#2563EB", // Darker green for ongoing, darker blue for future
                 fillOpacity: 1
             });
         });
         marker.on('mouseout', function() {
             this.setStyle({
-                fillColor: "#3B82F6", // Tailwind blue-500
+                fillColor: isEventOngoing(event.date) ? "#10B981" : "#3B82F6", // Back to original colors
                 fillOpacity: 0.8
             });
         });

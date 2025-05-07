@@ -12,12 +12,13 @@
 
 ### Planned Stack
 - **Auth:** 
-  - Supabase auth
-  - Google OAuth
-  - Wallet connection (Web3)
+  - Supabase auth (for non Web3)
+  - Wallet connection (for Web3)
   - Guest mode (skip auth)
 - **Backend:** Node.js + Express
 - **Database:** MongoDB → Supabase
+- **Analytics:** Simple Analytics (privacy-friendly)
+- **Domain:** Custom domain (e.g., journeytodevconnect.com)
 
 ## ✅ Completed Features
 
@@ -57,7 +58,7 @@ Enable users to explore events in a searchable, filterable list view.
   - [ ] Region filter
   - [ ] Cost filter (free/paid)
   - [ ] Volunteership opportunities
-  - [ ] Search box (by keyword/title)
+  - [ ] Search box (by keyword)
 
 ## 📋 Planned Features
 
@@ -80,21 +81,12 @@ Enable users to explore events in a searchable, filterable list view.
 - [ ] Event notifications
 - [ ] Supabase login with email or wallet
 
-### Community Features (Phase 4)
-- [ ] Community guidelines
-- [ ] Event organizer resources
-- [ ] Community feedback system
-- [ ] Community announcements
-- [ ] Local community pages
-- [ ] See others attending same events
-- [ ] Connect via DM, Telegram, or Discord
-
 ### Map Enhancements
-- [ ] Custom map styles
-- [ ] Clustering improvements
-- [ ] Region-based filtering
-- [ ] Distance calculations
-- [ ] Route planning
+- [ ] Map UI - minimalistic and neutral
+- [ ] Filtering
+- [ ] Route planning (Add To Journey)
+- [ ] Map cluster styling
+- [ ] Custom color coding by region or date (e.g., warmer colors for events closer to today)
 
 ### Event Management
 - [ ] Event submission form
@@ -112,25 +104,31 @@ Enable users to explore events in a searchable, filterable list view.
 
 ## 🎯 Next Steps (Priority Order)
 
-1. Complete List View Features
+1. Infrastructure Setup
+   - Purchase and configure custom domain
+   - Set up Simple Analytics
+   - Configure DNS and SSL
+   - Set up email addresses
+
+2. Map improvements:
+   - Change the date format on the map and list views to "June 4-7" or just "June 4" if it's one day
+   - On desktop, make it smaller so it doesn't take up the entire width
+   - Redesign the information of the card to the one Yann sent
+
+3. Complete List View Features
    - Implement search functionality
    - Add filtering options
    - Enhance sorting capabilities
 
-2. Complete Ecosystem Hub
+4. Complete Ecosystem Hub
    - Implement content management
    - Add grant information
    - Create event hosting guidelines
 
-3. User Features (Phase 3)
+5. User Features (Phase 3)
    - Implement user profiles
    - Add journey functionality
    - Create sharing system
-
-4. Community Features (Phase 4)
-   - Add community guidelines
-   - Create organizer resources
-   - Implement feedback system
 
 ## 📦 Event Data Schema
 
@@ -148,7 +146,7 @@ Enable users to explore events in a searchable, filterable list view.
 - `cost` (string: "free", "paid")
 - `volunteership` (boolean)
 - `region` (string)
-- `blockchain` (array)
+- `blockchain ecosystem` (array)
 - `tags` (array)
 - `description` (string)
 - `socials` (object)
@@ -165,9 +163,14 @@ Enable users to explore events in a searchable, filterable list view.
 ### Future Metrics
 - User retention
 - Event submission rate
-- Community engagement
 - Feature adoption
 - User feedback
+- Analytics tracking:
+  - Page views and unique visitors
+  - User journey tracking
+  - Event interaction metrics
+  - Feature usage statistics
+  - Geographic distribution
 
 ## 🔄 Development Workflow
 
@@ -187,10 +190,6 @@ Enable users to explore events in a searchable, filterable list view.
 
 ## 🚫 Out of Scope (for now)
 - User authentication (before Phase 3)
-- Real-time chat (before Phase 4)
-- Payments or ticketing
-- Native mobile apps
-- Desktop applications
 - Browser extensions
 
 ## 💡 Development Tips
