@@ -2,482 +2,6 @@
   "events": [
     {
       "id": 1,
-      "name": "Zugrama India",
-      "date": "2025-01-05",
-      "location": {
-        "lat": 8.524139,
-        "lng": 76.936638,
-        "city": "Thiruvananthapuram",
-        "country": "India"
-      },
-      "link": "https://zugrama.org/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 2,
-      "name": "BUIDL Europe",
-      "date": "2025-01-09",
-      "location": {
-        "lat": 38.722252,
-        "lng": -9.139337,
-        "city": "Lisbon",
-        "country": "Portugal"
-      },
-      "link": "https://buidleurope.com",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 3,
-      "name": "ETHiopia",
-      "date": "2025-01-21",
-      "location": {
-        "lat": 9.032055,
-        "lng": 38.751293,
-        "city": "Addis Ababa",
-        "country": "Ethiopia"
-      },
-      "link": "https://eth-iopia.xyz",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 4,
-      "name": "EthereumZuri.ch",
-      "date": "2025-01-30",
-      "location": {
-        "lat": 47.376886,
-        "lng": 8.541694,
-        "city": "Zurich",
-        "country": "Switzerland"
-      },
-      "link": "https://ethereumzuri.ch/ethereumzurich",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 5,
-      "name": "EthOxford",
-      "date": "2025-02-07",
-      "location": {
-        "lat": 51.752021,
-        "lng": -1.25785,
-        "city": "Oxford",
-        "country": "United Kingdom"
-      },
-      "link": "https://ethoxford.io/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 6,
-      "name": "NFT Paris*",
-      "date": "2025-02-13",
-      "location": {
-        "lat": 48.856614,
-        "lng": 2.352222,
-        "city": "Paris",
-        "country": "France"
-      },
-      "link": "https://nftparis.xyz",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 7,
-      "name": "RWA Paris Summit*",
-      "date": "2025-02-13",
-      "location": {
-        "lat": 48.856614,
-        "lng": 2.352222,
-        "city": "Paris",
-        "country": "France"
-      },
-      "link": "https://rwaparis.xyz",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 8,
-      "name": "Consensus HK*",
-      "date": "2025-02-18",
-      "location": {
-        "lat": 22.396428,
-        "lng": 114.109497,
-        "city": "Hong Kong",
-        "country": "Hong Kong"
-      },
-      "link": "https://consensus-hongkong.coindesk.com",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 9,
-      "name": "ZKDay",
-      "date": "2025-02-20",
-      "location": {
-        "lat": 39.739236,
-        "lng": -104.990251,
-        "city": "Denver",
-        "country": "United States"
-      },
-      "link": "https://zklab.systems/zkday",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 10,
-      "name": "ETHDenver",
-      "date": "2025-02-23",
-      "location": {
-        "lat": 39.739236,
-        "lng": -104.990251,
-        "city": "Denver",
-        "country": "United States"
-      },
-      "link": "https://ethdenver.com",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 11,
-      "name": "Pragma Denver",
-      "date": "2025-02-25",
-      "location": {
-        "lat": 39.739236,
-        "lng": -104.990251,
-        "city": "Denver",
-        "country": "United States"
-      },
-      "link": "https://ethglobal.com/events/pragma-denver",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 12,
-      "name": "Modular Carnival",
-      "date": "2025-02-25",
-      "location": {
-        "lat": -19.920817,
-        "lng": -43.937789,
-        "city": "Belo Horizonte",
-        "country": "Brazil"
-      },
-      "link": null,
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 13,
-      "name": "Edge City Austin",
-      "date": "2025-03-02",
-      "location": {
-        "lat": 30.267153,
-        "lng": -97.743061,
-        "city": "Austin",
-        "country": "United States"
-      },
-      "link": "https://www.edgecity.live/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 14,
-      "name": "Crecimiento",
-      "date": "2025-03-28",
-      "location": {
-        "lat": -34.603684,
-        "lng": -58.381559,
-        "city": "Buenos Aires",
-        "country": "Argentina"
-      },
-      "link": null,
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 15,
-      "name": "EthereumSF",
-      "date": "2025-03-10",
-      "location": {
-        "lat": 37.7749,
-        "lng": -122.4194,
-        "city": "San Francisco",
-        "country": "United States"
-      },
-      "link": "https://ethereumsf.org/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 16,
-      "name": "Building Blocks",
-      "date": "2025-03-25",
-      "location": {
-        "lat": 32.0853,
-        "lng": 34.7818,
-        "city": "Tel Aviv",
-        "country": "Israel"
-      },
-      "link": null,
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 17,
-      "name": "ETH Pondy",
-      "date": "2025-03-28",
-      "location": {
-        "lat": 11.9414,
-        "lng": 79.8083,
-        "city": "Pondicherry",
-        "country": "India"
-      },
-      "link": "https://ethpondy.xyz",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 18,
-      "name": "ETHTaipei",
-      "date": "2025-04-01",
-      "location": {
-        "lat": 25.032969,
-        "lng": 121.565418,
-        "city": "Taipei",
-        "country": "Taiwan"
-      },
-      "link": "https://ethtaipei.org",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 19,
-      "name": "ETH Bucharest",
-      "date": "2025-04-02",
-      "location": {
-        "lat": 44.426767,
-        "lng": 26.102538,
-        "city": "Bucharest",
-        "country": "Romania"
-      },
-      "link": "https://ethbucharest.xyz",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 20,
-      "name": "Pragma Taipei",
-      "date": "2025-04-03",
-      "location": {
-        "lat": 25.032969,
-        "lng": 121.565418,
-        "city": "Taipei",
-        "country": "Taiwan"
-      },
-      "link": "https://ethglobal.com/events/pragma-taipei",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 21,
-      "name": "Edge Expedition South Africa",
-      "date": "2025-04-03",
-      "location": {
-        "lat": -33.924869,
-        "lng": 18.424055,
-        "city": "Capetown",
-        "country": "South Africa"
-      },
-      "link": "https://www.edgecity.live/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 22,
-      "name": "ETHGlobal Taipei",
-      "date": "2025-04-04",
-      "location": {
-        "lat": 25.032969,
-        "lng": 121.565418,
-        "city": "Taipei",
-        "country": "Taiwan"
-      },
-      "link": "https://ethglobal.com/events/taipei",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 23,
-      "name": "Appcon",
-      "date": "2025-04-07",
-      "location": {
-        "lat": 45.464203,
-        "lng": 9.189982,
-        "city": "Milan",
-        "country": "Italy"
-      },
-      "link": "https://appcon.org",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 24,
-      "name": "zkHack",
-      "date": "2025-04-11",
-      "location": {
-        "lat": 37.5665,
-        "lng": 126.9780,
-        "city": "Seoul",
-        "country": "South Korea"
-      },
-      "link": "https://zkhack.dev",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 25,
-      "name": "ETH Seoul",
-      "date": "2025-04-14",
-      "location": {
-        "lat": 37.5665,
-        "lng": 126.9780,
-        "city": "Seoul",
-        "country": "South Korea"
-      },
-      "link": "https://ethseoul.org",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 26,
-      "name": "BUIDL Asia",
-      "date": "2025-04-15",
-      "location": {
-        "lat": 37.5665,
-        "lng": 126.9780,
-        "city": "Seoul",
-        "country": "South Korea"
-      },
-      "link": null,
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 27,
-      "name": "Invisible Garden",
-      "date": "2025-10-27",
-      "location": {
-        "lat": -34.603684,
-        "lng": -58.381559,
-        "city": "Buenos Aires",
-        "country": "Argentina"
-      },
-      "link": "https://invisible.garden",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 28,
-      "name": "ETH Canal",
-      "date": "2025-04-22",
-      "location": {
-        "lat": 8.537981,
-        "lng": -80.782127,
-        "city": "Panama City",
-        "country": "Panama"
-      },
-      "link": "https://ethcanal.xyz",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 29,
-      "name": "Staking Summit",
-      "date": "2025-04-28",
-      "location": {
-        "lat": 25.204849,
-        "lng": 55.270783,
-        "city": "Dubai",
-        "country": "United Arab Emirates"
-      },
-      "link": "https://stakingsummit.com/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 30,
-      "name": "ETHDubai",
-      "date": "2025-04-28",
-      "location": {
-        "lat": 25.204849,
-        "lng": 55.270783,
-        "city": "Dubai",
-        "country": "United Arab Emirates"
-      },
-      "link": "https://ethdubaiconf.org",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 32,
-      "name": "ETH Cinco de Mayo",
-      "date": "2025-05-01",
-      "location": {
-        "lat": 23.6345,
-        "lng": -102.5528,
-        "city": "Mexico City",
-        "country": "Mexico"
-      },
-      "link": "https://ethcdm.com/",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 33,
-      "name": "FarCon",
-      "date": "2025-05-01",
-      "location": {
-        "lat": 40.7128,
-        "lng": -74.0060,
-        "city": "New York, NYC",
-        "country": "United States"
-      },
-      "link": "https://farcon.nyc",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 34,
-      "name": "ETHDam",
-      "date": "2025-05-09",
-      "location": {
-        "lat": 52.366697,
-        "lng": 4.89454,
-        "city": "Amsterdam",
-        "country": "Netherlands"
-      },
-      "link": "https://ethdam.com",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 35,
-      "name": "ETH Lisbon",
-      "date": "2025-05-09",
-      "location": {
-        "lat": 38.722252,
-        "lng": -9.139337,
-        "city": "Lisbon",
-        "country": "Portugal"
-      },
-      "link": "https://ethlisbon.org",
-      "logo": null,
-      "short_description": "Short description coming soon."
-    },
-    {
-      "id": 38,
       "name": "Code Africa Conference",
       "date": "2025-05-19",
       "location": {
@@ -488,10 +12,11 @@
       },
       "link": "https://codeafrica.io",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 39,
+      "id": 2,
       "name": "ETHVietnam 2025",
       "date": "2025-05-24",
       "location": {
@@ -502,10 +27,11 @@
       },
       "link": "https://eth-vietnam.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 40,
+      "id": 3,
       "name": "ETHDublin 2025",
       "date": "2025-05-23",
       "location": {
@@ -516,10 +42,11 @@
       },
       "link": "https://lu.ma/hkl5jcre",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 41,
+      "id": 4,
       "name": "ETHBratislava",
       "date": "2025-05-23",
       "location": {
@@ -530,10 +57,11 @@
       },
       "link": "https://ethbratislava.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 42,
+      "id": 5,
       "name": "Edge Esmeralda",
       "date": "2025-05-24",
       "location": {
@@ -544,10 +72,11 @@
       },
       "link": "https://edgeesmeralda.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 43,
+      "id": 6,
       "name": "ETHPrague",
       "date": "2025-05-27",
       "location": {
@@ -558,10 +87,11 @@
       },
       "link": "https://ethprague.com/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 44,
+      "id": 7,
       "name": "ETHGlobal Prague",
       "date": "2025-05-30",
       "location": {
@@ -572,10 +102,11 @@
       },
       "link": "https://ethglobal.com/events/prague",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 45,
+      "id": 8,
       "name": "Pragma Prague",
       "date": "2025-05-29",
       "location": {
@@ -586,10 +117,11 @@
       },
       "link": "https://ethglobal.com/events/pragma-prague",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 46,
+      "id": 9,
       "name": "ETH Belgrade",
       "date": "2025-06-03",
       "location": {
@@ -600,10 +132,11 @@
       },
       "link": "https://ethbelgrade.rs/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 48,
+      "id": 10,
       "name": "ETHMilan",
       "date": "2025-06-24",
       "location": {
@@ -614,10 +147,11 @@
       },
       "link": "https://ethmilan.xyz",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 49,
+      "id": 11,
       "name": "Ethereum Brasil",
       "date": "2025-06-09",
       "location": {
@@ -628,10 +162,11 @@
       },
       "link": "https://ethereumbrasil.com/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 50,
+      "id": 12,
       "name": "Offscript",
       "date": "2025-06-11",
       "location": {
@@ -642,10 +177,11 @@
       },
       "link": "https://offscript.web3creatives.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 51,
+      "id": 13,
       "name": "ProtocolBerg",
       "date": "2025-06-12",
       "location": {
@@ -656,10 +192,11 @@
       },
       "link": "https://protocol.berlin",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 52,
+      "id": 14,
       "name": "ETHKyiv",
       "date": "2025-06-13",
       "location": {
@@ -670,10 +207,11 @@
       },
       "link": "https://ethkyiv.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 53,
+      "id": 15,
       "name": "DappCon",
       "date": "2025-06-16",
       "location": {
@@ -684,10 +222,11 @@
       },
       "link": "https://dappcon.io",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 55,
+      "id": 16,
       "name": "Permissionless IV",
       "date": "2025-06-24",
       "location": {
@@ -698,10 +237,11 @@
       },
       "link": "https://blockworks.co/event/permissionless-iv",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 56,
+      "id": 17,
       "name": "ETHCluj",
       "date": "2025-06-26",
       "location": {
@@ -712,10 +252,11 @@
       },
       "link": "https://ethcluj.org",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 57,
+      "id": 18,
       "name": "EthCC",
       "date": "2025-06-30",
       "location": {
@@ -726,10 +267,11 @@
       },
       "link": "https://ethcc.io",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 58,
+      "id": 19,
       "name": "EthCCweek",
       "date": "2025-07-01",
       "location": {
@@ -738,12 +280,13 @@
         "city": "Cannes",
         "country": "France"
       },
-      "link": "https://ethccweek.fr/",
+      "link": "https://ethcc.io/week",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 59,
+      "id": 20,
       "name": "Pragma Cannes",
       "date": "2025-07-03",
       "location": {
@@ -754,10 +297,11 @@
       },
       "link": "https://ethglobal.com/events/pragma-cannes",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 60,
+      "id": 21,
       "name": "ETHGlobal Cannes",
       "date": "2025-07-04",
       "location": {
@@ -768,10 +312,11 @@
       },
       "link": "https://ethglobal.com/events/cannes",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 61,
+      "id": 22,
       "name": "Pragma New York",
       "date": "2025-08-14",
       "location": {
@@ -782,10 +327,11 @@
       },
       "link": "https://ethglobal.com/events/pragma-newyork",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 62,
+      "id": 23,
       "name": "NapulETH",
       "date": "2025-07-16",
       "location": {
@@ -796,10 +342,11 @@
       },
       "link": "https://napuleth.org/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 63,
+      "id": 24,
       "name": "SBC (The Science of Blockchain Conference)",
       "date": "2025-08-04",
       "location": {
@@ -810,10 +357,11 @@
       },
       "link": "https://sbc-conference.org/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 64,
+      "id": 25,
       "name": "Frontiers 2025",
       "date": "2025-08-01",
       "location": {
@@ -824,10 +372,11 @@
       },
       "link": "https://frontiers.paradigm.xyz/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 65,
+      "id": 26,
       "name": "ETH Latam",
       "date": "2025-11-08",
       "location": {
@@ -838,10 +387,11 @@
       },
       "link": "https://ethlatam.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 66,
+      "id": 27,
       "name": "ETHGlobal New York",
       "date": "2025-08-15",
       "location": {
@@ -852,10 +402,11 @@
       },
       "link": "https://ethglobal.com/events/newyork",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 67,
+      "id": 28,
       "name": "Web3 Lagos Conference",
       "date": "2025-08-28",
       "location": {
@@ -866,10 +417,11 @@
       },
       "link": "https://event.web3bridge.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 68,
+      "id": 29,
       "name": "EthAccra",
       "date": "2025-09-03",
       "location": {
@@ -880,10 +432,11 @@
       },
       "link": "https://ethaccra.xyz",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 69,
+      "id": 30,
       "name": "ETHWarsaw",
       "date": "2025-09-04",
       "location": {
@@ -894,10 +447,11 @@
       },
       "link": "https://ethwarsaw.dev",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 70,
+      "id": 31,
       "name": "Ethsafari",
       "date": "2025-09-07",
       "location": {
@@ -908,10 +462,11 @@
       },
       "link": null,
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 71,
+      "id": 32,
       "name": "Boston Blockchain Week",
       "date": "2025-09-08",
       "location": {
@@ -922,10 +477,11 @@
       },
       "link": "https://bostonblockchainweek.com/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 72,
+      "id": 33,
       "name": "ETH Boston",
       "date": "2025-09-09",
       "location": {
@@ -936,10 +492,11 @@
       },
       "link": "https://bostonblockchainweek.com/",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 73,
+      "id": 34,
       "name": "ETHTokyo",
       "date": "2025-09-12",
       "location": {
@@ -950,10 +507,11 @@
       },
       "link": "https://lu.ma/eth-tokyo",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 74,
+      "id": 35,
       "name": "ETHSofia",
       "date": "2025-09-23",
       "location": {
@@ -964,10 +522,11 @@
       },
       "link": "https://ethsofia.com",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 75,
+      "id": 36,
       "name": "Pragma New Delhi",
       "date": "2025-09-25",
       "location": {
@@ -978,10 +537,11 @@
       },
       "link": "https://ethglobal.com/events/pragma-newdelhi",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 76,
+      "id": 37,
       "name": "ETHGlobal New Delhi",
       "date": "2025-09-26",
       "location": {
@@ -992,10 +552,11 @@
       },
       "link": "https://ethglobal.com/events/newdelhi",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 78,
+      "id": 38,
       "name": "ProtoLayers Conference",
       "date": "2025-10-11",
       "location": {
@@ -1006,10 +567,11 @@
       },
       "link": "https://lu.ma/protolayers",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 79,
+      "id": 39,
       "name": "Encode London 2025",
       "date": "2025-10-24",
       "location": {
@@ -1020,10 +582,11 @@
       },
       "link": "https://lu.ma/Encode-London",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 80,
+      "id": 40,
       "name": "ETHRome Hackathon",
       "date": "2025-10-01",
       "location": {
@@ -1034,7 +597,8 @@
       },
       "link": "https://ethrome.org",
       "logo": null,
-      "short_description": "Short description coming soon."
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
       "id": 9999,
@@ -1048,7 +612,8 @@
       },
       "link": "https://example.com",
       "logo": null,
-      "short_description": "This is a test event for today (ongoing)."
+      "short_description": "This is a test event for today (ongoing).",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     }
   ]
 } 

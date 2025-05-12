@@ -57,7 +57,7 @@ Enable users to explore events in a searchable, filterable list view.
 - [x] Toggle between Map ↔ List views
 - [x] List view of events, sorted by date
 - [x] Desktop-optimized layout (30% width)
-- [ ] Redesign list event cards to match map
+- [x] Redesign list event cards to match map
 - [ ] Search bar (keyword search)
 - [ ] Filters bar with:
   - [ ] Select month
