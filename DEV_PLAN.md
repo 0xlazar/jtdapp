@@ -7,7 +7,7 @@
 - **Map:** Leaflet.js
 - **Data:** JSON (→ Supabase later)
 - **Search/Filter:** Vanilla JS filtering
-- **Hosting:** Netlify
+- **Hosting:** Github Pages
 - **Dev Environment:** Cursor.dev
 
 ### Planned Stack
@@ -15,8 +15,9 @@
   - Supabase auth (for non Web3)
   - Wallet connection (for Web3)
   - Guest mode (skip auth)
+- **Hosting:** Netlify
 - **Backend:** Node.js + Express
-- **Database:** MongoDB → Supabase
+- **Database:** Supabase
 - **Analytics:** Simple Analytics (privacy-friendly)
 - **Domain:** Custom domain (e.g., journeytodevconnect.com)
 
@@ -29,6 +30,9 @@
 - Welcome popup for first-time visitors
 - List view with date-based sorting
 - Ecosystem Hub (Coming Soon)
+
+### Infrastructure
+- Purchased and configured journeytodevconnect.com as a custom domain in Github Pages
 
 ### UI/UX Improvements
 - Responsive design for all screen sizes
@@ -53,12 +57,18 @@ Enable users to explore events in a searchable, filterable list view.
 - [x] Toggle between Map ↔ List views
 - [x] List view of events, sorted by date
 - [x] Desktop-optimized layout (30% width)
-- [ ] Top filter/search bar with:
-  - [ ] Month selector
-  - [ ] Region filter
+- [ ] Redesign list event cards to match map
+- [ ] Search bar (keyword search)
+- [ ] Filters bar with:
+  - [ ] Select month
+  - [ ] Select region
   - [ ] Cost filter (free/paid)
   - [ ] Volunteership opportunities
   - [ ] Search box (by keyword)
+- [ ] Add tags to list event
+- [x] Enforce HTTPS in Github Pages once it's done with the TSL certificate
+- [ ] https://search.google.com/search-console/welcome
+
 
 ## 📋 Planned Features
 
@@ -95,6 +105,21 @@ Enable users to explore events in a searchable, filterable list view.
 - [ ] Event analytics
 - [ ] Event feedback system
 
+### Community Features
+- [ ] Linked to the Events somehow
+- [ ] Ethereum Communities Directory (from https://ethereum.org/en/community/events/)
+  - [ ] List of all Ethereum communities from ethereum.org
+  - [ ] Community profiles with:
+    - [ ] Location
+    - [ ] Social media links
+    - [ ] Meeting frequency
+    - [ ] Community size
+    - [ ] Focus areas
+  - [ ] Search and filter communities
+  - [ ] Map integration for community locations
+  - [ ] Community event calendar integration
+  - [ ] Community contact information
+
 ### Technical Improvements
 - [ ] Performance optimization
 - [ ] Advanced caching
@@ -105,9 +130,9 @@ Enable users to explore events in a searchable, filterable list view.
 ## 🎯 Next Steps (Priority Order)
 
 1. Infrastructure Setup
-   - Purchase and configure custom domain
+   - [x] Purchase and configure journeytodevconnect.com as a custom domain in Github Pages
    - Set up Simple Analytics
-   - Configure DNS and SSL
+   - [x] Configure DNS and SSL
    - Set up email addresses
 
 2. Map improvements:
@@ -132,7 +157,7 @@ Enable users to explore events in a searchable, filterable list view.
 
 ## 📦 Event Data Schema
 
-### Current Fields
+### Current Fields for Event
 - `name` (string)
 - `date` (string)
 - `location` (object)
@@ -141,62 +166,16 @@ Enable users to explore events in a searchable, filterable list view.
   - `lat` (number)
   - `lng` (number)
 - `link` (string)
+- `short description` (string)
 
-### Planned Fields
-- `cost` (string: "free", "paid")
-- `volunteership` (boolean)
+### Planned Fields for Event
+- `event_type` (string: "conference" or "gathering")
 - `region` (string)
+- `blockchain_week` (boolean)
+- `has_hackathon` (boolean)
+- `cost` (string: "free", "paid")
+- `free_entry` (boolean)
+- `volunteership` (boolean)
 - `blockchain ecosystem` (array)
 - `tags` (array)
-- `description` (string)
 - `socials` (object)
-
-## 📊 Performance Metrics
-
-### Current Focus
-- Page load time
-- Map performance
-- List view responsiveness
-- Offline functionality
-- User engagement
-
-### Future Metrics
-- User retention
-- Event submission rate
-- Feature adoption
-- User feedback
-- Analytics tracking:
-  - Page views and unique visitors
-  - User journey tracking
-  - Event interaction metrics
-  - Feature usage statistics
-  - Geographic distribution
-
-## 🔄 Development Workflow
-
-### Code Management
-- Feature branches
-- Pull request reviews
-- Automated testing
-- Continuous integration
-- Regular deployments
-
-### Documentation
-- Code documentation
-- User guides
-- API documentation
-- Changelog maintenance
-- Development guides
-
-## 🚫 Out of Scope (for now)
-- User authentication (before Phase 3)
-- Browser extensions
-
-## 💡 Development Tips
-
-1. Start small and ship fast
-2. Build one feature per phase
-3. Avoid premature complexity
-4. Focus on UI/UX polish
-5. Test thoroughly on mobile
-6. Keep codebase clean and documented 

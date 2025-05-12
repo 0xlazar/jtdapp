@@ -165,29 +165,59 @@ closeList.addEventListener('click', function() {
 
 // Function to render event list
 function renderEventList(events) {
+    // Sort events by date ascending
+    events = events.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
     // Store events globally
     window.currentEvents = events;
     
-    eventsList.innerHTML = events.map(event => `
-        <div class="p-4 border-b hover:bg-gray-50 cursor-pointer transition-colors" 
-             data-lat="${event.location.lat}" 
-             data-lng="${event.location.lng}">
-            <h3 class="font-semibold">${event.name}</h3>
-            <p class="text-gray-600 text-sm">${event.date}</p>
-            <p class="text-gray-600 text-sm">${event.location.city}, ${event.location.country}</p>
-            <a href="${event.link}" target="_blank" class="text-blue-500 text-sm hover:text-blue-600">Visit Website</a>
-        </div>
-    `).join('');
+    eventsList.innerHTML = events.map(event => {
+        // Format date as 'Month Day'
+        const eventDate = new Date(event.date);
+        const options = { month: 'long', day: 'numeric' };
+        const formattedDate = eventDate.toLocaleDateString(undefined, options);
+        
+        return `
+            <div class="p-4 border-b hover:bg-gray-50 cursor-pointer transition-colors relative" 
+                 data-lat="${event.location.lat}" 
+                 data-lng="${event.location.lng}">
+                <div class="flex items-center gap-4 mb-2">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 text-xl font-bold">Logo</div>
+                    <div>
+                        <h3 class="font-bold text-lg">${event.name}</h3>
+                        <p class="text-gray-600 text-sm">${event.short_description || ''}</p>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-blue-700 text-sm font-semibold mb-2">${formattedDate} &bull; ${event.location.city}, ${event.location.country}</p>
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        <!-- Tags placeholder -->
+                        <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Tag</span>
+                        <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Conference</span>
+                        <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Free</span>
+                        <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Volunteership</span>
+                    </div>
+                    <a href="${event.link}" target="_blank" class="text-blue-500 hover:underline text-sm block mb-2">Visit Website</a>
+                    <button class="w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-base font-semibold hover:bg-blue-700 transition-colors">Add To Journey</button>
+                </div>
+            </div>
+        `;
+    }).join('');
 
     // Add click handlers to list items
     eventsList.querySelectorAll('div').forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function(e) {
+            // Don't trigger if clicking on links or buttons
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+                return;
+            }
+            
             const lat = parseFloat(this.dataset.lat);
             const lng = parseFloat(this.dataset.lng);
             map.setView([lat, lng], 12);
             
             // Switch to map view
             listView.classList.add('translate-x-full');
+            viewToggle.classList.remove('hidden');
             viewIcon.textContent = '📋';
             viewText.textContent = 'List View';
             currentView = 'map';
@@ -257,7 +287,28 @@ function isEventFuture(eventDate) {
 function isEventPast(eventDate) {
     const now = new Date();
     const event = new Date(eventDate);
-    return event < now && !isEventOngoing(eventDate);
+    // Zero out the time for both dates
+    now.setHours(0, 0, 0, 0);
+    event.setHours(0, 0, 0, 0);
+    return event < now;
+}
+
+// Helper function to interpolate color between two hex colors
+function interpolateColor(color1, color2, factor) {
+    const c1 = color1.match(/\w\w/g).map(x => parseInt(x, 16));
+    const c2 = color2.match(/\w\w/g).map(x => parseInt(x, 16));
+    const result = c1.map((v, i) => Math.round(v + factor * (c2[i] - v)));
+    return `#${result.map(x => x.toString(16).padStart(2, '0')).join('')}`;
+}
+
+// Helper to get marker color based on days until event
+function getEventColor(daysToEvent) {
+    // 0 days = green (#10B981), 60+ days = purple (#7c3aed)
+    const minDays = 0;
+    const maxDays = 60;
+    const clamped = Math.max(minDays, Math.min(maxDays, daysToEvent));
+    const factor = 1 - (clamped / maxDays); // 1 = green, 0 = purple
+    return interpolateColor('7c3aed', '10B981', factor); // purple to green
 }
 
 // Function to add markers to the map
@@ -268,45 +319,58 @@ function addEventMarkers(events) {
     const markers = L.markerClusterGroup({
         // Customize cluster appearance
         iconCreateFunction: function(cluster) {
-            const count = cluster.getChildCount();
+            const children = cluster.getAllChildMarkers();
+            // Find the soonest event in the cluster
+            let minDays = Infinity;
+            let hasOngoing = false;
+            children.forEach(marker => {
+                if (marker.options.isOngoing) hasOngoing = true;
+                if (marker.options.daysToEvent < minDays) minDays = marker.options.daysToEvent;
+            });
+            const clusterColor = hasOngoing
+                ? '#10B981'
+                : getEventColor(minDays);
+            const pulsateClass = hasOngoing ? 'pulsating-marker' : '';
             return L.divIcon({
-                html: `<div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">${count}</div>`,
+                html: `<div style="background:${clusterColor}" class="text-white rounded-full w-8 h-8 flex items-center justify-center font-bold ${pulsateClass}">${cluster.getChildCount()}</div>`,
                 className: 'custom-cluster',
                 iconSize: L.point(32, 32)
             });
         }
     });
 
-    events.forEach(event => {
-        console.log('Processing event:', event.name);
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
 
-        // Skip past events
+    events.forEach(event => {
         if (isEventPast(event.date)) {
             return;
         }
-
-        // Create a circle marker with different styles based on event status
+        const eventDate = new Date(event.date);
+        eventDate.setHours(0, 0, 0, 0);
+        const daysToEvent = Math.round((eventDate - now) / (1000 * 60 * 60 * 24));
+        const ongoing = isEventOngoing(event.date);
+        const markerColor = ongoing ? '#10B981' : getEventColor(daysToEvent);
         const marker = L.circleMarker([event.location.lat, event.location.lng], {
-            radius: 8,
-            fillColor: isEventOngoing(event.date) ? "#10B981" : "#3B82F6", // Green for ongoing, blue for future
-            color: "#fff",
-            weight: 2,
+            radius: ongoing ? 12 : 8,
+            fillColor: markerColor,
+            color: ongoing ? '#10B981' : '#fff',
+            weight: ongoing ? 4 : 2,
             opacity: 1,
-            fillOpacity: 0.8
+            fillOpacity: 0.85,
+            isOngoing: ongoing,
+            daysToEvent: daysToEvent
         });
-
-        // Add pulsating effect for ongoing events
-        if (isEventOngoing(event.date)) {
-            marker.setStyle({
-                className: 'pulsating-marker'
+        if (ongoing) {
+            marker.on('add', function() {
+                const svg = marker._path;
+                if (svg) {
+                    svg.classList.add('pulsating-marker');
+                }
             });
         }
-
-        // Add click handler to show floating window
         marker.on('click', function() {
             const popupContent = document.getElementById('popup-content');
-            // Format date as 'Month Day'
-            const eventDate = new Date(event.date);
             const options = { month: 'long', day: 'numeric' };
             const formattedDate = eventDate.toLocaleDateString(undefined, options);
             popupContent.innerHTML = `
@@ -317,7 +381,6 @@ function addEventMarkers(events) {
                         <p class="text-gray-600 text-sm mb-1">${event.short_description || ''}</p>
                         <p class="text-blue-700 text-base font-semibold mb-2">${formattedDate} &bull; ${event.location.city}, ${event.location.country}</p>
                         <div class="flex flex-wrap gap-2 mb-1">
-                            <!-- Tags placeholder -->
                             <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Tag</span>
                             <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Conference</span>
                             <span class="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">Free</span>
@@ -332,31 +395,24 @@ function addEventMarkers(events) {
                 </div>
             `;
             const popup = document.getElementById('event-popup');
-           
             popup.classList.remove('translate-y-full');
             popup.classList.remove('opacity-0');
             popup.classList.remove('pointer-events-none');
         });
-
-        // Add hover effect
         marker.on('mouseover', function() {
             this.setStyle({
-                fillColor: isEventOngoing(event.date) ? "#059669" : "#2563EB", // Darker green for ongoing, darker blue for future
+                fillColor: ongoing ? '#059669' : markerColor,
                 fillOpacity: 1
             });
         });
         marker.on('mouseout', function() {
             this.setStyle({
-                fillColor: isEventOngoing(event.date) ? "#10B981" : "#3B82F6", // Back to original colors
-                fillOpacity: 0.8
+                fillColor: ongoing ? '#10B981' : markerColor,
+                fillOpacity: 0.85
             });
         });
-
-        // Add marker to cluster group
         markers.addLayer(marker);
     });
-
-    // Add the cluster group to the map
     map.addLayer(markers);
 }
 

@@ -1,5 +1,22 @@
 # Changelog
 
+## [2024-06-09]
+
+### Changed
+- Overhauled event marker logic on the map:
+  - Only ongoing and future events are shown.
+  - Ongoing events are pulsating (CSS animation).
+  - Past events are hidden (future: will be grayed out and unclickable if needed).
+  - Improved marker color logic.
+  - Fixed popup logic for all visible markers.
+- UI/UX:
+  - Map now fills available space, removed gray border.
+  - Adjusted map bounds to valid OSM range, preventing tile 400 errors.
+- Removed date sorting from the event list (UI and JS).
+- Reverted service worker and Tailwind CSS loading to stable state.
+- Cleaned up map initialization and tile layer options.
+- Committed and pushed all changes to GitHub.
+
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
