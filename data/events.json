@@ -599,21 +599,6 @@
       "logo": null,
       "short_description": "Short description coming soon.",
       "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
-    },
-    {
-      "id": 9999,
-      "name": "Test Ongoing Event",
-      "date": "2025-05-12",
-      "location": {
-        "lat": 40.0,
-        "lng": -75.0,
-        "city": "Testville",
-        "country": "Testland"
-      },
-      "link": "https://example.com",
-      "logo": null,
-      "short_description": "This is a test event for today (ongoing).",
-      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     }
   ]
 } 

@@ -7,6 +7,18 @@
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#3B82F6">
     <meta name="description" content="Track and discover blockchain events around the world">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Journey to DevConnect">
+    <meta property="og:description" content="Discover Ethereum-aligned events & connect with other travelers around the world leading up to DevConnect.">
+    <meta property="og:image" content="https://journeytodevconnect.com/icons/og-image.png">
+    <meta property="og:url" content="https://journeytodevconnect.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Journey to DevConnect">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Journey to DevConnect">
+    <meta name="twitter:description" content="Discover Ethereum-aligned events & connect with other travelers around the world leading up to DevConnect.">
+    <meta name="twitter:image" content="https://journeytodevconnect.com/icons/og-image.png">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     <link rel="icon" type="image/png" href="icons/logo.png">
@@ -209,23 +221,38 @@
     <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Welcome traveler!</h3>
+                <h3 class="text-xl font-bold">Welcome to Journey to DevConnect!</h3>
                 <button id="close-welcome" class="text-gray-500 hover:text-gray-700">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
-            <div class="space-y-3">
-                <p class="text-gray-600">Your gateway to the Ethereum ecosystem:</p>
-                <ul class="list-disc list-inside text-gray-600 space-y-2">
-                    <li>Discover Ethereum aligned, grassroots and community organized events across the globe leading up to DevConnect</li>
-                    <li>Stay updated on everything Ethereum ecosystem related (opportunities, grants, announcements)</li>
-                    <li>Connect with the community</li>
-                </ul>
+            <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-600 text-xl">🔍</span>
+                    <div>
+                        <p class="text-gray-800 font-medium">Discover Events</p>
+                        <p class="text-gray-600 text-sm">Curated list of Ethereum-aligned, no-BS events leading up to <a href="https://devconnect.org" target="_blank" class="text-blue-600 hover:underline">DevConnect</a></p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-600 text-xl">🎯</span>
+                    <div>
+                        <p class="text-gray-800 font-medium">Create Your Journey</p>
+                        <p class="text-gray-600 text-sm">Build your own Journey to DevConnect and connect with fellow cypherpunks</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-600 text-xl">🌱</span>
+                    <div>
+                        <p class="text-gray-800 font-medium">Ecosystem Hub</p>
+                        <p class="text-gray-600 text-sm">Get the latest announcements, opportunities, scholarships, grants, and more!</p>
+                    </div>
+                </div>
             </div>
-            <button id="got-it-button" class="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-                Start Your Journey to DevConnect
+            <button id="got-it-button" class="mt-6 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                Start Your Journey
             </button>
         </div>
     </div>
