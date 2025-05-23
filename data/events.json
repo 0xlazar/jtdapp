@@ -18,7 +18,7 @@
     {
       "id": 2,
       "name": "ETHVietnam 2025",
-      "date": "2025-05-24",
+      "date": "2025-08-09",
       "location": {
         "lat": 10.7764,
         "lng": 106.7025,
@@ -40,7 +40,7 @@
         "city": "Dublin",
         "country": "Ireland"
       },
-      "link": "https://lu.ma/hkl5jcre",
+      "link": "https://www.ethdublin.io/",
       "logo": null,
       "short_description": "Short description coming soon.",
       "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
@@ -132,7 +132,7 @@
       },
       "link": "https://ethbelgrade.rs/",
       "logo": null,
-      "short_description": "Short description coming soon.",
+      "description": "The Balkans' premier Web3 conference & hackathon. Join global Ethereum builders, innovators, and enthusiasts for cutting-edge talks, hands-on development, and networking. Part of Belgrade Blockchain Week.",
       "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
@@ -596,6 +596,21 @@
         "country": "Italy"
       },
       "link": "https://ethrome.org",
+      "logo": null,
+      "short_description": "Short description coming soon.",
+      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
+    },
+    {
+      "id": 9999,
+      "name": "Mock Ongoing Event",
+      "date": "2025-05-21",
+      "location": {
+        "lat": -1.286389,
+        "lng": 36.817223,
+        "city": "Nairobi",
+        "country": "Kenya"
+      },
+      "link": "https://codeafrica.io",
       "logo": null,
       "short_description": "Short description coming soon.",
       "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
