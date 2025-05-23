@@ -19,6 +19,71 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2024-06-10]
+
+### Changed
+- Timeline bar logic in event popups and tooltips:
+  - The bar now fills from the event's position to the right with the event color, and from the left to the event's position with a neutral color (#e5e7eb).
+  - When the event is ongoing, the entire bar is filled with pink (Blossom Pink, #F7B3E9).
+  - This provides a more intuitive countdown/progress visualization.
+- Color scheme for event markers and timeline:
+  - Distant events (30+ days): blue (#5094FF)
+  - Events 7-30 days away: gradient between Blossom Pink (#F7B3E9) and blue
+  - Events within 7 days and ongoing: Blossom Pink (#F7B3E9)
+  - Ongoing events have a pulsating effect and all timeline/marker elements use Blossom Pink
+- Event logo rendering:
+  - All event logos in tooltips, popup cards, and list view cards now use the smaller @icons/icon-192x192.png as the default if no custom logo is provided.
+  - Improved fallback logic for missing/broken logos.
+- List view improvements:
+  - Added a minimum width to the list view for better readability (initially 320px, then increased to 375px).
+
+### Technical Details
+- Updated renderTimeline function in scripts/main.js for new bar fill logic and color handling.
+- Updated event logo rendering logic in scripts/main.js to use the optimized icon.
+- Updated #list-view container in index.html to enforce a minimum width.
+
+### UX/UI
+- Timeline bar and event marker colors are now visually consistent and intuitive.
+- List view is more readable and visually balanced on all screen sizes.
+- Event logos are sharper and load faster due to optimized image usage.
+
+## [2024-06-11]
+
+### Added
+- Map Legend popup:
+  - Added a new help popup that explains the color coding of event markers
+  - Shows examples of all marker states (30+ days, 7-30 days, within 7 days, ongoing)
+  - Includes visual examples with the actual colors and animations
+  - Accessible via a help button in the UI
+
+### Changed
+- Enhanced event marker tooltips:
+  - Added event logo and name to tooltips on desktop view
+  - Improved tooltip layout and spacing
+  - Added "Click for more info" hint
+  - Made tooltips more informative while keeping them clean
+- Improved marker cluster appearance:
+  - Clusters now use the color of the soonest event in the group
+  - Added pulsating effect to clusters containing ongoing events
+  - Improved cluster size and visibility
+- List view enhancements:
+  - Added vertical timeline bar with colored dots
+  - Improved event card layout and spacing
+  - Added proper date formatting and time display
+  - Enhanced visual hierarchy of event information
+
+### Technical Details
+- Updated marker cluster configuration in scripts/main.js
+- Added new help popup component to index.html
+- Enhanced tooltip generation logic with new content structure
+- Improved list view rendering with timeline integration
+
+### UX/UI
+- Map legend helps users understand the color coding system
+- Tooltips are now more informative and visually appealing
+- List view timeline provides better context for event timing
+- Overall improved visual consistency across all components
+
 ## [Unreleased]
 
 ### Added
@@ -68,31 +133,6 @@ All notable changes to this project will be documented in this file.
   - Optimized for desktop viewing
   - Added shadow for depth
   - Improved visual separation from map
-
-### Technical Details
-- Added CSS classes for popup transitions:
-  - `transition-all` for smooth animations
-  - `opacity-0` for fade effects
-  - `pointer-events-none` for proper interaction handling
-- Updated z-index values:
-  - Footer: z-40 (highest)
-  - Popup: z-30
-  - Map UI elements: z-20
-  - Map: z-0
-- Implemented responsive design for popups
-- Added hover effects for navigation items
-- Implemented localStorage for welcome popup state
-- Enhanced popup interaction handling:
-  - Click outside to close
-  - Close button functionality
-  - Smooth animations
-  - Proper event delegation
-- Added list view features:
-  - View toggle functionality
-  - Date parsing and sorting
-  - Event list rendering
-  - Map integration
-  - Responsive layout using Tailwind breakpoints
 
 ### Files Modified
 - index.html

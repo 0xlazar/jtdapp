@@ -9,6 +9,7 @@
 - **Search/Filter:** Vanilla JS filtering
 - **Hosting:** Github Pages
 - **Dev Environment:** Cursor.dev
+- **Domain:** Custom domain (e.g., journeytodevconnect.com)
 
 ### Planned Stack
 - **Auth:** 
@@ -19,60 +20,102 @@
 - **Backend:** Node.js + Express
 - **Database:** Supabase
 - **Analytics:** Simple Analytics (privacy-friendly)
-- **Domain:** Custom domain (e.g., journeytodevconnect.com)
 
-## ✅ Completed Features
+## ✅ Done:
 
 ### Core Functionality
-- Interactive map with event markers
-- Event details popup
-- PWA support with offline capabilities
-- Welcome popup for first-time visitors
-- List view with date-based sorting
-- Ecosystem Hub (Coming Soon)
+- [x] Interactive map with event markers
+- [x] Event details popup
+- [x] PWA support with offline capabilities
+- [x] Welcome popup for first-time visitors
+- [x] List view with date-based sorting
+- [x] Ecosystem Hub (Coming Soon)
 
-### Infrastructure
-- Purchased and configured journeytodevconnect.com as a custom domain in Github Pages
+- [x] Purchased and configured journeytodevconnect.com as a custom domain in Github Pages
 
 ### UI/UX Improvements
-- Responsive design for all screen sizes
-- Smooth transitions and animations
-- Mobile-first approach
-- Desktop-optimized list view (30% width)
-- Community-focused messaging
+- [x] Responsive design for all screen sizes
+- [x] Smooth transitions and animations
+- [x] Mobile-first approach
 
 ### Technical Implementation
-- Service worker for offline support
-- LocalStorage for user preferences
-- Event data management
-- Map integration with Leaflet
-- Date parsing and sorting
+- [x] Service worker for offline support
+- [x] LocalStorage for user preferences
+- [x] Event data management
+- [x] Map integration with Leaflet
+- [x] Date parsing and sorting
 
-## 🚧 Current Phase – List View & Filters
-
-### 🎯 Goal
-Enable users to explore events in a searchable, filterable list view.
-
-### 🔧 In Progress
 - [x] Toggle between Map ↔ List views
 - [x] List view of events, sorted by date
 - [x] Desktop-optimized layout (30% width)
 - [x] Redesign list event cards to match map
-- [ ] Search bar (keyword search)
-- [ ] Filters bar with:
-  - [ ] Select month
-  - [ ] Select region
-  - [ ] Cost filter (free/paid)
-  - [ ] Volunteership opportunities
-  - [ ] Search box (by keyword)
-- [ ] Add tags to list event
+- [x] Search bar
+   - [x] by keyword
+   - [x] by name
+   - [x] by location (city, country)
+   - [x] by month
+   - [x] by season (winter, summer, etc.)
+   - [x] by tag
+- [x] Search filter indicator
 - [x] Enforce HTTPS in Github Pages once it's done with the TSL certificate
-- [ ] https://search.google.com/search-console/welcome
+- [x] https://search.google.com/search-console/welcome
+- [x] Set up email addresses - https://mail.zoho.com/zm/
+
+- [x] Added a tooltip when hovering over markers "Starts in X days"
+- [x] Changed the colors of the event markers to be more visually clear (from warm to green)
+- [x] Added a timeline strip on event marker hover, pop up card and list event card
+  - [x] Event marker tooltip now includes: timeline strip, starts in x days counter, logo, and event name
+- [x] When hover over DevCon floating marker, it should also have a timeline strip and "Starts in x days"
+
+- [ ] Redesign the List View:
+  - [x] Upcoming/Past Toggle Placement
+      Move the Upcoming/Past toggle to the top left, just left of the close (X) button.
+  - [x] Vertical Timeline Bar
+      Add a vertical timeline bar on the left.
+      Use logic to display "Today", "Tomorrow", or "in X days", followed by the day name (e.g., "Wednesday").
+      Also make the dot on the timeline be colored (or glowing) according to our event marker color logic
+  - [ ] Floating "In X Days" pill
+    - [ ] Aligned it to the timeline dot and text, right now it's not
+  - [ ] Dedicated Event Card Div
+      Each event should be inside a visually distinct card, similar to Luma's design.
+  - [ ] Event Card Sections
+      Section 1: Logo, name, location, and date (logo on the left, other info on the right).
+      Section 2: Description and tags.
+      Section 3: Action buttons, with "Add to Journey" as the primary button.
+
+## 🎯 Next Steps (Priority Order)
+
+- [ ] Fill out the current events with logos, info and tags
+- [ ] 
+
+### Create an Event page
+Data from user:
+- [ ] Name of Event
+- [ ] Description (please be mindful of this, for keyword filtering and SEO purposes)
+- [ ] Start Date
+- [ ] End Date
+- [ ] Location (City, Country)
+- [ ] Logo (what size??)
+- [ ] Website URL
+- [ ] Is this a conference of gathering (1day event)?
+- [ ] Is it part of a conference week
+- [ ] (unlocks) Conference week URL
+- [ ] Is there a hackathon?
+- [ ] (unlocks) Hackathon URL
+- [ ] Is this a free event?
+- [ ] Do you have open volunteerships?
+- [ ] Do you have open scholarships?
+- [ ] Is this a Destino Grant gathering?
+- [ ] Is this a 10 Years of Ethereum gathering?
 
 
-## 📋 Planned Features
+## 📋 Afterwards Planned Features
 
-### Authentication (Phase 2.5)
+- [ ] Create journey sharing system
+
+- [ ] Sliding bar to navigate from past to future
+
+### Authentication
 - [ ] Welcome screen with auth options:
   - [ ] Sign in with Google
   - [ ] Connect Wallet
@@ -82,7 +125,7 @@ Enable users to explore events in a searchable, filterable list view.
 - [ ] Auth state persistence
 - [ ] Seamless auth flow
 
-### User Features (Phase 3)
+### User Features
 - [ ] User profiles
 - [ ] "Add to Journey" functionality
 - [ ] Event bookmarking
@@ -92,14 +135,10 @@ Enable users to explore events in a searchable, filterable list view.
 - [ ] Supabase login with email or wallet
 
 ### Map Enhancements
-- [ ] Map UI - minimalistic and neutral
-- [ ] Filtering
 - [ ] Route planning (Add To Journey)
-- [ ] Map cluster styling
-- [ ] Custom color coding by region or date (e.g., warmer colors for events closer to today)
 
 ### Event Management
-- [ ] Event submission form
+- [x] Event submission form
 - [ ] Event verification system
 - [ ] Event updates and changes
 - [ ] Event analytics
@@ -127,55 +166,20 @@ Enable users to explore events in a searchable, filterable list view.
 - [ ] SEO optimization
 - [ ] Accessibility improvements
 
-## 🎯 Next Steps (Priority Order)
 
-1. Infrastructure Setup
-   - [x] Purchase and configure journeytodevconnect.com as a custom domain in Github Pages
-   - Set up Simple Analytics
-   - [x] Configure DNS and SSL
-   - Set up email addresses
 
-2. Map improvements:
-   - Change the date format on the map and list views to "June 4-7" or just "June 4" if it's one day
-   - On desktop, make it smaller so it doesn't take up the entire width
-   - Redesign the information of the card to the one Yann sent
 
-3. Complete List View Features
-   - Implement search functionality
-   - Add filtering options
-   - Enhance sorting capabilities
-
-4. Complete Ecosystem Hub
+   Complete Ecosystem Hub
    - Implement content management
    - Add grant information
-   - Create event hosting guidelines
 
 5. User Features (Phase 3)
    - Implement user profiles
    - Add journey functionality
-   - Create sharing system
+   
 
-## 📦 Event Data Schema
 
-### Current Fields for Event
-- `name` (string)
-- `date` (string)
-- `location` (object)
-  - `city` (string)
-  - `country` (string)
-  - `lat` (number)
-  - `lng` (number)
-- `link` (string)
-- `short description` (string)
 
-### Planned Fields for Event
-- `event_type` (string: "conference" or "gathering")
-- `region` (string)
-- `blockchain_week` (boolean)
-- `has_hackathon` (boolean)
-- `cost` (string: "free", "paid")
-- `free_entry` (boolean)
-- `volunteership` (boolean)
-- `blockchain ecosystem` (array)
-- `tags` (array)
-- `socials` (object)
+Bugs to fix for later:
+- Horizontal timeline bar on mobile view too wide
+- List view day label pill clean up
