@@ -74,39 +74,50 @@
       Add a vertical timeline bar on the left.
       Use logic to display "Today", "Tomorrow", or "in X days", followed by the day name (e.g., "Wednesday").
       Also make the dot on the timeline be colored (or glowing) according to our event marker color logic
-  - [ ] Floating "In X Days" pill
-    - [ ] Aligned it to the timeline dot and text, right now it's not
+  - [x] Floating "In X Days" pill
   - [ ] Dedicated Event Card Div
       Each event should be inside a visually distinct card, similar to Luma's design.
-  - [ ] Event Card Sections
+  - [x] Event Card Sections
       Section 1: Logo, name, location, and date (logo on the left, other info on the right).
       Section 2: Description and tags.
       Section 3: Action buttons, with "Add to Journey" as the primary button.
 
 ## 🎯 Next Steps (Priority Order)
 
-- [ ] Fill out the current events with logos, info and tags
-- [ ] 
-
 ### Create an Event page
-Data from user:
-- [ ] Name of Event
-- [ ] Description (please be mindful of this, for keyword filtering and SEO purposes)
-- [ ] Start Date
-- [ ] End Date
-- [ ] Location (City, Country)
-- [ ] Logo (what size??)
-- [ ] Website URL
-- [ ] Is this a conference of gathering (1day event)?
-- [ ] Is it part of a conference week
+
+- [x] Deploy on /submit-event.html
+
+Page data, from user:
+- [x] Name of Event
+- [x] Description
+- [x] Start Date
+- [x] End Date
+- [x] Location (City, Country)
+- [ ] Logo (optional)
+- [ ] Logo change - only upload
+- [x] Website URL
+- [ ] Type of event (select 1): Conference or gathering?
+- [ ] Question? Is it part of a conference week? If yes, show URL box for conference week
 - [ ] (unlocks) Conference week URL
-- [ ] Is there a hackathon?
+- [ ] Question? Is there a hackathon? If yes, show URL box for hackathon
 - [ ] (unlocks) Hackathon URL
-- [ ] Is this a free event?
+
+- [ ] Add a progress bar, and make the Submit page more engaging
+- [ ] Create a "Thanks for adding your event to the map, I'll approve it ASAP. Lazar <3 If you have any questions, feel free to contact me on Telegram @lazarjaksic" pop up window after successfully adding an event
+
+Special tags:
+- [ ] Is the a free event?
 - [ ] Do you have open volunteerships?
 - [ ] Do you have open scholarships?
 - [ ] Is this a Destino Grant gathering?
 - [ ] Is this a 10 Years of Ethereum gathering?
+
+- [ ] Make a database backend in Supabase for the submissions to go to
+- [ ] System to approve / deny the submissions
+- [ ] Deploy dev environment at dev.journeytodevconnect.com
+- [ ] Test if it works on dev.journeytodevconnect.com
+- [ ] Unhide the Submit Event button
 
 
 ## 📋 Afterwards Planned Features
