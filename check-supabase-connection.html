@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Supabase Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .code-box {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 16px;
+            background-color: #f5f5f5;
+            margin-top: 16px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Supabase Connection Test</h1>
+    
+    <div class="card">
+        <h2>Connection Status</h2>
+        <p>This tool will test your connection to Supabase and check if the events table exists with the correct structure.</p>
+        <button id="check-connection">Check Connection</button>
+        <div id="connection-result"></div>
+    </div>
+    
+    <div class="card">
+        <h2>Manual Setup SQL</h2>
+        <p>If the test fails, copy this SQL and run it in the Supabase SQL Editor:</p>
+        <div class="code-box">
+            <pre>-- Drop existing table if it exists
+DROP TABLE IF EXISTS events;
+
+-- Create events table with the correct schema
+CREATE TABLE events (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name TEXT NOT NULL,
+  description TEXT,
+  city TEXT NOT NULL,
+  country TEXT NOT NULL,
+  start_date TEXT NOT NULL,
+  end_date TEXT NOT NULL,
+  event_type TEXT NOT NULL,
+  event_url TEXT,
+  is_conference_week BOOLEAN DEFAULT FALSE,
+  conference_week_url TEXT,
+  has_hackathon BOOLEAN DEFAULT FALSE,
+  hackathon_url TEXT,
+  is_free BOOLEAN DEFAULT FALSE,
+  is_ethereum_10 BOOLEAN DEFAULT FALSE,
+  is_destino BOOLEAN DEFAULT FALSE,
+  has_volunteership BOOLEAN DEFAULT FALSE,
+  has_scholarship BOOLEAN DEFAULT FALSE,
+  contact_name TEXT,
+  contact_email TEXT,
+  contact_telegram TEXT,
+  logo TEXT,
+  status TEXT DEFAULT 'pending',
+  submitted_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+);
+
+-- Enable row level security
+ALTER TABLE events ENABLE ROW LEVEL SECURITY;
+
+-- Create policy to allow anonymous inserts
+CREATE POLICY "Allow anonymous inserts" ON events
+  FOR INSERT
+  TO anon
+  WITH CHECK (true);
+
+-- Create policy to allow authenticated users to select
+CREATE POLICY "Allow users to view submissions" ON events
+  FOR SELECT
+  TO authenticated
+  USING (true);</pre>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Test Event Submission</h2>
+        <p>After creating the table, test submitting a basic event:</p>
+        <button id="test-submit">Test Submit</button>
+        <div id="submit-result"></div>
+    </div>
+    
+    <script>
+        // Supabase configuration
+        const SUPABASE_CONFIG = {
+            URL: 'https://otbtstuphxrvkqlejytq.supabase.co',
+            ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90YnRzdHVwaHhydmtxbGVqeXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MTk2NzEsImV4cCI6MjA2NDA5NTY3MX0.iXlHAUj1NlbVvk9slXbcFqjx9AbTBpvsM4OeS9lMp2o'
+        };
+        
+        // Initialize Supabase client
+        const supabase = supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+        
+        // Check connection button
+        document.getElementById('check-connection').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('connection-result');
+            resultDiv.innerHTML = '<p>Checking connection...</p>';
+            
+            try {
+                // Check connection
+                const { data, error } = await supabase.from('events').select('*').limit(1);
+                
+                if (error) {
+                    // Try to determine if the table exists or if it's a column issue
+                    if (error.message.includes('relation "events" does not exist')) {
+                        resultDiv.innerHTML = `<p class="error">The events table does not exist.</p>
+                                              <p>Please run the SQL in the Supabase SQL Editor to create the table.</p>`;
+                    } else if (error.message.includes('column')) {
+                        resultDiv.innerHTML = `<p class="error">Table exists but has incorrect columns:</p>
+                                              <p>${error.message}</p>
+                                              <p>Please run the SQL in the Supabase SQL Editor to recreate the table with correct columns.</p>`;
+                    } else {
+                        resultDiv.innerHTML = `<p class="error">Error connecting to Supabase:</p>
+                                              <p>${error.message}</p>`;
+                    }
+                } else {
+                    resultDiv.innerHTML = `<p class="success">Connection successful!</p>
+                                          <p>The events table exists and is accessible.</p>
+                                          <p>Table structure: <button id="show-structure">Show</button></p>
+                                          <div id="table-structure" style="display: none;"></div>`;
+                    
+                    // Add event listener to show structure button
+                    document.getElementById('show-structure').addEventListener('click', async function() {
+                        const structureDiv = document.getElementById('table-structure');
+                        structureDiv.style.display = 'block';
+                        
+                        try {
+                            // Get table structure
+                            const { data: columns, error: columnsError } = await supabase.rpc('get_columns', { table_name: 'events' });
+                            
+                            if (columnsError || !columns) {
+                                structureDiv.innerHTML = `<p>Could not fetch table structure: ${columnsError?.message || 'No data returned'}</p>`;
+                            } else {
+                                structureDiv.innerHTML = `<pre>${JSON.stringify(columns, null, 2)}</pre>`;
+                            }
+                        } catch (e) {
+                            structureDiv.innerHTML = `<p>Could not fetch table structure. You may need to check in the Supabase dashboard.</p>`;
+                        }
+                    });
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Error checking connection:</p>
+                                      <p>${error.message}</p>`;
+            }
+        });
+        
+        // Test submit button
+        document.getElementById('test-submit').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('submit-result');
+            resultDiv.innerHTML = '<p>Submitting test event...</p>';
+            
+            try {
+                // Create a test event
+                const testEvent = {
+                    name: 'Test Event',
+                    description: 'This is a test event',
+                    city: 'Test City',
+                    country: 'Test Country',
+                    start_date: '2025-01-01',
+                    end_date: '2025-01-02',
+                    event_type: 'conference',
+                    event_url: 'https://example.com',
+                    is_conference_week: false,
+                    conference_week_url: null,
+                    has_hackathon: false,
+                    hackathon_url: null,
+                    is_free: true,
+                    is_ethereum_10: false,
+                    is_destino: false,
+                    has_volunteership: false,
+                    has_scholarship: false,
+                    contact_name: 'Test Contact',
+                    contact_email: 'test@example.com',
+                    contact_telegram: '',
+                    status: 'test',
+                    submitted_at: new Date().toISOString()
+                };
+                
+                // Submit the test event
+                const { data, error } = await supabase.from('events').insert([testEvent]).select();
+                
+                if (error) {
+                    resultDiv.innerHTML = `<p class="error">Error submitting test event:</p>
+                                          <p>${error.message}</p>
+                                          <p>Error details: <pre>${JSON.stringify(error, null, 2)}</pre></p>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="success">Test event submitted successfully!</p>
+                                          <p>Response: <pre>${JSON.stringify(data, null, 2)}</pre></p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">Error submitting test event:</p>
+                                      <p>${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html> 

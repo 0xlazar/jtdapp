@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -295,6 +295,28 @@
             border-radius: 0.5rem; /* matches rounded-lg */
             display: inline-block;
         }
+        .gradient-text {
+            background: linear-gradient(90deg, #5094FF 0%, #F7B3E9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .coming-soon {
+            opacity: 0.6;
+            position: relative;
+        }
+        .coming-soon::after {
+            content: "Soon";
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #CBD5E1;
+            color: #475569;
+            font-size: 8px;
+            padding: 2px 4px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body class="h-screen w-screen bg-gray-50">
@@ -304,12 +326,16 @@
         </a>
         <span class="mx-auto text-xl font-bold hidden sm:inline">Journey to DevConnect</span>
         <div class="absolute right-4 flex items-center gap-4">
-            <a href="submit-event.html" class="px-4 py-2 gradient-primary rounded-lg text-sm font-semibold shadow-md hidden">
-                Submit Event
+            <a href="submit-event" class="px-4 py-2 gradient-primary rounded-lg text-sm font-semibold shadow-md flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                <span class="hidden sm:inline">Submit Event</span>
+                <span class="sm:hidden">Submit</span>
             </a>
             <button id="hamburger-menu" class="flex items-center justify-center h-12 w-12 p-2 rounded hover:bg-gray-100 focus:outline-none" aria-label="Open menu">
-                <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-700">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
         </div>
@@ -334,7 +360,9 @@
             </button>
             <div class="gradient-border">
                 <button id="view-toggle" class="bg-white text-blue-600 border border-transparent px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 hover:bg-blue-50 transition-colors">
-                    <span id="view-icon">📋</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
                     <span id="view-text">Events List</span>
                 </button>
             </div>
@@ -420,38 +448,6 @@
         </div>
     </div>
 
-    <!-- Ecosystem Hub Popup -->
-    <div id="ecosystem-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-lg p-6 max-w-2xl mx-4">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Ecosystem Hub <span class="text-sm font-normal text-gray-500">(Coming Soon)</span></h3>
-                <button id="close-ecosystem" class="text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="space-y-6">
-                <section>
-                    <h4 class="font-semibold text-lg mb-2">📢 Latest Updates</h4>
-                    <p class="text-gray-600">Stay informed about new events added to the map, ecosystem announcements, and exciting opportunities in the community.</p>
-                </section>
-                <section>
-                    <h4 class="font-semibold text-lg mb-2">🎯 Host Your Event</h4>
-                    <p class="text-gray-600">Learn how to organize and host your own events and gatherings leading up to DevConnect. Get support, resources, and connect with other organizers.</p>
-                </section>
-                <section>
-                    <h4 class="font-semibold text-lg mb-2">�� Opportunities</h4>
-                    <p class="text-gray-600">Discover active grants, internships, and other opportunities in the ecosystem. Stay updated on new openings and application deadlines.</p>
-                </section>
-                <section>
-                    <h4 class="font-semibold text-lg mb-2">🤝 Community Support</h4>
-                    <p class="text-gray-600">Find resources, guidelines, and support for organizing community events. Connect with experienced organizers and get your questions answered.</p>
-                </section>
-            </div>
-        </div>
-    </div>
-
     <!-- Welcome Popup -->
     <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
@@ -465,21 +461,21 @@
             </div>
             <div class="space-y-4">
                 <div class="flex items-start gap-3">
-                    <span class="text-blue-600 text-xl">🔍</span>
+                    <span class="text-blue-600 text-xl">ðŸ"</span>
                     <div>
                         <p class="text-gray-800 font-medium">Discover Events</p>
                         <p class="text-gray-600 text-sm">Curated list of Ethereum-aligned, no-BS events leading up to <a href="https://devconnect.org" target="_blank" class="text-blue-600 hover:underline">DevConnect</a></p>
                     </div>
                 </div>
                 <div class="flex items-start gap-3">
-                    <span class="text-blue-600 text-xl">🎯</span>
+                    <span class="text-blue-600 text-xl">ðŸŽ¯</span>
                     <div>
                         <p class="text-gray-800 font-medium">Create Your Journey</p>
                         <p class="text-gray-600 text-sm">Build your own Journey to DevConnect and connect with fellow cypherpunks</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-3">
-                    <span class="text-blue-600 text-xl">🌱</span>
+                    <span class="text-blue-600 text-xl">ðŸŒ±</span>
                     <div>
                         <p class="text-gray-800 font-medium">Ecosystem Hub</p>
                         <p class="text-gray-600 text-sm">Get the latest announcements, opportunities, scholarships, grants, and more!</p>
@@ -524,26 +520,34 @@
 
     <!-- Hamburger Menu Dropdown -->
     <div id="menu-dropdown" class="fixed right-8 top-[76px] bg-white shadow-lg rounded-lg py-2 w-48 z-50 hidden">
-        <a href="submit-event.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hidden">
+        <a href="submit-event" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
             Submit Event
         </a>
     </div>
 
     <footer class="w-full h-12 bg-white shadow flex justify-around items-center fixed bottom-0 left-0 z-40">
-        <button class="flex flex-col items-center text-blue-600">
-            <span>🗺️</span>
+        <button id="map-nav" class="flex flex-col items-center text-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+            </svg>
             <span class="text-xs">Map</span>
         </button>
-        <button id="ecosystem-button" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors">
-            <span>🌱</span>
+        <button id="ecosystem-button" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors coming-soon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
             <span class="text-xs">Ecosystem</span>
         </button>
         <a href="https://t.me/+127miY3a6mU0Y2E0" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors">
-            <span>👥</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
             <span class="text-xs">Community</span>
         </a>
-        <button id="profile-button" class="flex flex-col items-center text-gray-400">
-            <span>👤</span>
+        <button id="profile-button" class="flex flex-col items-center text-gray-400 coming-soon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
             <span class="text-xs">Profile</span>
         </button>
     </footer>
@@ -551,6 +555,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- MarkerCluster JS -->
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-events.js"></script>
     <!-- Main JS -->
     <script src="scripts/main.js"></script>
 

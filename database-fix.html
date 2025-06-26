@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Supabase Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .warning {
+            background-color: #ffeb3b;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Supabase Database Fix</h1>
+    
+    <div class="warning">
+        <strong>Warning:</strong> This will delete any existing data in the events table!
+    </div>
+    
+    <button id="fix-button">Fix Database</button>
+    
+    <h2>Console Output:</h2>
+    <pre id="output"></pre>
+    
+    <script src="fix-supabase.js"></script>
+    <script>
+        // Override console.log to also display in the output element
+        const originalLog = console.log;
+        const originalError = console.error;
+        const output = document.getElementById('output');
+        
+        console.log = function() {
+            output.innerHTML += Array.from(arguments).join(' ') + '\n';
+            originalLog.apply(console, arguments);
+        };
+        
+        console.error = function() {
+            output.innerHTML += '<span style="color: red;">' + Array.from(arguments).join(' ') + '</span>\n';
+            originalError.apply(console, arguments);
+        };
+        
+        // Button click handler
+        document.getElementById('fix-button').addEventListener('click', async function() {
+            output.innerHTML = '';
+            console.log('Starting database fix...');
+            
+            try {
+                const result = await window.fixSupabase();
+                if (result) {
+                    console.log('\nDatabase fix completed successfully!');
+                    console.log('You can now go back to the form and try submitting an event.');
+                } else {
+                    console.error('\nFailed to fix database. Check console for detailed errors.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html> 

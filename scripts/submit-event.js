@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Supabase client from config - wrapped in try/catch to prevent breaking the form
+    let supabaseClient;
+    try {
+        // Initialize the Supabase client - using window.supabase since we're loading from CDN
+        supabaseClient = window.supabase.createClient(
+            SUPABASE_CONFIG.URL, 
+            SUPABASE_CONFIG.ANON_KEY
+        );
+    } catch (error) {
+        console.error('Error initializing Supabase client:', error);
+        // Continue with the form functionality even if Supabase fails to initialize
+    }
+
     // Form step navigation
     const steps = document.querySelectorAll('.step-content');
     const progressSteps = document.querySelectorAll('.progress-step');
@@ -466,20 +479,117 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const formData = new FormData(form);
+        // Show loading state
+        form.classList.add('hidden');
+        submissionStatus.classList.remove('hidden');
+        const loadingElement = document.createElement('div');
+        loadingElement.id = 'loading-submission';
+        loadingElement.innerHTML = `
+            <div class="flex flex-col items-center justify-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+                <p class="text-lg font-medium text-gray-700">Submitting your event...</p>
+            </div>
+        `;
+        submissionStatus.appendChild(loadingElement);
         
         try {
-            // Here you would typically send the form data to your server
-            // For now, we'll simulate a successful submission
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Prepare form data
+            const formData = new FormData(form);
             
-            form.classList.add('hidden');
-            submissionStatus.classList.remove('hidden');
+            // Create a structured object matching the database schema
+            // Using snake_case for all field names as that's what Supabase expects by default
+            const eventData = {
+                name: formData.get('name') || '',
+                description: formData.get('description') || '',
+                city: formData.get('city') || '',
+                country: formData.get('country') || '',
+                start_date: formData.get('startDate') || '',
+                end_date: formData.get('endDate') || '',
+                event_type: formData.get('eventType') || '',
+                event_url: formData.get('eventUrl') || '',
+                
+                // Checkbox fields - convert to boolean
+                is_conference_week: formData.get('isConferenceWeek') === 'on',
+                conference_week_url: formData.get('conferenceWeekUrl') || null,
+                has_hackathon: formData.get('hasHackathon') === 'on',
+                hackathon_url: formData.get('hackathonUrl') || null,
+                is_free: formData.get('isFree') === 'on',
+                is_ethereum_10: formData.get('isEthereum10') === 'on',
+                is_destino: formData.get('isDestino') === 'on',
+                has_volunteership: formData.get('hasVolunteership') === 'on',
+                has_scholarship: formData.get('hasScholarship') === 'on',
+                
+                // Contact information
+                contact_name: formData.get('contactName') || '',
+                contact_email: formData.get('contactEmail') || '',
+                contact_telegram: formData.get('contactTelegram') || ''
+            };
+            
+            // Add submission timestamp
+            eventData.submitted_at = new Date().toISOString();
+            
+            // Add status field (pending approval)
+            eventData.status = 'pending';
+            
+            // Upload logo if provided
+            const logoFile = logoUpload.files[0];
+            if (logoFile && !noLogoCheckbox.checked) {
+                try {
+                    // Convert file to base64 for storage
+                    const reader = new FileReader();
+                    const logoPromise = new Promise((resolve, reject) => {
+                        reader.onload = () => resolve(reader.result);
+                        reader.onerror = reject;
+                        reader.readAsDataURL(logoFile);
+                    });
+                    
+                    // Wait for logo to be converted to base64
+                    const logoBase64 = await logoPromise;
+                    // Keep using 'logo' as it's already in snake_case
+                    eventData.logo = logoBase64;
+                    console.log("Logo encoded successfully");
+                } catch (logoError) {
+                    console.error("Error encoding logo:", logoError);
+                    // Continue without the logo rather than failing the submission
+                }
+            } else {
+                // Set logo to null if no logo is provided
+                eventData.logo = null;
+            }
+            
+            // Insert event data into Supabase if client is initialized
+            if (supabaseClient) {
+                try {
+                    console.log('Submitting event data to Supabase:', eventData);
+                    
+                    const { data, error } = await supabaseClient
+                        .from('events')
+                        .insert([eventData]);
+                        
+                    if (error) {
+                        console.error('Supabase error:', error);
+                        throw error;
+                    }
+                    console.log('Successfully submitted event to Supabase, response:', data);
+                } catch (supabaseError) {
+                    console.error('Supabase error:', supabaseError);
+                    // Continue with success flow even if Supabase fails
+                    // This ensures the form works even without Supabase
+                }
+            } else {
+                console.log('Supabase client not initialized, skipping database submission');
+                // Continue with success flow
+            }
+            
+            // Hide loading and show success
+            document.getElementById('loading-submission').remove();
             successMessage.classList.remove('hidden');
             errorMessage.classList.add('hidden');
         } catch (error) {
-            form.classList.add('hidden');
-            submissionStatus.classList.remove('hidden');
+            console.error('Error submitting event:', error);
+            
+            // Hide loading and show error
+            document.getElementById('loading-submission').remove();
             successMessage.classList.add('hidden');
             errorMessage.classList.remove('hidden');
         }

@@ -64,22 +64,9 @@ document.getElementById('profile-button').addEventListener('click', function() {
     showToast('Profiles coming soon!');
 });
 
-// Ecosystem Hub Popup functionality
+// Ecosystem button toast functionality
 document.getElementById('ecosystem-button').addEventListener('click', function() {
-    const popup = document.getElementById('ecosystem-popup');
-    popup.classList.remove('hidden');
-});
-
-document.getElementById('close-ecosystem').addEventListener('click', function() {
-    const popup = document.getElementById('ecosystem-popup');
-    popup.classList.add('hidden');
-});
-
-// Close ecosystem popup when clicking outside
-document.getElementById('ecosystem-popup').addEventListener('click', function(e) {
-    if (e.target === this) {
-        this.classList.add('hidden');
-    }
+    showToast('Ecosystem Hub coming soon!');
 });
 
 // Get UI elements
@@ -218,13 +205,34 @@ document.getElementById('close-popup').addEventListener('click', function() {
 let currentView = 'map'; // 'map' or 'list'
 let originalEvents = []; // Store original events
 let filteredEvents = []; // Store filtered events
+let currentSearchTerm = ''; // Store current search term
 const viewToggle = document.getElementById('view-toggle');
-const viewIcon = document.getElementById('view-icon');
+const viewIcon = viewToggle.querySelector('svg');
 const viewText = document.getElementById('view-text');
 const listView = document.getElementById('list-view');
 const closeList = document.getElementById('close-list');
 const eventsList = document.getElementById('events-list');
 const searchInput = document.getElementById('search-input');
+const mapNav = document.getElementById('map-nav');
+
+// Function to update footer navigation based on current view
+function updateFooterNav() {
+    // Get all text elements in the footer
+    const mapNavText = mapNav.querySelector('span');
+    const mapNavIcon = mapNav.querySelector('svg');
+    
+    if (currentView === 'map') {
+        // Apply gradient to Map icon when in Map view
+        mapNavText.classList.add('gradient-text');
+        mapNavIcon.classList.add('text-transparent');
+        mapNavIcon.style.stroke = 'url(#footer-gradient)';
+    } else {
+        // Remove gradient when in List view
+        mapNavText.classList.remove('gradient-text');
+        mapNavIcon.classList.remove('text-transparent');
+        mapNavIcon.style.stroke = '';
+    }
+}
 
 // --- Upcoming/Past Toggle Logic ---
 let currentEventListType = 'upcoming'; // 'upcoming' or 'past'
@@ -282,7 +290,6 @@ updateEventToggleUI();
 
 // Add variables for search state
 let isSearchActive = false;
-let currentSearchTerm = '';
 
 // Function to update search indicator
 function updateSearchIndicator() {
@@ -873,12 +880,15 @@ function addEventMarkers(events) {
 
 // Function to update both list and map based on search
 function updateSearchResults(searchTerm) {
+    // Update search state
+    isSearchActive = searchTerm.trim() !== '';
     currentSearchTerm = searchTerm;
-    isSearchActive = searchTerm.trim().length > 0;
+    
+    // Update search indicator
     updateSearchIndicator();
     
-    // Filter events based on search term
-    const searchResults = originalEvents.filter(event => {
+    // Store filtered events
+    filteredEvents = originalEvents.filter(event => {
         if (!searchTerm.trim()) return true;
         
         // Convert date to month name and season for searching
@@ -901,17 +911,17 @@ function updateSearchResults(searchTerm) {
     });
     
     // Update list view
-    renderEventList(searchResults);
+    renderEventList(filteredEvents);
     
     // Update map markers
     if (markerLayerGroup) {
         map.removeLayer(markerLayerGroup);
     }
-    addEventMarkers(searchResults);
+    addEventMarkers(filteredEvents);
     
     // Fit map bounds to show all visible markers
-    if (searchResults.length > 0) {
-        const bounds = L.latLngBounds(searchResults.map(event => [event.location.lat, event.location.lng]));
+    if (filteredEvents.length > 0) {
+        const bounds = L.latLngBounds(filteredEvents.map(event => [event.location.lat, event.location.lng]));
         map.fitBounds(bounds);
     }
 }
@@ -938,64 +948,140 @@ clearSearchButton.addEventListener('click', function() {
 // Toggle between map and list views
 viewToggle.addEventListener('click', function() {
     if (currentView === 'map') {
-        // Switch to list view
+        // Show the list view
         listView.classList.remove('translate-x-full');
-        viewToggle.classList.add('hidden');
-        viewIcon.textContent = '🗺️';
-        viewText.textContent = 'Map View';
         currentView = 'list';
+        viewText.textContent = 'Map View';
+        // Update icon to map
+        viewIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+            </svg>
+        `;
+        // Render the event list
+        renderEventList(filteredEvents.length > 0 ? filteredEvents : originalEvents);
+        // Update footer navigation
+        updateFooterNav();
+    } else {
+        // Hide the list view
+        listView.classList.add('translate-x-full');
+        currentView = 'map';
+        viewText.textContent = 'Events List';
+        // Update footer navigation
+        updateFooterNav();
     }
-    // No else block: toggle cannot close the list view
 });
 
 // Close list view (X button)
 closeList.addEventListener('click', function() {
     listView.classList.add('translate-x-full');
-    viewToggle.classList.remove('hidden');
-    viewIcon.textContent = '📋';
-    viewText.textContent = 'List View';
     currentView = 'map';
-    // Don't clear search state, just update indicator
-    updateSearchIndicator();
+    viewText.textContent = 'Events List';
+    viewIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+        </svg>
+    `;
+    viewToggle.classList.remove('hidden');
+    // Update footer navigation
+    updateFooterNav();
 });
 
-// Modify the loadEvents function to store original events
-async function loadEvents() {
-    setLoading(true);
-    try {
-        const cacheBuster = `t=${Date.now()}&r=${Math.random()}`;
-        console.log('Fetching events with cache buster:', cacheBuster);
-        const response = await fetch(`data/events.json?${cacheBuster}`, {
-            cache: 'no-store',
-            headers: {
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        });
-        
-        if (!response.ok) {
-            console.error('Failed to load events:', response.status, response.statusText);
-            throw new Error('Failed to load events');
-        }
-        
-        const data = await response.json();
-        console.log('Raw events data:', data);
-        console.log('Loaded events:', data.events.length);
-        
-        // Store original events
-        originalEvents = data.events;
-        
-        // Initial render of the list
-        renderEventList(originalEvents);
-        
-        setLoading(false);
-        return data.events;
-    } catch (err) {
-        console.error('Error loading events:', err);
-        showError();
-        return [];
+// Add map button click handler in the footer
+mapNav.addEventListener('click', function() {
+    if (currentView === 'list') {
+        // Switch to map view if we're in list view
+        listView.classList.add('translate-x-full');
+        currentView = 'map';
+        viewText.textContent = 'Events List';
+        viewIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+            </svg>
+        `;
+        viewToggle.classList.remove('hidden');
+        // Update footer navigation
+        updateFooterNav();
     }
+});
+
+// Add search indicator click handler
+document.getElementById('search-indicator').addEventListener('click', function() {
+    // Show list view
+    listView.classList.remove('translate-x-full');
+    viewToggle.classList.add('hidden');
+    viewIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+        </svg>
+    `;
+    viewText.textContent = 'Map View';
+    currentView = 'list';
+    // Update footer navigation
+    updateFooterNav();
+    
+    // Focus search input
+    searchInput.focus();
+    // Restore previous search term
+    searchInput.value = currentSearchTerm;
+});
+
+// Add an SVG gradient definition to the document for the footer icons
+document.addEventListener('DOMContentLoaded', function() {
+    // Create SVG element with gradient definition
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "0");
+    svg.setAttribute("height", "0");
+    svg.style.position = "absolute";
+    svg.style.visibility = "hidden";
+    
+    // Create the gradient element
+    const gradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient.setAttribute("id", "footer-gradient");
+    gradient.setAttribute("x1", "0%");
+    gradient.setAttribute("y1", "0%");
+    gradient.setAttribute("x2", "100%");
+    gradient.setAttribute("y2", "0%");
+    
+    // Create the gradient stops
+    const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop1.setAttribute("offset", "0%");
+    stop1.setAttribute("stop-color", "#5094FF");
+    
+    const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+    stop2.setAttribute("offset", "100%");
+    stop2.setAttribute("stop-color", "#F7B3E9");
+    
+    // Add the stops to the gradient
+    gradient.appendChild(stop1);
+    gradient.appendChild(stop2);
+    
+    // Add the gradient to the SVG
+    svg.appendChild(gradient);
+    
+    // Add the SVG to the document
+    document.body.appendChild(svg);
+    
+    // Initialize footer navigation
+    updateFooterNav();
+});
+
+function showWelcomePopup() {
+    // Reset UI state
+    currentView = 'map';
+    listView.classList.add('translate-x-full');
+    viewText.textContent = 'Events List';
+    viewIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+        </svg>
+    `;
+    
+    // Update footer navigation
+    updateFooterNav();
+    
+    // Show welcome popup
+    document.getElementById('welcome-popup').classList.remove('hidden');
 }
 
 // Helper function to determine if an event is ongoing
@@ -1047,6 +1133,61 @@ function getEventColor(daysToEvent) {
         return interpolateColor('#F7B3E9', '#5094FF', factor);
     } else {
         return '#F7B3E9'; // Blossom Pink for events within 7 days and ongoing
+    }
+}
+
+// Modified loadEvents function to use Supabase
+async function loadEvents() {
+    setLoading(true);
+    try {
+        let events = [];
+        
+        // Try to fetch events from Supabase first
+        if (window.supabaseEvents) {
+            console.log('Fetching events from Supabase');
+            events = await window.supabaseEvents.fetchEvents();
+        }
+        
+        // If no events from Supabase or an error occurred, fall back to JSON file
+        if (!events || events.length === 0) {
+            console.log('No events from Supabase, falling back to JSON file');
+            const cacheBuster = `t=${Date.now()}&r=${Math.random()}`;
+            console.log('Fetching events with cache buster:', cacheBuster);
+            const response = await fetch(`data/events.json?${cacheBuster}`, {
+                cache: 'no-store',
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
+            
+            if (!response.ok) {
+                console.error('Failed to load events:', response.status, response.statusText);
+                throw new Error('Failed to load events');
+            }
+            
+            const data = await response.json();
+            console.log('Raw events data from JSON:', data);
+            console.log('Loaded events from JSON:', data.events.length);
+            
+            events = data.events;
+        }
+        
+        console.log('Total events loaded:', events.length);
+        
+        // Store original events
+        originalEvents = events;
+        
+        // Initial render of the list
+        renderEventList(originalEvents);
+        
+        setLoading(false);
+        return events;
+    } catch (err) {
+        console.error('Error loading events:', err);
+        showError();
+        return [];
     }
 }
 
@@ -1102,21 +1243,6 @@ document.addEventListener('click', function(e) {
     if (isHelpPopupOpen && !helpPopup.contains(e.target) && e.target !== helpButton) {
         hideHelpPopup();
     }
-});
-
-// Add search indicator click handler
-document.getElementById('search-indicator').addEventListener('click', function() {
-    // Show list view
-    listView.classList.remove('translate-x-full');
-    viewToggle.classList.add('hidden');
-    viewIcon.textContent = '🗺️';
-    viewText.textContent = 'Map View';
-    currentView = 'list';
-    
-    // Focus search input
-    searchInput.focus();
-    // Restore previous search term
-    searchInput.value = currentSearchTerm;
 });
 
 // Add this function after the existing popup functionality (around line 80)

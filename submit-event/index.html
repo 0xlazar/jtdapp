@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Event - Journey to DevConnect</title>
     <meta name="description" content="Submit your Ethereum or Web3 event to be listed on Journey to DevConnect">
-    <link rel="icon" href="icons/logo.png" type="image/png">
-    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="../icons/logo.png" type="image/png">
+    <link rel="manifest" href="../manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .gradient-primary {
@@ -68,11 +68,17 @@
             transition: width 0.3s ease;
         }
     </style>
+    <!-- Supabase JS client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase configuration -->
+    <script src="../scripts/supabase-config.js"></script>
+    <!-- Supabase setup -->
+    <script src="../scripts/setup-supabase.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen">
     <header class="w-full py-4 bg-white shadow flex items-center relative">
-        <a href="index.html" class="absolute left-8 flex items-center">
-            <img src="icons/logo.png" alt="Journey to DevConnect Logo" class="h-14 w-14 inline-block align-middle cursor-pointer" />
+        <a href="../index.html" class="absolute left-8 flex items-center">
+            <img src="../icons/logo.png" alt="Journey to DevConnect Logo" class="h-14 w-14 inline-block align-middle cursor-pointer" />
         </a>
         <span class="mx-auto text-xl font-bold">Submit Event</span>
     </header>
@@ -376,12 +382,12 @@
             <p>Journey to DevConnect</p>
             <p>Made with 🪷 by <a href="https://t.me/lazarjaksic" target="_blank" class="text-blue-600 hover:underline">@Lazar</a></p>
             <p class="mt-2">
-                <a href="index.html" class="text-blue-600 hover:underline">Home</a> |
+                <a href="../index.html" class="text-blue-600 hover:underline">Home</a> |
                 <a href="mailto:info@journeytodevconnect.com" class="text-blue-600 hover:underline">Contact</a>
             </p>
         </div>
     </footer>
 
-        <script src="scripts/submit-event.js"></script>
+        <script src="../scripts/submit-event.js"></script>
 </body>
 </html> 

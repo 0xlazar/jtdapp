@@ -94,8 +94,8 @@ Page data, from user:
 - [x] Start Date
 - [x] End Date
 - [x] Location (City, Country)
-- [ ] Logo (optional)
-- [ ] Logo change - only upload
+- [x] Logo (optional)
+- [x] Logo change - only upload
 - [x] Website URL
 - [ ] Type of event (select 1): Conference or gathering?
 - [ ] Question? Is it part of a conference week? If yes, show URL box for conference week

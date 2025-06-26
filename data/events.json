@@ -601,19 +601,664 @@
       "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
     },
     {
-      "id": 9999,
-      "name": "Mock Ongoing Event",
-      "date": "2025-05-21",
+      "id": 41,
+      "name": "Les 10 Ans d'Anniversaire d'Ethereum",
+      "date": "2024-07-30",
       "location": {
-        "lat": -1.286389,
-        "lng": 36.817223,
-        "city": "Nairobi",
-        "country": "Kenya"
+        "lat": 5.3600,
+        "lng": -4.0083,
+        "city": "Abidjan",
+        "country": "Cote D'Ivoire"
       },
-      "link": "https://codeafrica.io",
+      "link": "https://app.unlock-protocol.com/event/meetup-les-10-ans-d-anniversaire-d-ethereum",
       "logo": null,
-      "short_description": "Short description coming soon.",
-      "tags": ["Conference", "Free", "Volunteership", "Community Hub"]
+      "short_description": "Celebrate 10 years of Ethereum with friends in Abidjan!",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 42,
+      "name": "ETH Congo - 10 Years of Ethereum",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -4.4419,
+        "lng": 15.2663,
+        "city": "Kinshasa",
+        "country": "Congo"
+      },
+      "link": "https://lu.ma/1mha555b",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum with friends in Kinshasa!",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 43,
+      "name": "10 Years of Ethereum in Accra, Ghana",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 5.6037,
+        "lng": -0.1870,
+        "city": "Accra",
+        "country": "Ghana"
+      },
+      "link": "https://lu.ma/y3bxp34m",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum with friends in Accra",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 44,
+      "name": "10 Years of Ethereum - Kaduna, Nigeria",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 10.5222,
+        "lng": 7.4384,
+        "city": "Kaduna",
+        "country": "Nigeria"
+      },
+      "link": "https://lu.ma/d75tlbfw",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum with friends in Kaduna, Nigeria",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 45,
+      "name": "10 Years of Ethereum - Plateau, Nigeria",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 9.2182,
+        "lng": 9.5179,
+        "city": "Jos",
+        "country": "Nigeria"
+      },
+      "link": "https://lu.ma/sttk0wd5",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum with friends in Jos, Plateau",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 46,
+      "name": "10 Years of Ethereum - Lome, Togo",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 6.1375,
+        "lng": 1.2123,
+        "city": "Lome",
+        "country": "Togo"
+      },
+      "link": "https://lu.ma/xatik06o",
+      "logo": null,
+      "short_description": "Join ETHAfrique for a special night celebrating 10 years of Ethereum in Lome",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 47,
+      "name": "10 Years of Ethereum - Harare, Zimbabwe",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -17.8292,
+        "lng": 31.0522,
+        "city": "Harare",
+        "country": "Zimbabwe"
+      },
+      "link": "https://lu.ma/6yotpgq5",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum at Eight2Five Innovation Hub in Harare",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 48,
+      "name": "10 Years of Ethereum - Shenzhen, China",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 22.5431,
+        "lng": 114.0579,
+        "city": "Shenzhen",
+        "country": "China"
+      },
+      "link": "https://lu.ma/ejoo0fb5",
+      "logo": null,
+      "short_description": "Technical Innovations and Future Outlook Salon at Shenzhen Technology University",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 49,
+      "name": "10 Years of Ethereum - Chennai, India",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 13.0827,
+        "lng": 80.2707,
+        "city": "Chennai",
+        "country": "India"
+      },
+      "link": "https://lu.ma/e1ctjffh",
+      "logo": null,
+      "short_description": "Celebrate 10 Years of Ethereum at Backyard, Adyar",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 50,
+      "name": "ETH10 Mumbai",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 19.0760,
+        "lng": 72.8777,
+        "city": "Mumbai",
+        "country": "India"
+      },
+      "link": "https://lu.ma/vmtviber",
+      "logo": null,
+      "short_description": "An evening of Ethereum film screening and discussions about cyberpunk, privacy, and decentralization",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 51,
+      "name": "10 Years of Ethereum - Hyderabad",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 17.3850,
+        "lng": 78.4867,
+        "city": "Hyderabad",
+        "country": "India"
+      },
+      "link": "https://se.ro/events/10-years-of-ethereum-iiit-hyderabad-hyderabad-india-maabsu",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum at IIIT Hyderabad",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 52,
+      "name": "10 Years of Ethereum - Delhi",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 28.6139,
+        "lng": 77.2090,
+        "city": "Delhi",
+        "country": "India"
+      },
+      "link": "https://lu.ma/b9tnoyl2",
+      "logo": null,
+      "short_description": "Join the Ethereum community in Delhi for discussions, networking and celebration",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 53,
+      "name": "10 Years of Ethereum - EthGlobetrotters Kerala",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 10.8505,
+        "lng": 76.2711,
+        "city": "Thiruvananthapuram",
+        "country": "India"
+      },
+      "link": "https://lu.ma/atm8y7xp",
+      "logo": null,
+      "short_description": "Kerala Blockchain Academy celebrates Ethereum's 10-year milestone",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 54,
+      "name": "10 Years of Ethereum - Bhopal",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 23.2599,
+        "lng": 77.4126,
+        "city": "Bhopal",
+        "country": "India"
+      },
+      "link": "https://lu.ma/sc3s8xcl",
+      "logo": null,
+      "short_description": "India Community Meetup featuring keynote talks, lightning talks and community networking",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 55,
+      "name": "10 Years of Ethereum - Bulandshahr",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 28.4070,
+        "lng": 77.8498,
+        "city": "Bulandshahr",
+        "country": "India"
+      },
+      "link": "https://lu.ma/90y38i0g",
+      "logo": null,
+      "short_description": "Community gathering at Aachman Restaurant with livestream viewing and workshops",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 56,
+      "name": "Ethereum Celebrates 10 Years - Tel Aviv",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 32.0853,
+        "lng": 34.7818,
+        "city": "Tel Aviv",
+        "country": "Israel"
+      },
+      "link": "https://lu.ma/4qvn1wv9",
+      "logo": null,
+      "short_description": "Join the celebration at Hagag Tower for Ethereum's 10th anniversary",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 57,
+      "name": "10 Years of Ethereum - The Gathering",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 3.1319,
+        "lng": 101.6841,
+        "city": "Petaling Jaya",
+        "country": "Malaysia"
+      },
+      "link": "https://lu.ma/wsiwh8qp",
+      "logo": null,
+      "short_description": "Celebration at Sunway iLabs Foundry featuring talks, watch party and networking",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 58,
+      "name": "10 Years of Ethereum - Davao",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 7.1907,
+        "lng": 125.4553,
+        "city": "Davao City",
+        "country": "Philippines"
+      },
+      "link": "https://lu.ma/gfivritq",
+      "logo": null,
+      "short_description": "Celebrate 10 years of Ethereum in Davao City",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 59,
+      "name": "10 Years of Ethereum - Cebu",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 10.3157,
+        "lng": 123.8854,
+        "city": "Cebu",
+        "country": "Philippines"
+      },
+      "link": "https://lu.ma/5p9rkhqv",
+      "logo": null,
+      "short_description": "Join the Ethereum community celebration in Cebu",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 60,
+      "name": "10 Years of Ethereum - Singapore",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "city": "Singapore",
+        "country": "Singapore"
+      },
+      "link": "https://lu.ma/alwo0o2j",
+      "logo": null,
+      "short_description": "Celebrate Ethereum's 10th anniversary in Singapore",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 61,
+      "name": "10 Years of Ethereum - Koh Phangan Edition",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 9.7348,
+        "lng": 100.0208,
+        "city": "Ko Phangan",
+        "country": "Thailand"
+      },
+      "link": "https://platform.serotonin.co/events/10-years-of-ethereum-phangan-edition-ko-phangan-district-thailand-0uqxqb",
+      "logo": null,
+      "short_description": "Island celebration of Ethereum's 10th anniversary",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 62,
+      "name": "10 Years of Ethereum - Tandil",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -37.3279,
+        "lng": -59.1332,
+        "city": "Tandil",
+        "country": "Argentina"
+      },
+      "link": "https://lu.ma/lb7dtked",
+      "logo": null,
+      "short_description": "Lanzamiento Nodo Serrano celebrating Ethereum's 10th anniversary",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 63,
+      "name": "10 Years of Ethereum - Cochabamba",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -17.3895,
+        "lng": -66.1568,
+        "city": "Cochabamba",
+        "country": "Bolivia"
+      },
+      "link": "https://app.unlock-protocol.com/event/celebra-los-10-aos-de-ethereum-junto-a-cocha-block-2",
+      "logo": null,
+      "short_description": "Celebra los 10 años de Ethereum junto a CochaBlock",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 64,
+      "name": "10 Years of Ethereum - Santa Cruz",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -17.7863,
+        "lng": -63.1812,
+        "city": "Santa Cruz de la Sierra",
+        "country": "Bolivia"
+      },
+      "link": "https://app.unlock-protocol.com/event/una-dcada-de-ethereum-bolivia-se-suma-al-bloque-1",
+      "logo": null,
+      "short_description": "Una Década de Ethereum: Bolivia Se Suma al Bloque",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 65,
+      "name": "10 Years of Ethereum - Florianópolis",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -27.5954,
+        "lng": -48.5480,
+        "city": "Florianópolis",
+        "country": "Brazil"
+      },
+      "link": "https://lu.ma/kq1nul4t",
+      "logo": null,
+      "short_description": "Join us at Founder Haus Jurere for Ethereum's 10th anniversary celebration",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 66,
+      "name": "10 Years of Ethereum - São Paulo",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -23.5505,
+        "lng": -46.6333,
+        "city": "São Paulo",
+        "country": "Brazil"
+      },
+      "link": "https://lu.ma/f1txuy3q",
+      "logo": null,
+      "short_description": "ERC55 presents an evening celebration of Ethereum's decade",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 67,
+      "name": "10 Years of Ethereum - Santa Teresa",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 9.6433,
+        "lng": -85.1307,
+        "city": "Santa Teresa",
+        "country": "Costa Rica"
+      },
+      "link": "https://platform.serotonin.co/events/10-years-of-ethereum-in-santa-teresa-puntarenas-costa-rica-hbv_q6",
+      "logo": null,
+      "short_description": "Celebrate Ethereum's 10th anniversary in beautiful Santa Teresa",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 68,
+      "name": "10 Years of Ethereum - Tegucigalpa",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 14.0723,
+        "lng": -87.1921,
+        "city": "Tegucigalpa",
+        "country": "Honduras"
+      },
+      "link": "https://lu.ma/lll5ayb5?tk=ZZaz4c",
+      "logo": null,
+      "short_description": "Ethereum Tegucigalpa celebrates 10 Years of Decentralization",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 69,
+      "name": "10 Years of Ethereum - Prague",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 50.0755,
+        "lng": 14.4378,
+        "city": "Prague",
+        "country": "Czech Republic"
+      },
+      "link": "https://lu.ma/xdjlepmh",
+      "logo": null,
+      "short_description": "PWNDAO presents a celebration for newcomers and OGs in Holešovice",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 70,
+      "name": "10 Years of Ethereum - Paris",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 48.8566,
+        "lng": 2.3522,
+        "city": "Paris",
+        "country": "France"
+      },
+      "link": "https://www.meetup.com/ethereum-france/events/308225477",
+      "logo": null,
+      "short_description": "Ethereum France celebrates with a hybrid meetup featuring special guests",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 71,
+      "name": "10 Years of Ethereum - Aachen",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 50.7753,
+        "lng": 6.0839,
+        "city": "Aachen",
+        "country": "Germany"
+      },
+      "link": "https://lu.ma/fpj1t4nl",
+      "logo": null,
+      "short_description": "Join the Ethereum community celebration in Aachen",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 72,
+      "name": "10 Years of Ethereum - Markt Indersdorf",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 48.3354,
+        "lng": 11.3489,
+        "city": "Markt Indersdorf",
+        "country": "Germany"
+      },
+      "link": "https://lu.ma/0wh4fh5d",
+      "logo": null,
+      "short_description": "Crypto Roundtable Germany celebrates at Butchers Bar & Grill",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 73,
+      "name": "10 Years of Ethereum - Rora",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 44.8986,
+        "lng": 11.4379,
+        "city": "Rora",
+        "country": "Italy"
+      },
+      "link": "https://platform.serotonin.co/events/decentralized-by-nature-ethereums-10th-at-stone-oven-house-ror-italy-isrcoe",
+      "logo": null,
+      "short_description": "Decentralized by Nature: Ethereum's 10th at Stone Oven House",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 74,
+      "name": "10 Years of Ethereum - Rome",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 41.9028,
+        "lng": 12.4964,
+        "city": "Rome",
+        "country": "Italy"
+      },
+      "link": "https://lu.ma/bk5s41kn",
+      "logo": null,
+      "short_description": "Web3 Forum at Urbe Hub celebrating a decade of innovation",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 75,
+      "name": "10 Years of Ethereum - Lisbon",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 38.7223,
+        "lng": -9.1393,
+        "city": "Lisbon",
+        "country": "Portugal"
+      },
+      "link": "https://www.meetup.com/theblock/events/308390462",
+      "logo": null,
+      "short_description": "The Block Lisboa hosts a special evening celebration with the community",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 76,
+      "name": "10 Years of Ethereum - Bratislava",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 48.1486,
+        "lng": 17.1077,
+        "city": "Bratislava",
+        "country": "Slovakia"
+      },
+      "link": "https://lu.ma/t41op9nb",
+      "logo": null,
+      "short_description": "ETHBratislava presents a decade of decentralization at The Spot",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 77,
+      "name": "10 Years of Ethereum - Lausanne",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 46.5197,
+        "lng": 6.6323,
+        "city": "Lausanne",
+        "country": "Switzerland"
+      },
+      "link": "https://lu.ma/8njndqrw",
+      "logo": null,
+      "short_description": "Swiss Ethereum community celebrates the 10th anniversary",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 78,
+      "name": "10 Years of Ethereum - Kyiv",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 50.4501,
+        "lng": 30.5234,
+        "city": "Kyiv",
+        "country": "Ukraine"
+      },
+      "link": "https://lu.ma/c8lzm78l",
+      "logo": null,
+      "short_description": "Ukrainian Ethereum community celebrates a decade of innovation",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 79,
+      "name": "10 Years of Ethereum - London",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 51.5074,
+        "lng": -0.1278,
+        "city": "London",
+        "country": "United Kingdom"
+      },
+      "link": "https://lu.ma/8ejysqky",
+      "logo": null,
+      "short_description": "London's Ethereum community gathers to celebrate the 10th anniversary",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 80,
+      "name": "10 Years of Ethereum - Brighton",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 50.8225,
+        "lng": -0.1372,
+        "city": "Brighton",
+        "country": "United Kingdom"
+      },
+      "link": "https://www.meetup.com/brighton-blockchain/events/307527140",
+      "logo": null,
+      "short_description": "Brighton Blockchain community celebrates Ethereum's milestone",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 81,
+      "name": "10 Years of Ethereum - Toronto",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 43.6511,
+        "lng": -79.3754,
+        "city": "Toronto",
+        "country": "Canada"
+      },
+      "link": "https://lu.ma/cjxur5u6",
+      "logo": null,
+      "short_description": "Highline Beta ETH celebrates Ethereum's journey at Bay Street",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 82,
+      "name": "10 Years of Ethereum - Monterrey",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 25.6866,
+        "lng": -100.3161,
+        "city": "Santa Catarina",
+        "country": "Mexico"
+      },
+      "link": "https://lu.ma/8njndqrw",
+      "logo": null,
+      "short_description": "Ethereum Monterrey hosts celebration at LaCuraduria with talks and networking",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 83,
+      "name": "10 Years of Ethereum - Austin",
+      "date": "2024-07-30",
+      "location": {
+        "lat": 30.2672,
+        "lng": -97.7431,
+        "city": "Austin",
+        "country": "United States"
+      },
+      "link": "https://www.meetup.com/ethereum-austin/events/307661745",
+      "logo": null,
+      "short_description": "Pizza, drinks, and OG crypto discussions with the Austin Ethereum community",
+      "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 84,
+      "name": "10 Years of Ethereum - Sydney",
+      "date": "2024-07-30",
+      "location": {
+        "lat": -33.8932,
+        "lng": 151.2001,
+        "city": "Redfern",
+        "country": "Australia"
+      },
+      "link": "https://lu.ma/qx0g2942",
+      "logo": null,
+      "short_description": "ETHSydney presents builder spotlights and startup pitch showcase at Helix Collective",
+      "tags": ["ETH10Years", "Gathering"]
     }
   ]
 } 

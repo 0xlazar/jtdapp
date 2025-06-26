@@ -2,6 +2,8 @@ const CACHE_NAME = 'devconnect-v1';
 const urlsToCache = [
     '/',
     '/index.html',
+    '/submit-event/',
+    '/submit-event/index.html',
     '/scripts/main.js',
     '/data/events.json',
     'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',

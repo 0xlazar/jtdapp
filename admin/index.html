@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Journey to DevConnect</title>
+    <link rel="icon" href="../icons/logo.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="w-full py-4 bg-white shadow flex items-center">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center">
+                <img src="../icons/logo.png" alt="Journey to DevConnect Logo" class="h-14 w-14 inline-block align-middle" />
+                <span class="ml-3 text-xl font-bold">Admin Dashboard</span>
+            </a>
+            <nav>
+                <a href="../index.html" class="text-gray-600 hover:text-gray-900">Back to App</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-6">Event Submissions</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex justify-between mb-4">
+                <div class="flex space-x-2">
+                    <button id="show-pending" class="px-4 py-2 bg-yellow-500 text-white rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                        Pending
+                    </button>
+                    <button id="show-approved" class="px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                        Approved
+                    </button>
+                    <button id="show-rejected" class="px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors">
+                        Rejected
+                    </button>
+                </div>
+                <button id="refresh-btn" class="px-4 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition-colors">
+                    Refresh
+                </button>
+            </div>
+            
+            <div id="loading" class="text-center py-10">
+                <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto"></div>
+                <p class="mt-2 text-gray-600">Loading events...</p>
+            </div>
+            
+            <div id="error" class="hidden text-center py-10 text-red-500">
+                <p>Error loading events. Please try again.</p>
+            </div>
+            
+            <div id="no-events" class="hidden text-center py-10 text-gray-500">
+                <p>No events found.</p>
+            </div>
+            
+            <div id="events-container" class="hidden">
+                <!-- Events will be loaded here -->
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Supabase configuration
+        const SUPABASE_CONFIG = {
+            URL: 'https://otbtstuphxrvkqlejytq.supabase.co',
+            ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90YnRzdHVwaHhydmtxbGVqeXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MTk2NzEsImV4cCI6MjA2NDA5NTY3MX0.iXlHAUj1NlbVvk9slXbcFqjx9AbTBpvsM4OeS9lMp2o'
+        };
+        
+        // Initialize Supabase client
+        const supabase = supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+        
+        // Elements
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const noEventsEl = document.getElementById('no-events');
+        const eventsContainerEl = document.getElementById('events-container');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const showPendingBtn = document.getElementById('show-pending');
+        const showApprovedBtn = document.getElementById('show-approved');
+        const showRejectedBtn = document.getElementById('show-rejected');
+        
+        // Current filter
+        let currentFilter = 'pending';
+        
+        // Fetch events based on status
+        async function fetchEvents(status) {
+            // Show loading
+            loadingEl.classList.remove('hidden');
+            errorEl.classList.add('hidden');
+            noEventsEl.classList.add('hidden');
+            eventsContainerEl.classList.add('hidden');
+            
+            try {
+                // Fetch events with the given status
+                const { data, error } = await supabase
+                    .from('events')
+                    .select('*')
+                    .eq('status', status)
+                    .order('submitted_at', { ascending: false });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Hide loading
+                loadingEl.classList.add('hidden');
+                
+                // Check if there are events
+                if (!data || data.length === 0) {
+                    noEventsEl.classList.remove('hidden');
+                    return;
+                }
+                
+                // Render events
+                renderEvents(data);
+                eventsContainerEl.classList.remove('hidden');
+            } catch (err) {
+                console.error('Error fetching events:', err);
+                loadingEl.classList.add('hidden');
+                errorEl.classList.remove('hidden');
+            }
+        }
+        
+        // Render events
+        function renderEvents(events) {
+            eventsContainerEl.innerHTML = '';
+            
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'border border-gray-200 rounded-lg p-4 mb-4 relative';
+                
+                // Status badge
+                const statusBadge = document.createElement('div');
+                statusBadge.className = 'absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold';
+                
+                if (event.status === 'pending') {
+                    statusBadge.className += ' bg-yellow-100 text-yellow-800';
+                    statusBadge.textContent = 'Pending';
+                } else if (event.status === 'approved') {
+                    statusBadge.className += ' bg-green-100 text-green-800';
+                    statusBadge.textContent = 'Approved';
+                } else if (event.status === 'rejected') {
+                    statusBadge.className += ' bg-red-100 text-red-800';
+                    statusBadge.textContent = 'Rejected';
+                }
+                
+                eventCard.appendChild(statusBadge);
+                
+                // Event content
+                const eventContent = `
+                    <h3 class="text-xl font-bold mb-2">${event.name}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-gray-600"><strong>Location:</strong> ${event.city}, ${event.country}</p>
+                            <p class="text-gray-600"><strong>Dates:</strong> ${event.start_date} to ${event.end_date}</p>
+                            <p class="text-gray-600"><strong>Type:</strong> ${event.event_type}</p>
+                            <p class="text-gray-600"><strong>URL:</strong> <a href="${event.event_url}" target="_blank" class="text-blue-500 hover:underline">${event.event_url}</a></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong>Contact:</strong> ${event.contact_name || 'N/A'}</p>
+                            <p class="text-gray-600"><strong>Email:</strong> ${event.contact_email || 'N/A'}</p>
+                            <p class="text-gray-600"><strong>Telegram:</strong> ${event.contact_telegram || 'N/A'}</p>
+                            <p class="text-gray-600"><strong>Submitted:</strong> ${new Date(event.submitted_at).toLocaleString()}</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-gray-600"><strong>Description:</strong></p>
+                        <p>${event.description || 'No description provided.'}</p>
+                    </div>
+                `;
+                
+                // Create a container for the event content
+                const contentDiv = document.createElement('div');
+                contentDiv.innerHTML = eventContent;
+                eventCard.appendChild(contentDiv);
+                
+                // Action buttons for pending events
+                if (event.status === 'pending') {
+                    const actionButtons = document.createElement('div');
+                    actionButtons.className = 'flex space-x-2 mt-4';
+                    
+                    const approveBtn = document.createElement('button');
+                    approveBtn.className = 'px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors';
+                    approveBtn.textContent = 'Approve';
+                    approveBtn.addEventListener('click', () => approveEvent(event.id));
+                    
+                    const rejectBtn = document.createElement('button');
+                    rejectBtn.className = 'px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors';
+                    rejectBtn.textContent = 'Reject';
+                    rejectBtn.addEventListener('click', () => rejectEvent(event.id));
+                    
+                    actionButtons.appendChild(approveBtn);
+                    actionButtons.appendChild(rejectBtn);
+                    eventCard.appendChild(actionButtons);
+                }
+                
+                // Show logo if available
+                if (event.logo) {
+                    const logoContainer = document.createElement('div');
+                    logoContainer.className = 'mt-4';
+                    logoContainer.innerHTML = `
+                        <p class="text-gray-600 mb-2"><strong>Logo:</strong></p>
+                        <img src="${event.logo}" alt="${event.name} Logo" class="max-w-[200px] max-h-[200px] border border-gray-200 rounded-lg">
+                    `;
+                    eventCard.appendChild(logoContainer);
+                }
+                
+                eventsContainerEl.appendChild(eventCard);
+            });
+        }
+        
+        // Approve event
+        async function approveEvent(id) {
+            try {
+                const { error } = await supabase
+                    .from('events')
+                    .update({ status: 'approved' })
+                    .eq('id', id);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Refresh events
+                fetchEvents(currentFilter);
+            } catch (err) {
+                console.error('Error approving event:', err);
+                alert('Error approving event: ' + err.message);
+            }
+        }
+        
+        // Reject event
+        async function rejectEvent(id) {
+            try {
+                const { error } = await supabase
+                    .from('events')
+                    .update({ status: 'rejected' })
+                    .eq('id', id);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Refresh events
+                fetchEvents(currentFilter);
+            } catch (err) {
+                console.error('Error rejecting event:', err);
+                alert('Error rejecting event: ' + err.message);
+            }
+        }
+        
+        // Add event listeners
+        refreshBtn.addEventListener('click', () => fetchEvents(currentFilter));
+        showPendingBtn.addEventListener('click', () => {
+            currentFilter = 'pending';
+            fetchEvents(currentFilter);
+        });
+        showApprovedBtn.addEventListener('click', () => {
+            currentFilter = 'approved';
+            fetchEvents(currentFilter);
+        });
+        showRejectedBtn.addEventListener('click', () => {
+            currentFilter = 'rejected';
+            fetchEvents(currentFilter);
+        });
+        
+        // Initial load
+        fetchEvents(currentFilter);
+    </script>
+</body>
+</html> 
