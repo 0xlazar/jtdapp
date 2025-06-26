@@ -1259,6 +1259,81 @@
       "logo": null,
       "short_description": "ETHSydney presents builder spotlights and startup pitch showcase at Helix Collective",
       "tags": ["ETH10Years", "Gathering"]
+    },
+    {
+      "id": 85,
+      "name": "Road to Devconnect | EthereumCR",
+      "date": "2025-07-12",
+      "location": {
+        "lat": 9.9281,
+        "lng": -84.0907,
+        "city": "San José",
+        "country": "Costa Rica"
+      },
+      "link": "https://x.com/EthereumCR",
+      "logo": null,
+      "short_description": "Road to Devconnect event at Jardín de Lolita",
+      "tags": ["Gathering", "Destino"]
+    },
+    {
+      "id": 86,
+      "name": "Road to Devconnect: Puebla Onchain",
+      "date": "2025-07-19",
+      "location": {
+        "lat": 19.0414,
+        "lng": -98.2063,
+        "city": "Puebla",
+        "country": "Mexico"
+      },
+      "link": "https://x.com/Research_Kairos",
+      "logo": null,
+      "short_description": "Road to Devconnect event in Puebla",
+      "tags": ["Gathering", "Destino"]
+    },
+    {
+      "id": 87,
+      "name": "Mobil3.xyz Meetup",
+      "date": "2025-07-28",
+      "location": {
+        "lat": 19.4326,
+        "lng": -99.1332,
+        "city": "Mexico City",
+        "country": "Mexico"
+      },
+      "link": "https://x.com/mobil3_xyz",
+      "logo": null,
+      "short_description": "Mobil3.xyz community meetup in Mexico City",
+      "tags": ["Gathering", "Destino"]
+    },
+    {
+      "id": 88,
+      "name": "ETH Bolivia Buildathon 2025",
+      "date": "2025-08-01",
+      "location": {
+        "lat": -17.7863,
+        "lng": -63.1812,
+        "city": "Santa Cruz de la Sierra",
+        "country": "Bolivia"
+      },
+      "link": "https://x.com/EthereumBo",
+      "logo": null,
+      "short_description": "ETH Bolivia's annual buildathon event",
+      "tags": ["Hackathon", "Gathering"]
+    },
+    {
+      "id": 89,
+      "name": "CochaBlock Challenge: Destino Devconnect",
+      "date": "2025-09-01",
+      "location": {
+        "lat": -17.3895,
+        "lng": -66.1568,
+        "city": "Cochabamba",
+        "country": "Bolivia"
+      },
+      "link": "https://x.com/CochaBlock",
+      "logo": null,
+      "short_description": "CochaBlock's hackathon on the road to Devconnect",
+      "tags": ["Hackathon", "Destino"]
     }
   ]
 } 
