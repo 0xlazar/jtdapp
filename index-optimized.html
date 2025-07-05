@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey to DevConnect</title>
+    
+    <!-- Critical CSS - Inlined for fastest render -->
+    <style>
+        /* Critical CSS - Above the fold styles only */
+        .h-screen{height:100vh}.w-screen{width:100vw}.bg-gray-50{background-color:#f9fafb}.w-full{width:100%}.h-16{height:4rem}.bg-white{background-color:#fff}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)}.flex{display:flex}.items-center{align-items:center}.relative{position:relative}.absolute{position:absolute}.hidden{display:none}.overflow-hidden{overflow:hidden}.inset-0{top:0;right:0;bottom:0;left:0}.py-4{padding-top:1rem;padding-bottom:1rem}.border-b{border-bottom-width:1px}.border-gray-100{border-color:#f3f4f6}.left-4{left:1rem}.right-4{right:1rem}.p-2{padding:.5rem}.h-10{height:2.5rem}.w-10{width:2.5rem}.inline-block{display:inline-block}.align-middle{vertical-align:middle}.cursor-pointer{cursor:pointer}.mx-auto{margin-left:auto;margin-right:auto}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.gap-4{gap:1rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.rounded-lg{border-radius:.5rem}.text-sm{font-size:.875rem;line-height:1.25rem}.font-semibold{font-weight:600}.shadow-md{box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06)}.gap-2{gap:.5rem}.w-5{width:1.25rem}.h-5{height:1.25rem}.justify-center{justify-content:center}.h-12{height:3rem}.w-12{width:3rem}.rounded{border-radius:.25rem}.hover\:bg-gray-100:hover{background-color:#f3f4f6}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.w-8{width:2rem}.h-8{height:2rem}.text-gray-700{color:#374151}.gradient-primary{background:linear-gradient(90deg,#5094FF 0%,#F7B3E9 100%);color:#fff;border:none}.gradient-primary:hover{filter:brightness(.95)}.top-4{top:1rem}.z-20{z-index:20}.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)}.z-0{z-index:0}.fixed{position:fixed}.bottom-0{bottom:0}.left-0{left:0}.z-40{z-index:40}.justify-around{justify-content:space-around}.flex-col{flex-direction:column}.text-blue-600{color:#2563eb}.text-xs{font-size:.75rem;line-height:1rem}.text-gray-400{color:#9ca3af}.hover\:text-blue-600:hover{color:#2563eb}.text-gray-500{color:#6b7280}.hover\:text-gray-700:hover{color:#374151}.w-6{width:1.5rem}.h-6{height:1.5rem}.fill-none{fill:none}.stroke-current{stroke:currentColor}.stroke-2{stroke-width:2}.bottom-4{bottom:1rem}.rounded-full{border-radius:9999px}.p-3{padding:.75rem}.hover\:bg-gray-50:hover{background-color:#f9fafb}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:150ms}.text-gray-600{color:#4b5563}@media (max-width:640px){.sm\:inline{display:inline}.sm\:h-14{height:3.5rem}.sm\:w-14{width:3.5rem}.sm\:hidden{display:none}}
+    </style>
+    
+    <!-- Resource Hints for External Dependencies -->
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//scripts.simpleanalyticscdn.com">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles/main.css" as="style">
+    <link rel="preload" href="scripts/modules/ui.js" as="script">
+    <link rel="preload" href="icons/logo.png" as="image">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#3B82F6">
+    <meta name="description" content="Track and discover blockchain events around the world">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Journey to DevConnect">
+    <meta property="og:description" content="Discover Ethereum-aligned events & connect with other travelers around the world leading up to DevConnect.">
+    <meta property="og:image" content="https://journeytodevconnect.com/icons/og-image.png">
+    <meta property="og:url" content="https://journeytodevconnect.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Journey to DevConnect">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Journey to DevConnect">
+    <meta name="twitter:description" content="Discover Ethereum-aligned events & connect with other travelers around the world leading up to DevConnect.">
+    <meta name="twitter:image" content="https://journeytodevconnect.com/icons/og-image.png">
+    
+    <!-- PWA Links -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="icon" type="image/png" href="icons/logo.png">
+    
+    <!-- Load Main CSS (non-critical) -->
+    <link rel="stylesheet" href="styles/main.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles/main.css"></noscript>
+    
+    <!-- Load Leaflet CSS (non-critical) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
+    
+    <!-- Load MarkerCluster CSS (non-critical) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css">
+    </noscript>
+</head>
+<body class="h-screen w-screen bg-gray-50">
+    <!-- SVG Gradients for footer -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <linearGradient id="footer-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#5094FF;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#F7B3E9;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+    
+    <header class="w-full py-4 h-16 bg-white shadow flex items-center relative border-b border-gray-100">
+        <a href="#map" id="logo-link" class="absolute left-4 flex items-center p-2">
+            <img src="icons/logo.png" alt="Journey to DevConnect Logo" class="h-10 w-10 sm:h-14 sm:w-14 inline-block align-middle cursor-pointer" />
+        </a>
+        <span class="mx-auto text-xl font-bold hidden sm:inline">Journey to DevConnect</span>
+        <div class="absolute right-4 flex items-center gap-4">
+            <a href="submit-event" class="px-4 py-2 gradient-primary rounded-lg text-sm font-semibold shadow-md flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                <span class="hidden sm:inline">Submit Event</span>
+                <span class="sm:hidden">Submit</span>
+            </a>
+            <button id="hamburger-menu" class="flex items-center justify-center h-12 w-12 p-2 rounded hover:bg-gray-100 focus:outline-none" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-700">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+    </header>
+    
+    <main id="app" class="h-[calc(100vh-112px)] w-full relative overflow-hidden">
+        <!-- Loading indicator -->
+        <div id="loading" class="absolute top-4 left-4 bg-white p-4 rounded-lg shadow-lg hidden z-20">
+            Loading events...
+        </div>
+        
+        <!-- Error message -->
+        <div id="error" class="absolute top-4 left-4 bg-red-100 p-4 rounded-lg shadow-lg hidden z-20">
+            Error loading events. Please try again later.
+        </div>
+        
+        <!-- View Toggle Button -->
+        <div class="absolute top-4 right-4 z-20 flex items-center gap-2">
+            <button id="search-indicator" class="hidden bg-white text-gray-800 px-3 py-1.5 rounded-lg shadow-lg hover:bg-gray-50 transition-colors flex items-center gap-2 border border-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <span class="text-sm font-medium">Filtered</span>
+                <span id="search-count" class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded-full"></span>
+            </button>
+            <div class="gradient-border">
+                <button id="view-toggle" class="bg-white text-blue-600 border border-transparent px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 hover:bg-blue-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                    <span id="view-text">Events List</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Map container -->
+        <div id="map-area" class="absolute inset-0 z-0">
+            <div id="map" class="w-full h-full"></div>
+            
+            <!-- Help Button -->
+            <button id="help-button" class="absolute bottom-4 left-4 bg-white p-3 rounded-full shadow-lg hover:bg-gray-50 transition-colors z-[1000] w-10 h-10 flex items-center justify-center">
+                <span class="text-gray-600 text-xl font-bold">?</span>
+            </button>
+            
+            <!-- Zoom to Fit Button -->
+            <button id="zoom-to-fit" class="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-colors z-[1000] w-10 h-10 flex items-center justify-center hidden">
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                </svg>
+            </button>
+        </div>
+        
+        <!-- List View -->
+        <div id="list-view" class="absolute inset-y-0 right-0 w-full md:w-[30%] bg-white z-30 transform translate-x-full transition-transform duration-300 ease-in-out shadow-lg min-w-[375px]">
+            <div class="h-full flex flex-col">
+                <!-- List Header -->
+                <div class="p-4 border-b">
+                    <div class="flex items-center justify-between w-full">
+                        <h2 class="text-xl font-bold">Events</h2>
+                        <div class="flex items-center space-x-2">
+                            <div id="event-toggle" class="flex bg-gray-100 rounded-lg p-1">
+                                <button class="px-3 py-1 rounded-md bg-white shadow text-gray-900 font-semibold focus:outline-none transition-colors" disabled>Upcoming</button>
+                                <button class="px-3 py-1 rounded-md text-gray-500 hover:text-gray-900 focus:outline-none transition-colors">Past</button>
+                            </div>
+                            <button id="close-list" class="text-gray-500 hover:text-gray-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative px-4 pt-2 pb-2 border-b bg-white">
+                    <input type="text" 
+                           id="search-input" 
+                           placeholder="Search by name, location, month, or keyword..." 
+                           class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                    <button id="clear-search" class="absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 hidden">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Events List -->
+                <div id="events-list" class="flex-1 overflow-y-auto">
+                    <!-- Events will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Overlay container for future UI (filters, etc.) -->
+        <div id="ui-overlay" class="absolute inset-0 z-10 pointer-events-none"></div>
+    </main>
+    
+    <!-- Event Details Popup -->
+    <div id="event-popup" class="fixed left-1/2 bottom-12 transform -translate-x-1/2 w-full max-w-xl bg-white shadow-lg rounded-2xl transition-all duration-300 ease-in-out z-30 opacity-0 pointer-events-none">
+        <div class="p-4">
+            <!-- Close button -->
+            <button id="close-popup" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors z-50">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <!-- Content will be dynamically inserted here -->
+            <div id="popup-content" class="mt-2"></div>
+        </div>
+    </div>
+
+    <!-- Welcome Popup -->
+    <div id="welcome-popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-sm mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Welcome to Journey to DevConnect!</h3>
+                <button id="close-welcome" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-600 text-xl">🔍</span>
+                    <div>
+                        <p class="text-gray-800 font-medium">Discover Events</p>
+                        <p class="text-gray-600 text-sm">Curated list of Ethereum-aligned, no-BS events leading up to <a href="https://devconnect.org" target="_blank" class="text-blue-600 hover:underline">DevConnect</a></p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-600 text-xl">🎯</span>
+                    <div>
+                        <p class="text-gray-800 font-medium">Create Your Journey</p>
+                        <p class="text-gray-600 text-sm">Build your own Journey to DevConnect and connect with fellow cypherpunks</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-blue-600 text-xl">🌱</span>
+                    <div>
+                        <p class="text-gray-800 font-medium">Ecosystem Hub</p>
+                        <p class="text-gray-600 text-sm">Get the latest announcements, opportunities, scholarships, grants, and more!</p>
+                    </div>
+                </div>
+            </div>
+            <button id="got-it-button" class="mt-6 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                Start Your Journey
+            </button>
+        </div>
+    </div>
+
+    <!-- Help Popup -->
+    <div id="help-popup" class="fixed left-4 bottom-20 bg-white shadow-lg rounded-lg p-4 max-w-xs transform transition-all duration-300 ease-in-out z-[1000] opacity-0 pointer-events-none">
+        <div class="space-y-4">
+            <h3 class="font-bold text-lg">Map Legend</h3>
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-4 h-4 rounded-full bg-[#5094FF]"></div>
+                    <span class="text-sm text-gray-600">Events 30+ days away</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-4 h-4 rounded-full" style="background: linear-gradient(90deg, #F7B3E9, #5094FF)"></div>
+                    <span class="text-sm text-gray-600">Events 7-30 days away</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-4 h-4 rounded-full bg-[#F7B3E9]"></div>
+                    <span class="text-sm text-gray-600">Events within 7 days</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-4 h-4 rounded-full bg-[#F7B3E9] pulsating-marker"></div>
+                    <span class="text-sm text-gray-600">Ongoing events</span>
+                </div>
+            </div>
+            <button id="close-help" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu Dropdown -->
+    <div id="menu-dropdown" class="fixed right-8 top-[76px] bg-white shadow-lg rounded-lg py-2 w-48 z-50 hidden">
+        <a href="submit-event" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+            Submit Event
+        </a>
+    </div>
+
+    <footer class="w-full h-12 bg-white shadow flex justify-around items-center fixed bottom-0 left-0 z-40">
+        <button id="map-nav" class="flex flex-col items-center text-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+            </svg>
+            <span class="text-xs">Map</span>
+        </button>
+        <button id="ecosystem-button" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors coming-soon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+            <span class="text-xs">Ecosystem</span>
+        </button>
+        <a href="https://t.me/+127miY3a6mU0Y2E0" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center text-gray-400 hover:text-blue-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
+            <span class="text-xs">Community</span>
+        </a>
+        <button id="profile-button" class="flex flex-col items-center text-gray-400 coming-soon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+            <span class="text-xs">Profile</span>
+        </button>
+    </footer>
+
+    <!-- Load JavaScript modules with performance optimizations -->
+    <script>
+        // Service Worker Registration (critical, inline for immediate registration)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('ServiceWorker registered'))
+                    .catch(err => console.log('ServiceWorker registration failed: ', err));
+            });
+        }
+    </script>
+    
+    <!-- Load UI module first (critical for interaction) -->
+    <script src="scripts/modules/ui.js"></script>
+    
+    <!-- Load external dependencies asynchronously -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" async></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" async></script>
+    
+    <!-- Load application scripts with defer -->
+    <script src="scripts/supabase-events.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+
+    <!-- Load analytics last (non-critical) -->
+    <script src="https://scripts.simpleanalyticscdn.com/latest.js" async></script>
+</body>
+</html>

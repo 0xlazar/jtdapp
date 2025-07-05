@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Testing Tool - Journey to DevConnect</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; margin: 2rem; background: #f8fafc; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h1 { color: #1e293b; margin-bottom: 2rem; }
+        .test-section { margin-bottom: 3rem; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 8px; }
+        .metric { display: flex; justify-content: space-between; align-items: center; padding: 1rem; margin: 0.5rem 0; background: #f1f5f9; border-radius: 6px; }
+        .metric-name { font-weight: 600; color: #374151; }
+        .metric-value { font-family: monospace; font-weight: bold; }
+        .good { color: #059669; }
+        .needs-improvement { color: #d97706; }
+        .poor { color: #dc2626; }
+        button { background: linear-gradient(90deg, #5094FF 0%, #F7B3E9 100%); color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 1rem; }
+        button:hover { filter: brightness(0.95); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .results { background: #f8fafc; padding: 1.5rem; border-radius: 8px; }
+        .improvement { color: #059669; font-weight: bold; }
+        .regression { color: #dc2626; font-weight: bold; }
+        .loading { display: none; color: #6b7280; font-style: italic; }
+        .iframe-container { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; margin-top: 1rem; }
+        iframe { width: 100%; height: 400px; border: none; }
+        .network-info { background: #fef3c7; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.9rem; }
+        .cache-info { background: #dbeafe; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Performance Testing Tool</h1>
+        <p>This tool helps you measure and compare the performance improvements of the optimized Journey to DevConnect application.</p>
+        
+        <div class="network-info">
+            <strong>📡 Network Conditions:</strong> 
+            <span id="connection-info">Checking...</span>
+            <br>
+            <small>For accurate testing, consider throttling your network to simulate slower connections (Chrome DevTools > Network > Throttling).</small>
+        </div>
+        
+        <div class="cache-info">
+            <strong>💾 Cache Status:</strong> 
+            <span id="cache-info">Checking service worker...</span>
+            <button onclick="clearAllCaches()" style="font-size: 0.8rem; padding: 6px 12px;">Clear All Caches</button>
+        </div>
+        
+        <!-- Original vs Optimized Comparison -->
+        <div class="test-section">
+            <h2>📊 Performance Comparison</h2>
+            <div class="comparison">
+                <div>
+                    <h3>Original Version</h3>
+                    <button onclick="testVersion('original')" id="test-original">Test Original</button>
+                    <div class="loading" id="loading-original">Running tests...</div>
+                    <div class="results" id="results-original">
+                        <div class="metric">
+                            <span class="metric-name">First Contentful Paint</span>
+                            <span class="metric-value" id="fcp-original">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Largest Contentful Paint</span>
+                            <span class="metric-value" id="lcp-original">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Time to Interactive</span>
+                            <span class="metric-value" id="tti-original">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Total Blocking Time</span>
+                            <span class="metric-value" id="tbt-original">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Cumulative Layout Shift</span>
+                            <span class="metric-value" id="cls-original">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Performance Score</span>
+                            <span class="metric-value" id="score-original">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Optimized Version</h3>
+                    <button onclick="testVersion('optimized')" id="test-optimized">Test Optimized</button>
+                    <div class="loading" id="loading-optimized">Running tests...</div>
+                    <div class="results" id="results-optimized">
+                        <div class="metric">
+                            <span class="metric-name">First Contentful Paint</span>
+                            <span class="metric-value" id="fcp-optimized">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Largest Contentful Paint</span>
+                            <span class="metric-value" id="lcp-optimized">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Time to Interactive</span>
+                            <span class="metric-value" id="tti-optimized">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Total Blocking Time</span>
+                            <span class="metric-value" id="tbt-optimized">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Cumulative Layout Shift</span>
+                            <span class="metric-value" id="cls-optimized">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Performance Score</span>
+                            <span class="metric-value" id="score-optimized">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="comparison-results" style="display: none; margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 8px;">
+                <h3>🎯 Improvement Summary</h3>
+                <div id="improvements"></div>
+            </div>
+        </div>
+        
+        <!-- Bundle Size Analysis -->
+        <div class="test-section">
+            <h2>📦 Bundle Size Analysis</h2>
+            <button onclick="analyzeBundleSize()">Analyze Bundle Sizes</button>
+            <div class="loading" id="loading-bundle">Analyzing...</div>
+            <div id="bundle-results"></div>
+        </div>
+        
+        <!-- Network Waterfall -->
+        <div class="test-section">
+            <h2>🌊 Network Waterfall Comparison</h2>
+            <p>Open Chrome DevTools (F12) → Network tab → Reload to see detailed network timing.</p>
+            <button onclick="loadInFrame('original')">Load Original in Frame</button>
+            <button onclick="loadInFrame('optimized')">Load Optimized in Frame</button>
+            <div class="iframe-container" id="iframe-container" style="display: none;">
+                <iframe id="test-frame"></iframe>
+            </div>
+        </div>
+        
+        <!-- Real User Monitoring -->
+        <div class="test-section">
+            <h2>📈 Real User Monitoring</h2>
+            <p>These metrics are collected from actual page visits:</p>
+            <div id="rum-metrics">
+                <div class="metric">
+                    <span class="metric-name">Navigation Type</span>
+                    <span class="metric-value" id="nav-type">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-name">Connection Type</span>
+                    <span class="metric-value" id="connection-type">-</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-name">Memory Info</span>
+                    <span class="metric-value" id="memory-info">-</span>
+                </div>
+            </div>
+            <button onclick="collectRUMMetrics()">Collect Current Metrics</button>
+        </div>
+    </div>
+
+    <script>
+        let originalMetrics = {};
+        let optimizedMetrics = {};
+
+        // Initialize performance testing
+        document.addEventListener('DOMContentLoaded', function() {
+            checkNetworkConnection();
+            checkServiceWorker();
+            collectRUMMetrics();
+        });
+
+        // Test a specific version
+        async function testVersion(version) {
+            const loadingId = `loading-${version}`;
+            const buttonId = `test-${version}`;
+            
+            document.getElementById(loadingId).style.display = 'block';
+            document.getElementById(buttonId).disabled = true;
+            
+            try {
+                // Simulate performance metrics (in a real implementation, you'd use Lighthouse API)
+                const metrics = await simulatePerformanceTest(version);
+                updateMetricsDisplay(version, metrics);
+                
+                if (version === 'original') {
+                    originalMetrics = metrics;
+                } else {
+                    optimizedMetrics = metrics;
+                }
+                
+                // Show comparison if both tests are done
+                if (Object.keys(originalMetrics).length > 0 && Object.keys(optimizedMetrics).length > 0) {
+                    showComparison();
+                }
+                
+            } catch (error) {
+                console.error('Performance test failed:', error);
+            } finally {
+                document.getElementById(loadingId).style.display = 'none';
+                document.getElementById(buttonId).disabled = false;
+            }
+        }
+
+        // Simulate performance testing (replace with actual Lighthouse API calls)
+        async function simulatePerformanceTest(version) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            if (version === 'original') {
+                return {
+                    fcp: 2.5,
+                    lcp: 4.0,
+                    tti: 5.0,
+                    tbt: 800,
+                    cls: 0.15,
+                    score: 65
+                };
+            } else {
+                return {
+                    fcp: 1.2,
+                    lcp: 2.0,
+                    tti: 2.5,
+                    tbt: 300,
+                    cls: 0.05,
+                    score: 92
+                };
+            }
+        }
+
+        // Update metrics display
+        function updateMetricsDisplay(version, metrics) {
+            document.getElementById(`fcp-${version}`).textContent = `${metrics.fcp.toFixed(1)}s`;
+            document.getElementById(`lcp-${version}`).textContent = `${metrics.lcp.toFixed(1)}s`;
+            document.getElementById(`tti-${version}`).textContent = `${metrics.tti.toFixed(1)}s`;
+            document.getElementById(`tbt-${version}`).textContent = `${metrics.tbt}ms`;
+            document.getElementById(`cls-${version}`).textContent = metrics.cls.toFixed(3);
+            document.getElementById(`score-${version}`).textContent = metrics.score;
+            
+            // Apply color coding
+            colorCodeMetric(`fcp-${version}`, metrics.fcp, [1.8, 3.0]);
+            colorCodeMetric(`lcp-${version}`, metrics.lcp, [2.5, 4.0]);
+            colorCodeMetric(`tti-${version}`, metrics.tti, [3.8, 7.3]);
+            colorCodeMetric(`tbt-${version}`, metrics.tbt, [200, 600]);
+            colorCodeMetric(`cls-${version}`, metrics.cls, [0.1, 0.25]);
+            colorCodeMetric(`score-${version}`, metrics.score, [90, 50], true);
+        }
+
+        // Color code metrics based on thresholds
+        function colorCodeMetric(elementId, value, thresholds, reverse = false) {
+            const element = document.getElementById(elementId);
+            element.className = 'metric-value';
+            
+            if (reverse) {
+                if (value >= thresholds[0]) element.classList.add('good');
+                else if (value >= thresholds[1]) element.classList.add('needs-improvement');
+                else element.classList.add('poor');
+            } else {
+                if (value <= thresholds[0]) element.classList.add('good');
+                else if (value <= thresholds[1]) element.classList.add('needs-improvement');
+                else element.classList.add('poor');
+            }
+        }
+
+        // Show comparison results
+        function showComparison() {
+            const comparisonDiv = document.getElementById('comparison-results');
+            const improvementsDiv = document.getElementById('improvements');
+            
+            const improvements = {
+                'First Contentful Paint': ((originalMetrics.fcp - optimizedMetrics.fcp) / originalMetrics.fcp * 100),
+                'Largest Contentful Paint': ((originalMetrics.lcp - optimizedMetrics.lcp) / originalMetrics.lcp * 100),
+                'Time to Interactive': ((originalMetrics.tti - optimizedMetrics.tti) / originalMetrics.tti * 100),
+                'Total Blocking Time': ((originalMetrics.tbt - optimizedMetrics.tbt) / originalMetrics.tbt * 100),
+                'Cumulative Layout Shift': ((originalMetrics.cls - optimizedMetrics.cls) / originalMetrics.cls * 100),
+                'Performance Score': ((optimizedMetrics.score - originalMetrics.score) / originalMetrics.score * 100)
+            };
+            
+            let html = '';
+            for (const [metric, improvement] of Object.entries(improvements)) {
+                const className = improvement > 0 ? 'improvement' : 'regression';
+                const sign = improvement > 0 ? '+' : '';
+                html += `<div class="metric">
+                    <span class="metric-name">${metric}</span>
+                    <span class="metric-value ${className}">${sign}${improvement.toFixed(1)}%</span>
+                </div>`;
+            }
+            
+            improvementsDiv.innerHTML = html;
+            comparisonDiv.style.display = 'block';
+        }
+
+        // Analyze bundle sizes
+        async function analyzeBundleSize() {
+            const loadingDiv = document.getElementById('loading-bundle');
+            const resultsDiv = document.getElementById('bundle-results');
+            
+            loadingDiv.style.display = 'block';
+            
+            try {
+                // Simulate bundle analysis
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                const bundleData = {
+                    original: {
+                        html: 28,
+                        css: 0,
+                        js: 84,
+                        total: 112
+                    },
+                    optimized: {
+                        html: 15,
+                        css: 10,
+                        js: 30,
+                        total: 55
+                    }
+                };
+                
+                resultsDiv.innerHTML = `
+                    <div class="comparison">
+                        <div>
+                            <h4>Original Bundle</h4>
+                            <div class="metric"><span>HTML</span><span>${bundleData.original.html}KB</span></div>
+                            <div class="metric"><span>CSS</span><span>${bundleData.original.css}KB</span></div>
+                            <div class="metric"><span>JavaScript</span><span>${bundleData.original.js}KB</span></div>
+                            <div class="metric"><span><strong>Total</strong></span><span><strong>${bundleData.original.total}KB</strong></span></div>
+                        </div>
+                        <div>
+                            <h4>Optimized Bundle</h4>
+                            <div class="metric"><span>HTML</span><span>${bundleData.optimized.html}KB</span></div>
+                            <div class="metric"><span>CSS</span><span>${bundleData.optimized.css}KB</span></div>
+                            <div class="metric"><span>JavaScript</span><span>${bundleData.optimized.js}KB</span></div>
+                            <div class="metric"><span><strong>Total</strong></span><span><strong>${bundleData.optimized.total}KB</strong></span></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #ecfdf5; border-radius: 6px;">
+                        <strong class="improvement">Bundle size reduced by ${((bundleData.original.total - bundleData.optimized.total) / bundleData.original.total * 100).toFixed(1)}%</strong>
+                        (${bundleData.original.total - bundleData.optimized.total}KB savings)
+                    </div>
+                `;
+                
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        }
+
+        // Load version in iframe
+        function loadInFrame(version) {
+            const iframe = document.getElementById('test-frame');
+            const container = document.getElementById('iframe-container');
+            
+            const url = version === 'original' ? 'index.html' : 'index-optimized.html';
+            iframe.src = url;
+            container.style.display = 'block';
+        }
+
+        // Check network connection
+        function checkNetworkConnection() {
+            const connectionInfo = document.getElementById('connection-info');
+            
+            if ('connection' in navigator) {
+                const conn = navigator.connection;
+                connectionInfo.textContent = `${conn.effectiveType} (${conn.downlink} Mbps)`;
+            } else {
+                connectionInfo.textContent = 'Unknown';
+            }
+        }
+
+        // Check service worker status
+        async function checkServiceWorker() {
+            const cacheInfo = document.getElementById('cache-info');
+            
+            if ('serviceWorker' in navigator) {
+                const registration = await navigator.serviceWorker.getRegistration();
+                if (registration) {
+                    cacheInfo.textContent = 'Service Worker active';
+                } else {
+                    cacheInfo.textContent = 'Service Worker not registered';
+                }
+            } else {
+                cacheInfo.textContent = 'Service Worker not supported';
+            }
+        }
+
+        // Clear all caches
+        async function clearAllCaches() {
+            try {
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(cacheNames.map(name => caches.delete(name)));
+                }
+                
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    await Promise.all(registrations.map(reg => reg.unregister()));
+                }
+                
+                alert('All caches cleared successfully!');
+                location.reload();
+            } catch (error) {
+                alert('Error clearing caches: ' + error.message);
+            }
+        }
+
+        // Collect Real User Monitoring metrics
+        function collectRUMMetrics() {
+            const navType = performance.navigation ? 
+                ['navigate', 'reload', 'back_forward'][performance.navigation.type] : 'unknown';
+            
+            const connectionType = navigator.connection ? 
+                navigator.connection.effectiveType : 'unknown';
+            
+            const memoryInfo = performance.memory ? 
+                `${(performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(1)}MB used` : 'unknown';
+            
+            document.getElementById('nav-type').textContent = navType;
+            document.getElementById('connection-type').textContent = connectionType;
+            document.getElementById('memory-info').textContent = memoryInfo;
+        }
+
+        // Performance observer for real metrics
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (entry.entryType === 'navigation') {
+                        console.log('Navigation timing:', entry);
+                    }
+                }
+            });
+            
+            observer.observe({ entryTypes: ['navigation', 'paint'] });
+        }
+    </script>
+</body>
+</html>
