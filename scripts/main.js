@@ -1136,45 +1136,63 @@ function getEventColor(daysToEvent) {
     }
 }
 
-// Modified loadEvents function to use Supabase
+// Modified loadEvents function to use Supabase as primary source
 async function loadEvents() {
     setLoading(true);
     try {
         let events = [];
         
-        // Try to fetch events from Supabase first
+        // Try to fetch events from Supabase first (primary source)
         if (window.supabaseEvents) {
-            console.log('Fetching events from Supabase');
-            events = await window.supabaseEvents.fetchEvents();
-        }
-        
-        // If no events from Supabase or an error occurred, fall back to JSON file
-        if (!events || events.length === 0) {
-            console.log('No events from Supabase, falling back to JSON file');
-            const cacheBuster = `t=${Date.now()}&r=${Math.random()}`;
-            console.log('Fetching events with cache buster:', cacheBuster);
-            const response = await fetch(`data/events.json?${cacheBuster}`, {
-                cache: 'no-store',
-                headers: {
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache',
-                    'Expires': '0'
+            console.log('Fetching events from Supabase...');
+            try {
+                events = await window.supabaseEvents.fetchEvents();
+                console.log(`✅ Loaded ${events.length} events from Supabase`);
+                
+                // If we have events from Supabase, use them exclusively
+                if (events.length > 0) {
+                    console.log('🎉 Using Supabase as primary data source');
+                } else {
+                    console.warn('⚠️ Supabase returned 0 events, falling back to JSON');
+                    throw new Error('No events in Supabase');
                 }
-            });
-            
-            if (!response.ok) {
-                console.error('Failed to load events:', response.status, response.statusText);
-                throw new Error('Failed to load events');
+            } catch (supabaseError) {
+                console.error('❌ Error fetching from Supabase:', supabaseError);
+                events = []; // Reset events array
             }
-            
-            const data = await response.json();
-            console.log('Raw events data from JSON:', data);
-            console.log('Loaded events from JSON:', data.events.length);
-            
-            events = data.events;
         }
         
-        console.log('Total events loaded:', events.length);
+        // Fallback to JSON only if Supabase fails or returns no events
+        if (events.length === 0) {
+            console.log('📄 Falling back to JSON file...');
+            try {
+                const cacheBuster = `t=${Date.now()}&r=${Math.random()}`;
+                const response = await fetch(`data/events.json?${cacheBuster}`, {
+                    cache: 'no-store',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    events = data.events || [];
+                    console.log(`📄 Loaded ${events.length} events from JSON (fallback)`);
+                } else {
+                    throw new Error('Failed to load JSON events');
+                }
+            } catch (jsonError) {
+                console.error('❌ Error fetching from JSON:', jsonError);
+                throw new Error('Failed to load events from both Supabase and JSON');
+            }
+        }
+        
+        if (events.length === 0) {
+            console.warn('No events loaded from any source');
+            throw new Error('No events available');
+        }
         
         // Store original events
         originalEvents = events;

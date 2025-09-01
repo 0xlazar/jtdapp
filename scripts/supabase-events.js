@@ -25,6 +25,27 @@ function initSupabase() {
     }
 }
 
+// Function to geocode location using OpenStreetMap Nominatim API
+async function geocodeLocation(city, country) {
+    try {
+        const query = encodeURIComponent(`${city}, ${country}`);
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
+        const data = await response.json();
+        
+        if (data && data.length > 0) {
+            return {
+                lat: parseFloat(data[0].lat),
+                lng: parseFloat(data[0].lon)
+            };
+        }
+    } catch (error) {
+        console.error('Geocoding error:', error);
+    }
+    
+    // Return default coordinates (center of the world) if geocoding fails
+    return { lat: 0, lng: 0 };
+}
+
 // Function to fetch events from Supabase
 async function fetchEvents() {
     if (!supabaseClient) {
@@ -35,11 +56,12 @@ async function fetchEvents() {
     }
     
     try {
-        // Only fetch approved events
+        // Fetch approved and pending events (for testing)
+        // In production, you might want to only show approved events
         const { data, error } = await supabaseClient
             .from('events')
             .select('*')
-            .eq('status', 'approved');
+            .in('status', ['approved', 'pending']);
             
         if (error) {
             console.error("Error fetching events from Supabase:", error);
@@ -47,16 +69,28 @@ async function fetchEvents() {
         }
         
         // Transform Supabase data to match the expected format
-        const formattedEvents = data.map((event, index) => {
+        const formattedEvents = await Promise.all(data.map(async (event, index) => {
+            let coordinates = { lat: 0, lng: 0 };
+            
+            // Use coordinates from database if available
+            if (event.latitude && event.longitude) {
+                coordinates = {
+                    lat: parseFloat(event.latitude),
+                    lng: parseFloat(event.longitude)
+                };
+            } else if (event.city && event.country) {
+                // Geocode from city/country if coordinates not available
+                coordinates = await geocodeLocation(event.city, event.country);
+            }
+            
             return {
                 id: event.id || index + 1,
                 name: event.name,
                 date: event.start_date,  // Using start_date as the main date
                 end_date: event.end_date,
                 location: {
-                    // We'll need to add geocoding later, for now use dummy coordinates
-                    lat: Math.random() * 180 - 90,  // Random latitude between -90 and 90
-                    lng: Math.random() * 360 - 180, // Random longitude between -180 and 180
+                    lat: coordinates.lat,
+                    lng: coordinates.lng,
                     city: event.city,
                     country: event.country
                 },
@@ -65,7 +99,7 @@ async function fetchEvents() {
                 short_description: event.description || "No description available",
                 tags: generateTagsFromEvent(event)
             };
-        });
+        }));
         
         console.log("Fetched events from Supabase:", formattedEvents);
         return formattedEvents;

@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS events (
   description TEXT,
   city TEXT NOT NULL,
   country TEXT NOT NULL,
+  latitude NUMERIC,
+  longitude NUMERIC,
   start_date TEXT NOT NULL,
   end_date TEXT NOT NULL,
   event_type TEXT NOT NULL,
@@ -36,11 +38,11 @@ CREATE POLICY "Allow anonymous inserts" ON events
   TO anon
   WITH CHECK (true);
 
--- Create policy to allow authenticated users to select their own submissions
-CREATE POLICY "Allow users to view their submissions" ON events
+-- Create policy to allow anyone to view approved and pending events
+CREATE POLICY "Allow public to view events" ON events
   FOR SELECT
-  TO authenticated
-  USING (true);
+  TO anon, authenticated
+  USING (status IN ('approved', 'pending'));
 
 -- Create bucket for logo storage (optional - we're using base64 in the code)
 -- INSERT INTO storage.buckets (id, name) VALUES ('event-logos', 'event-logos');

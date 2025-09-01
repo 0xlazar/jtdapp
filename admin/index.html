@@ -7,6 +7,7 @@
     <link rel="icon" href="../icons/logo.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin-config.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen">
     <header class="w-full py-4 bg-white shadow flex items-center">
@@ -15,14 +16,60 @@
                 <img src="../icons/logo.png" alt="Journey to DevConnect Logo" class="h-14 w-14 inline-block align-middle" />
                 <span class="ml-3 text-xl font-bold">Admin Dashboard</span>
             </a>
-            <nav>
+            <nav class="flex items-center space-x-4">
+                <button id="logout-btn" onclick="logout()" class="hidden text-red-600 hover:text-red-900 font-medium">
+                    🔓 Logout
+                </button>
                 <a href="../index.html" class="text-gray-600 hover:text-gray-900">Back to App</a>
             </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-6">Event Submissions</h1>
+    <!-- Login Form -->
+    <div id="login-form" class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div class="text-center">
+                <img src="../icons/logo.png" alt="Journey to DevConnect Logo" class="mx-auto h-20 w-20" />
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Admin Access</h2>
+                <p class="mt-2 text-sm text-gray-600">Enter password to access the admin dashboard</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="mt-8 space-y-6">
+                <div>
+                    <label for="password-input" class="sr-only">Password</label>
+                    <input id="password-input" name="password" type="password" required 
+                           class="relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-center text-lg"
+                           placeholder="Enter admin password" />
+                </div>
+                <div id="login-error" class="hidden text-center text-red-600 text-sm font-medium"></div>
+                <div>
+                    <button type="submit" 
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            🔐
+                        </span>
+                        Access Admin Dashboard
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Content -->
+    <main id="admin-content" class="container mx-auto px-4 py-8 hidden">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Event Submissions</h1>
+            <div id="stats" class="flex space-x-4 text-sm">
+                <div class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold">
+                    <span id="pending-count">0</span> Pending
+                </div>
+                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold">
+                    <span id="approved-count">0</span> Approved
+                </div>
+                <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full font-semibold">
+                    <span id="rejected-count">0</span> Rejected
+                </div>
+            </div>
+        </div>
         
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
             <div class="flex justify-between mb-4">
@@ -62,6 +109,86 @@
     </main>
     
     <script>
+        // Admin Authentication System (using external config)
+        const ADMIN_PASSWORD = window.ADMIN_CONFIG?.PASSWORD || 'DevConnect2024!';
+        const AUTH_SESSION_KEY = window.ADMIN_CONFIG?.STORAGE_KEY || 'jtd_admin_auth';
+        const AUTH_EXPIRY_HOURS = window.ADMIN_CONFIG?.SESSION_HOURS || 24;
+        
+        // Check if user is authenticated
+        function isAuthenticated() {
+            const authData = localStorage.getItem(AUTH_SESSION_KEY);
+            if (!authData) return false;
+            
+            try {
+                const { timestamp } = JSON.parse(authData);
+                const now = new Date().getTime();
+                const expiry = timestamp + (AUTH_EXPIRY_HOURS * 60 * 60 * 1000);
+                
+                if (now > expiry) {
+                    localStorage.removeItem(AUTH_SESSION_KEY);
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                localStorage.removeItem(AUTH_SESSION_KEY);
+                return false;
+            }
+        }
+        
+        // Authenticate user
+        function authenticate(password) {
+            if (password === ADMIN_PASSWORD) {
+                const authData = {
+                    timestamp: new Date().getTime(),
+                    authenticated: true
+                };
+                localStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(authData));
+                return true;
+            }
+            return false;
+        }
+        
+        // Logout function
+        function logout() {
+            localStorage.removeItem(AUTH_SESSION_KEY);
+            showLoginForm();
+        }
+        
+        // Show login form
+        function showLoginForm() {
+            document.getElementById('admin-content').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('logout-btn').classList.add('hidden');
+            document.getElementById('password-input').focus();
+        }
+        
+        // Show admin content
+        function showAdminContent() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('admin-content').classList.remove('hidden');
+            document.getElementById('logout-btn').classList.remove('hidden');
+        }
+        
+        // Handle login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            const password = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('login-error');
+            
+            if (authenticate(password)) {
+                document.getElementById('password-input').value = '';
+                errorMsg.classList.add('hidden');
+                showAdminContent();
+                // Initialize admin panel
+                initializeAdminPanel();
+            } else {
+                errorMsg.classList.remove('hidden');
+                errorMsg.textContent = '❌ Invalid password. Please try again.';
+                document.getElementById('password-input').value = '';
+                document.getElementById('password-input').focus();
+            }
+        }
+        
         // Supabase configuration
         const SUPABASE_CONFIG = {
             URL: 'https://otbtstuphxrvkqlejytq.supabase.co',
@@ -69,7 +196,7 @@
         };
         
         // Initialize Supabase client
-        const supabase = supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+        const supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
         
         // Elements
         const loadingEl = document.getElementById('loading');
@@ -84,6 +211,23 @@
         // Current filter
         let currentFilter = 'pending';
         
+        // Load statistics
+        async function loadStats() {
+            try {
+                const [pending, approved, rejected] = await Promise.all([
+                    supabaseClient.from('events').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+                    supabaseClient.from('events').select('id', { count: 'exact', head: true }).eq('status', 'approved'),
+                    supabaseClient.from('events').select('id', { count: 'exact', head: true }).eq('status', 'rejected')
+                ]);
+                
+                document.getElementById('pending-count').textContent = pending.count || 0;
+                document.getElementById('approved-count').textContent = approved.count || 0;
+                document.getElementById('rejected-count').textContent = rejected.count || 0;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+        
         // Fetch events based on status
         async function fetchEvents(status) {
             // Show loading
@@ -94,7 +238,7 @@
             
             try {
                 // Fetch events with the given status
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('events')
                     .select('*')
                     .eq('status', status)
@@ -148,26 +292,56 @@
                 
                 eventCard.appendChild(statusBadge);
                 
+                // Format coordinates
+                const coordinates = event.latitude && event.longitude 
+                    ? `${parseFloat(event.latitude).toFixed(4)}, ${parseFloat(event.longitude).toFixed(4)}`
+                    : 'Not geocoded yet';
+                
+                // Format special flags
+                const specialFlags = [];
+                if (event.is_free) specialFlags.push('🆓 Free');
+                if (event.is_ethereum_10) specialFlags.push('🎂 ETH 10 Years');
+                if (event.is_destino) specialFlags.push('🎯 Destino');
+                if (event.has_volunteership) specialFlags.push('🙋‍♂️ Volunteers');
+                if (event.has_scholarship) specialFlags.push('🎓 Scholarships');
+                if (event.has_hackathon) specialFlags.push('💻 Hackathon');
+                if (event.is_conference_week) specialFlags.push('📅 Conference Week');
+                
                 // Event content
                 const eventContent = `
-                    <h3 class="text-xl font-bold mb-2">${event.name}</h3>
+                    <div class="flex items-start justify-between mb-4">
+                        <h3 class="text-xl font-bold">${event.name}</h3>
+                        ${event.logo ? `<img src="${event.logo}" alt="Logo" class="w-12 h-12 rounded-lg object-cover border">` : ''}
+                    </div>
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
-                            <p class="text-gray-600"><strong>Location:</strong> ${event.city}, ${event.country}</p>
-                            <p class="text-gray-600"><strong>Dates:</strong> ${event.start_date} to ${event.end_date}</p>
-                            <p class="text-gray-600"><strong>Type:</strong> ${event.event_type}</p>
-                            <p class="text-gray-600"><strong>URL:</strong> <a href="${event.event_url}" target="_blank" class="text-blue-500 hover:underline">${event.event_url}</a></p>
+                            <p class="text-gray-600 mb-1"><strong>📍 Location:</strong> ${event.city}, ${event.country}</p>
+                            <p class="text-gray-600 mb-1"><strong>🌐 Coordinates:</strong> ${coordinates}</p>
+                            <p class="text-gray-600 mb-1"><strong>📅 Dates:</strong> ${event.start_date}${event.start_date !== event.end_date ? ` → ${event.end_date}` : ''}</p>
+                            <p class="text-gray-600 mb-1"><strong>🏷️ Type:</strong> ${event.event_type}</p>
+                            <p class="text-gray-600 mb-1"><strong>🔗 URL:</strong> <a href="${event.event_url}" target="_blank" class="text-blue-500 hover:underline break-all">${event.event_url}</a></p>
                         </div>
                         <div>
-                            <p class="text-gray-600"><strong>Contact:</strong> ${event.contact_name || 'N/A'}</p>
-                            <p class="text-gray-600"><strong>Email:</strong> ${event.contact_email || 'N/A'}</p>
-                            <p class="text-gray-600"><strong>Telegram:</strong> ${event.contact_telegram || 'N/A'}</p>
-                            <p class="text-gray-600"><strong>Submitted:</strong> ${new Date(event.submitted_at).toLocaleString()}</p>
+                            <p class="text-gray-600 mb-1"><strong>👤 Contact:</strong> ${event.contact_name || 'N/A'}</p>
+                            <p class="text-gray-600 mb-1"><strong>📧 Email:</strong> ${event.contact_email ? `<a href="mailto:${event.contact_email}" class="text-blue-500 hover:underline">${event.contact_email}</a>` : 'N/A'}</p>
+                            <p class="text-gray-600 mb-1"><strong>💬 Telegram:</strong> ${event.contact_telegram ? `<a href="https://t.me/${event.contact_telegram.replace('@', '')}" target="_blank" class="text-blue-500 hover:underline">${event.contact_telegram}</a>` : 'N/A'}</p>
+                            <p class="text-gray-600 mb-1"><strong>⏰ Submitted:</strong> ${new Date(event.submitted_at).toLocaleString()}</p>
                         </div>
                     </div>
+                    
+                    ${specialFlags.length > 0 ? `
+                        <div class="mb-4">
+                            <p class="text-gray-600 font-semibold mb-2">Special Features:</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${specialFlags.map(flag => `<span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">${flag}</span>`).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
                     <div class="mb-4">
-                        <p class="text-gray-600"><strong>Description:</strong></p>
-                        <p>${event.description || 'No description provided.'}</p>
+                        <p class="text-gray-600 font-semibold mb-2">Description:</p>
+                        <p class="bg-gray-50 p-3 rounded-lg">${event.description || 'No description provided.'}</p>
                     </div>
                 `;
                 
@@ -176,98 +350,192 @@
                 contentDiv.innerHTML = eventContent;
                 eventCard.appendChild(contentDiv);
                 
-                // Action buttons for pending events
+                // Action buttons - now available for all events
+                const actionButtons = document.createElement('div');
+                actionButtons.className = 'flex flex-wrap gap-2 mt-4';
+                
+                // Status dropdown for quick switching
+                const statusContainer = document.createElement('div');
+                statusContainer.className = 'flex items-center gap-2';
+                
+                const statusLabel = document.createElement('span');
+                statusLabel.className = 'text-sm font-medium text-gray-700';
+                statusLabel.textContent = 'Change Status:';
+                
+                const statusSelect = document.createElement('select');
+                statusSelect.className = 'px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500';
+                statusSelect.innerHTML = `
+                    <option value="pending" ${event.status === 'pending' ? 'selected' : ''}>⏳ Pending</option>
+                    <option value="approved" ${event.status === 'approved' ? 'selected' : ''}>✅ Approved</option>
+                    <option value="rejected" ${event.status === 'rejected' ? 'selected' : ''}>❌ Rejected</option>
+                `;
+                
+                statusSelect.addEventListener('change', () => {
+                    const newStatus = statusSelect.value;
+                    if (newStatus !== event.status) {
+                        changeEventStatus(event.id, newStatus, event.name);
+                    }
+                });
+                
+                statusContainer.appendChild(statusLabel);
+                statusContainer.appendChild(statusSelect);
+                actionButtons.appendChild(statusContainer);
+                
+                // Quick action buttons (more prominent)
                 if (event.status === 'pending') {
-                    const actionButtons = document.createElement('div');
-                    actionButtons.className = 'flex space-x-2 mt-4';
-                    
                     const approveBtn = document.createElement('button');
-                    approveBtn.className = 'px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors';
-                    approveBtn.textContent = 'Approve';
-                    approveBtn.addEventListener('click', () => approveEvent(event.id));
+                    approveBtn.className = 'px-4 py-2 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center gap-1';
+                    approveBtn.innerHTML = '✅ Quick Approve';
+                    approveBtn.addEventListener('click', () => changeEventStatus(event.id, 'approved', event.name));
                     
                     const rejectBtn = document.createElement('button');
-                    rejectBtn.className = 'px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors';
-                    rejectBtn.textContent = 'Reject';
-                    rejectBtn.addEventListener('click', () => rejectEvent(event.id));
+                    rejectBtn.className = 'px-4 py-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition-colors flex items-center gap-1';
+                    rejectBtn.innerHTML = '❌ Quick Reject';
+                    rejectBtn.addEventListener('click', () => changeEventStatus(event.id, 'rejected', event.name));
                     
                     actionButtons.appendChild(approveBtn);
                     actionButtons.appendChild(rejectBtn);
-                    eventCard.appendChild(actionButtons);
+                } else if (event.status === 'approved') {
+                    const rejectBtn = document.createElement('button');
+                    rejectBtn.className = 'px-3 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600 transition-colors';
+                    rejectBtn.innerHTML = '❌ Reject';
+                    rejectBtn.addEventListener('click', () => changeEventStatus(event.id, 'rejected', event.name));
+                    
+                    const pendingBtn = document.createElement('button');
+                    pendingBtn.className = 'px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-yellow-600 transition-colors';
+                    pendingBtn.innerHTML = '⏳ Back to Pending';
+                    pendingBtn.addEventListener('click', () => changeEventStatus(event.id, 'pending', event.name));
+                    
+                    actionButtons.appendChild(rejectBtn);
+                    actionButtons.appendChild(pendingBtn);
+                } else if (event.status === 'rejected') {
+                    const approveBtn = document.createElement('button');
+                    approveBtn.className = 'px-3 py-1 bg-green-500 text-white rounded-lg text-sm hover:bg-green-600 transition-colors';
+                    approveBtn.innerHTML = '✅ Approve';
+                    approveBtn.addEventListener('click', () => changeEventStatus(event.id, 'approved', event.name));
+                    
+                    const pendingBtn = document.createElement('button');
+                    pendingBtn.className = 'px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-yellow-600 transition-colors';
+                    pendingBtn.innerHTML = '⏳ Back to Pending';
+                    pendingBtn.addEventListener('click', () => changeEventStatus(event.id, 'pending', event.name));
+                    
+                    actionButtons.appendChild(approveBtn);
+                    actionButtons.appendChild(pendingBtn);
                 }
                 
-                // Show logo if available
-                if (event.logo) {
-                    const logoContainer = document.createElement('div');
-                    logoContainer.className = 'mt-4';
-                    logoContainer.innerHTML = `
-                        <p class="text-gray-600 mb-2"><strong>Logo:</strong></p>
-                        <img src="${event.logo}" alt="${event.name} Logo" class="max-w-[200px] max-h-[200px] border border-gray-200 rounded-lg">
-                    `;
-                    eventCard.appendChild(logoContainer);
-                }
+                eventCard.appendChild(actionButtons);
+                
+                // Logo is now shown in the header
                 
                 eventsContainerEl.appendChild(eventCard);
             });
         }
         
-        // Approve event
-        async function approveEvent(id) {
+        // Universal function to change event status
+        async function changeEventStatus(id, newStatus, eventName) {
+            console.log(`Attempting to change event status to "${newStatus}" for ID:`, id);
+            
+            const statusEmojis = {
+                'pending': '⏳',
+                'approved': '✅',
+                'rejected': '❌'
+            };
+            
+            const statusLabels = {
+                'pending': 'moved to pending',
+                'approved': 'approved',
+                'rejected': 'rejected'
+            };
+            
             try {
-                const { error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('events')
-                    .update({ status: 'approved' })
-                    .eq('id', id);
+                    .update({ status: newStatus })
+                    .eq('id', id)
+                    .select('id, name, status');
+                
+                console.log('Update response:', { data, error });
                 
                 if (error) {
+                    console.error('Supabase error details:', error);
                     throw error;
                 }
                 
-                // Refresh events
-                fetchEvents(currentFilter);
+                console.log(`Successfully changed event status to ${newStatus}:`, data);
+                
+                // Show success message
+                const emoji = statusEmojis[newStatus] || '📝';
+                const label = statusLabels[newStatus] || `changed to ${newStatus}`;
+                alert(`${emoji} Event "${eventName}" ${label} successfully!`);
+                
+                // Refresh events and stats
+                await Promise.all([fetchEvents(currentFilter), loadStats()]);
             } catch (err) {
-                console.error('Error approving event:', err);
-                alert('Error approving event: ' + err.message);
+                console.error('Error changing event status:', err);
+                alert(`❌ Error changing event status: ${err.message}\n\nCheck browser console for details.`);
             }
         }
         
-        // Reject event
+        // Legacy functions for backward compatibility (now just call changeEventStatus)
+        async function approveEvent(id) {
+            const event = originalEvents?.find(e => e.id === id);
+            await changeEventStatus(id, 'approved', event?.name || 'Unknown Event');
+        }
+        
         async function rejectEvent(id) {
-            try {
-                const { error } = await supabase
-                    .from('events')
-                    .update({ status: 'rejected' })
-                    .eq('id', id);
-                
-                if (error) {
-                    throw error;
-                }
-                
-                // Refresh events
-                fetchEvents(currentFilter);
-            } catch (err) {
-                console.error('Error rejecting event:', err);
-                alert('Error rejecting event: ' + err.message);
-            }
+            const event = originalEvents?.find(e => e.id === id);
+            await changeEventStatus(id, 'rejected', event?.name || 'Unknown Event');
+        }
+        
+        // Update active button styling
+        function updateActiveButton(activeBtn) {
+            [showPendingBtn, showApprovedBtn, showRejectedBtn].forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-offset-2');
+            });
+            activeBtn.classList.add('ring-2', 'ring-offset-2');
         }
         
         // Add event listeners
-        refreshBtn.addEventListener('click', () => fetchEvents(currentFilter));
-        showPendingBtn.addEventListener('click', () => {
-            currentFilter = 'pending';
-            fetchEvents(currentFilter);
-        });
-        showApprovedBtn.addEventListener('click', () => {
-            currentFilter = 'approved';
-            fetchEvents(currentFilter);
-        });
-        showRejectedBtn.addEventListener('click', () => {
-            currentFilter = 'rejected';
-            fetchEvents(currentFilter);
+        refreshBtn.addEventListener('click', async () => {
+            await Promise.all([fetchEvents(currentFilter), loadStats()]);
         });
         
-        // Initial load
-        fetchEvents(currentFilter);
+        showPendingBtn.addEventListener('click', async () => {
+            currentFilter = 'pending';
+            updateActiveButton(showPendingBtn);
+            await fetchEvents(currentFilter);
+        });
+        
+        showApprovedBtn.addEventListener('click', async () => {
+            currentFilter = 'approved';
+            updateActiveButton(showApprovedBtn);
+            await fetchEvents(currentFilter);
+        });
+        
+        showRejectedBtn.addEventListener('click', async () => {
+            currentFilter = 'rejected';
+            updateActiveButton(showRejectedBtn);
+            await fetchEvents(currentFilter);
+        });
+        
+        // Initialize admin panel (called after successful authentication)
+        async function initializeAdminPanel() {
+            updateActiveButton(showPendingBtn);
+            await Promise.all([fetchEvents(currentFilter), loadStats()]);
+        }
+        
+        // Initial authentication check and setup
+        function init() {
+            if (isAuthenticated()) {
+                showAdminContent();
+                initializeAdminPanel();
+            } else {
+                showLoginForm();
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html> 
