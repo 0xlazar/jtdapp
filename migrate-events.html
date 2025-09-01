@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrate JSON Events to Supabase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">🚀 Migrate JSON Events to Supabase</h1>
+        
+        <div class="mb-6 p-4 bg-blue-50 rounded-lg">
+            <p class="text-blue-800">
+                <strong>What this does:</strong> This will read all events from your <code>data/events.json</code> file 
+                and add them to your Supabase database. Events that already exist (same name and date) will be skipped.
+            </p>
+        </div>
+        
+        <div class="space-y-4 mb-6">
+            <button id="check-status" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold">
+                📊 Check Current Status
+            </button>
+            
+            <button id="start-migration" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 font-semibold">
+                🚀 Start Migration
+            </button>
+            
+            <button id="clear-log" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                🗑️ Clear Log
+            </button>
+        </div>
+        
+        <div class="mb-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold">Migration Progress</h3>
+                <div id="progress-text" class="text-sm text-gray-600">Ready to start</div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3 mt-2">
+                <div id="progress-bar" class="bg-green-600 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <div id="log" class="p-4 bg-gray-50 rounded border min-h-[400px] font-mono text-sm overflow-auto max-h-96">
+            <div class="text-gray-500">Ready to migrate events...</div>
+        </div>
+    </div>
+
+    <script src="scripts/supabase-config.js"></script>
+    <script>
+        const log = document.getElementById('log');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        
+        function addLog(message, type = 'info') {
+            const colors = {
+                info: 'text-blue-600',
+                success: 'text-green-600',
+                error: 'text-red-600',
+                warning: 'text-yellow-600'
+            };
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = colors[type] || 'text-gray-600';
+            logEntry.innerHTML = `<span class="text-gray-400">[${timestamp}]</span> ${message}`;
+            log.appendChild(logEntry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function updateProgress(current, total) {
+            const percentage = Math.round((current / total) * 100);
+            progressBar.style.width = `${percentage}%`;
+            progressText.textContent = `${current}/${total} events (${percentage}%)`;
+        }
+        
+        function clearLog() {
+            log.innerHTML = '<div class="text-gray-500">Log cleared...</div>';
+            progressBar.style.width = '0%';
+            progressText.textContent = 'Ready to start';
+        }
+        
+        // Initialize Supabase client
+        let supabaseClient;
+        try {
+            addLog('Initializing Supabase client...', 'info');
+            supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+            addLog('✓ Supabase client initialized successfully', 'success');
+        } catch (error) {
+            addLog('✗ Failed to initialize Supabase client: ' + error.message, 'error');
+        }
+        
+        // Transform JSON event to Supabase format
+        function transformEvent(jsonEvent) {
+            // Determine event type from tags
+            let eventType = 'conference'; // default
+            if (jsonEvent.tags && jsonEvent.tags.includes('Gathering')) {
+                eventType = 'gathering';
+            } else if (jsonEvent.tags && jsonEvent.tags.includes('Hackathon')) {
+                eventType = 'hackathon';
+            }
+            
+            // Check for special tags
+            const isEthereum10 = jsonEvent.tags && jsonEvent.tags.some(tag => 
+                tag.includes('ETH10Years') || tag.includes('Ethereum 10')
+            );
+            const isDestino = jsonEvent.tags && jsonEvent.tags.some(tag => 
+                tag.includes('Destino')
+            );
+            const isFree = jsonEvent.tags && jsonEvent.tags.includes('Free');
+            const hasVolunteership = jsonEvent.tags && jsonEvent.tags.includes('Volunteership');
+            const hasScholarship = jsonEvent.tags && jsonEvent.tags.includes('Scholarship');
+            
+            return {
+                name: jsonEvent.name,
+                description: jsonEvent.short_description || jsonEvent.description || 'Event description coming soon.',
+                city: jsonEvent.location.city,
+                country: jsonEvent.location.country,
+                latitude: jsonEvent.location.lat,
+                longitude: jsonEvent.location.lng,
+                start_date: jsonEvent.date,
+                end_date: jsonEvent.end_date || jsonEvent.date, // Use same date if no end date
+                event_type: eventType,
+                event_url: jsonEvent.link,
+                is_free: isFree,
+                is_ethereum_10: isEthereum10,
+                is_destino: isDestino,
+                has_volunteership: hasVolunteership,
+                has_scholarship: hasScholarship,
+                logo: jsonEvent.logo,
+                status: 'approved', // All JSON events are pre-approved
+                contact_name: 'Journey to DevConnect',
+                contact_email: 'events@journeytodevconnect.com',
+                submitted_at: new Date().toISOString()
+            };
+        }
+        
+        // Check current status
+        document.getElementById('check-status').addEventListener('click', async () => {
+            addLog('Checking current database status...', 'info');
+            
+            try {
+                // Check current events in Supabase
+                const { data: supabaseEvents, error: supabaseError } = await supabaseClient
+                    .from('events')
+                    .select('name, start_date, status');
+                
+                if (supabaseError) {
+                    addLog('✗ Error checking Supabase: ' + supabaseError.message, 'error');
+                    return;
+                }
+                
+                addLog(`📊 Current Supabase events: ${supabaseEvents.length}`, 'success');
+                supabaseEvents.forEach(event => {
+                    addLog(`  - ${event.name} (${event.start_date}) [${event.status}]`, 'info');
+                });
+                
+                // Load JSON events
+                const response = await fetch('data/events.json');
+                const jsonData = await response.json();
+                addLog(`📊 JSON events to migrate: ${jsonData.events.length}`, 'success');
+                
+                // Check for duplicates
+                const duplicates = jsonData.events.filter(jsonEvent => 
+                    supabaseEvents.some(supabaseEvent => 
+                        supabaseEvent.name === jsonEvent.name && 
+                        supabaseEvent.start_date === jsonEvent.date
+                    )
+                );
+                
+                addLog(`📊 Potential duplicates (will be skipped): ${duplicates.length}`, 'warning');
+                addLog(`📊 New events to add: ${jsonData.events.length - duplicates.length}`, 'success');
+                
+            } catch (error) {
+                addLog('✗ Error checking status: ' + error.message, 'error');
+            }
+        });
+        
+        // Start migration
+        document.getElementById('start-migration').addEventListener('click', async () => {
+            addLog('🚀 Starting migration process...', 'info');
+            
+            try {
+                // Load JSON events
+                addLog('📖 Loading JSON events...', 'info');
+                const response = await fetch('data/events.json');
+                const jsonData = await response.json();
+                const jsonEvents = jsonData.events;
+                
+                addLog(`📊 Found ${jsonEvents.length} events in JSON file`, 'success');
+                
+                // Get existing events from Supabase
+                const { data: existingEvents, error: fetchError } = await supabaseClient
+                    .from('events')
+                    .select('name, start_date');
+                
+                if (fetchError) {
+                    addLog('✗ Error fetching existing events: ' + fetchError.message, 'error');
+                    return;
+                }
+                
+                addLog(`📊 Found ${existingEvents.length} existing events in Supabase`, 'info');
+                
+                // Filter out duplicates
+                const newEvents = jsonEvents.filter(jsonEvent => 
+                    !existingEvents.some(existing => 
+                        existing.name === jsonEvent.name && 
+                        existing.start_date === jsonEvent.date
+                    )
+                );
+                
+                addLog(`📊 ${newEvents.length} new events to migrate`, 'success');
+                
+                if (newEvents.length === 0) {
+                    addLog('✅ No new events to migrate. All events are already in Supabase!', 'success');
+                    return;
+                }
+                
+                // Migrate events in batches of 10
+                const batchSize = 10;
+                let successCount = 0;
+                let errorCount = 0;
+                
+                for (let i = 0; i < newEvents.length; i += batchSize) {
+                    const batch = newEvents.slice(i, i + batchSize);
+                    addLog(`📦 Processing batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(newEvents.length/batchSize)} (${batch.length} events)`, 'info');
+                    
+                    // Transform events for this batch
+                    const transformedBatch = batch.map(transformEvent);
+                    
+                    try {
+                        const { data, error } = await supabaseClient
+                            .from('events')
+                            .insert(transformedBatch)
+                            .select('name');
+                        
+                        if (error) {
+                            addLog(`✗ Batch error: ${error.message}`, 'error');
+                            errorCount += batch.length;
+                        } else {
+                            addLog(`✅ Successfully added ${data.length} events`, 'success');
+                            data.forEach(event => {
+                                addLog(`  + ${event.name}`, 'success');
+                            });
+                            successCount += data.length;
+                        }
+                        
+                    } catch (batchError) {
+                        addLog(`✗ Batch failed: ${batchError.message}`, 'error');
+                        errorCount += batch.length;
+                    }
+                    
+                    // Update progress
+                    updateProgress(i + batch.length, newEvents.length);
+                    
+                    // Small delay between batches to avoid rate limiting
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+                
+                addLog('🎉 Migration completed!', 'success');
+                addLog(`📊 Summary: ${successCount} successful, ${errorCount} errors`, 'info');
+                
+                if (successCount > 0) {
+                    addLog('🔄 Refresh your main app to see all events!', 'success');
+                }
+                
+            } catch (error) {
+                addLog('✗ Migration failed: ' + error.message, 'error');
+            }
+        });
+        
+        // Clear log
+        document.getElementById('clear-log').addEventListener('click', clearLog);
+    </script>
+</body>
+</html>

@@ -14,52 +14,52 @@ Since the automatic setup script is facing permission issues, here's how to manu
 Copy and paste the following SQL into the query editor:
 
 ```sql
--- Drop existing table if it exists
-DROP TABLE IF EXISTS events;
+    -- Drop existing table if it exists
+    DROP TABLE IF EXISTS events;
 
--- Create events table with the correct schema
-CREATE TABLE events (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  name TEXT NOT NULL,
-  description TEXT,
-  city TEXT NOT NULL,
-  country TEXT NOT NULL,
-  start_date TEXT NOT NULL,
-  end_date TEXT NOT NULL,
-  event_type TEXT NOT NULL,
-  event_url TEXT,
-  is_conference_week BOOLEAN DEFAULT FALSE,
-  conference_week_url TEXT,
-  has_hackathon BOOLEAN DEFAULT FALSE,
-  hackathon_url TEXT,
-  is_free BOOLEAN DEFAULT FALSE,
-  is_ethereum_10 BOOLEAN DEFAULT FALSE,
-  is_destino BOOLEAN DEFAULT FALSE,
-  has_volunteership BOOLEAN DEFAULT FALSE,
-  has_scholarship BOOLEAN DEFAULT FALSE,
-  contact_name TEXT,
-  contact_email TEXT,
-  contact_telegram TEXT,
-  logo TEXT,
-  status TEXT DEFAULT 'pending',
-  submitted_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
-);
+    -- Create events table with the correct schema
+    CREATE TABLE events (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name TEXT NOT NULL,
+    description TEXT,
+    city TEXT NOT NULL,
+    country TEXT NOT NULL,
+    start_date TEXT NOT NULL,
+    end_date TEXT NOT NULL,
+    event_type TEXT NOT NULL,
+    event_url TEXT,
+    is_conference_week BOOLEAN DEFAULT FALSE,
+    conference_week_url TEXT,
+    has_hackathon BOOLEAN DEFAULT FALSE,
+    hackathon_url TEXT,
+    is_free BOOLEAN DEFAULT FALSE,
+    is_ethereum_10 BOOLEAN DEFAULT FALSE,
+    is_destino BOOLEAN DEFAULT FALSE,
+    has_volunteership BOOLEAN DEFAULT FALSE,
+    has_scholarship BOOLEAN DEFAULT FALSE,
+    contact_name TEXT,
+    contact_email TEXT,
+    contact_telegram TEXT,
+    logo TEXT,
+    status TEXT DEFAULT 'pending',
+    submitted_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
+    );
 
--- Enable row level security
-ALTER TABLE events ENABLE ROW LEVEL SECURITY;
+    -- Enable row level security
+    ALTER TABLE events ENABLE ROW LEVEL SECURITY;
 
--- Create policy to allow anonymous inserts
-CREATE POLICY "Allow anonymous inserts" ON events
-  FOR INSERT
-  TO anon
-  WITH CHECK (true);
+    -- Create policy to allow anonymous inserts
+    CREATE POLICY "Allow anonymous inserts" ON events
+    FOR INSERT
+    TO anon
+    WITH CHECK (true);
 
--- Create policy to allow authenticated users to select
-CREATE POLICY "Allow users to view submissions" ON events
-  FOR SELECT
-  TO authenticated
-  USING (true);
+    -- Create policy to allow authenticated users to select
+    CREATE POLICY "Allow users to view submissions" ON events
+    FOR SELECT
+    TO authenticated
+    USING (true);
 ```
 
 ## Step 3: Run the SQL Query

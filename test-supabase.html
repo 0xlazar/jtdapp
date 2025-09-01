@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Connection Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-6">Supabase Connection Test</h1>
+        
+        <div class="space-y-4">
+            <button id="test-connection" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                Test Connection
+            </button>
+            
+            <button id="test-table" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                Test Events Table
+            </button>
+            
+            <button id="test-insert" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+                Test Insert (Dummy Event)
+            </button>
+            
+            <button id="clear-log" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+                Clear Log
+            </button>
+        </div>
+        
+        <div id="log" class="mt-6 p-4 bg-gray-50 rounded border min-h-[200px] font-mono text-sm overflow-auto">
+            <div class="text-gray-500">Click a button to test Supabase connection...</div>
+        </div>
+    </div>
+
+    <script src="scripts/supabase-config.js"></script>
+    <script>
+        const log = document.getElementById('log');
+        
+        function addLog(message, type = 'info') {
+            const colors = {
+                info: 'text-blue-600',
+                success: 'text-green-600',
+                error: 'text-red-600',
+                warning: 'text-yellow-600'
+            };
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = colors[type] || 'text-gray-600';
+            logEntry.innerHTML = `<span class="text-gray-400">[${timestamp}]</span> ${message}`;
+            log.appendChild(logEntry);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function clearLog() {
+            log.innerHTML = '<div class="text-gray-500">Log cleared...</div>';
+        }
+        
+        // Initialize Supabase client
+        let supabaseClient;
+        try {
+            addLog('Initializing Supabase client...', 'info');
+            supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.URL, SUPABASE_CONFIG.ANON_KEY);
+            addLog('✓ Supabase client initialized successfully', 'success');
+            addLog(`URL: ${SUPABASE_CONFIG.URL}`, 'info');
+            addLog(`Key: ${SUPABASE_CONFIG.ANON_KEY.substring(0, 20)}...`, 'info');
+        } catch (error) {
+            addLog('✗ Failed to initialize Supabase client: ' + error.message, 'error');
+        }
+        
+        // Test connection
+        document.getElementById('test-connection').addEventListener('click', async () => {
+            addLog('Testing Supabase connection...', 'info');
+            
+            try {
+                // Test with a simple query to check connection
+                const { data, error } = await supabaseClient
+                    .from('events')
+                    .select('count', { count: 'exact', head: true });
+                
+                if (error) {
+                    addLog('✗ Connection failed: ' + error.message, 'error');
+                    addLog('Error details: ' + JSON.stringify(error, null, 2), 'error');
+                } else {
+                    addLog('✓ Connection successful!', 'success');
+                    addLog(`Found ${data} events in database`, 'success');
+                }
+            } catch (error) {
+                addLog('✗ Connection test failed: ' + error.message, 'error');
+            }
+        });
+        
+        // Test events table
+        document.getElementById('test-table').addEventListener('click', async () => {
+            addLog('Testing events table access...', 'info');
+            
+            try {
+                const { data, error } = await supabaseClient
+                    .from('events')
+                    .select('*')
+                    .limit(5);
+                
+                if (error) {
+                    addLog('✗ Table access failed: ' + error.message, 'error');
+                    addLog('Error details: ' + JSON.stringify(error, null, 2), 'error');
+                    
+                    // Check if it's a table doesn't exist error
+                    if (error.message.includes('relation "events" does not exist')) {
+                        addLog('⚠ Events table does not exist. You need to run the SQL setup script.', 'warning');
+                    }
+                } else {
+                    addLog('✓ Table access successful!', 'success');
+                    addLog(`Retrieved ${data.length} events:`, 'success');
+                    data.forEach((event, index) => {
+                        addLog(`  ${index + 1}. ${event.name} (${event.status})`, 'info');
+                    });
+                }
+            } catch (error) {
+                addLog('✗ Table test failed: ' + error.message, 'error');
+            }
+        });
+        
+        // Test insert
+        document.getElementById('test-insert').addEventListener('click', async () => {
+            addLog('Testing event insertion...', 'info');
+            
+            const testEvent = {
+                name: 'Test Event ' + Date.now(),
+                description: 'This is a test event created by the connection tester',
+                city: 'Test City',
+                country: 'Test Country',
+                start_date: '2025-12-01',
+                end_date: '2025-12-01',
+                event_type: 'conference',
+                event_url: 'https://test.example.com',
+                status: 'pending',
+                contact_name: 'Test User',
+                contact_email: 'test@example.com'
+            };
+            
+            try {
+                const { data, error } = await supabaseClient
+                    .from('events')
+                    .insert([testEvent])
+                    .select();
+                
+                if (error) {
+                    addLog('✗ Insert failed: ' + error.message, 'error');
+                    addLog('Error details: ' + JSON.stringify(error, null, 2), 'error');
+                } else {
+                    addLog('✓ Insert successful!', 'success');
+                    addLog('Inserted event: ' + JSON.stringify(data[0], null, 2), 'success');
+                }
+            } catch (error) {
+                addLog('✗ Insert test failed: ' + error.message, 'error');
+            }
+        });
+        
+        // Clear log
+        document.getElementById('clear-log').addEventListener('click', clearLog);
+    </script>
+</body>
+</html>
