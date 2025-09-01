@@ -47,17 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Register service worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('ServiceWorker registration successful');
-            })
-            .catch(err => {
-                console.log('ServiceWorker registration failed: ', err);
-            });
-    });
-}
+// Temporarily disabled service worker for dev environment
+// if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', () => {
+//         navigator.serviceWorker.register('/sw.js')
+//             .then(registration => {
+//                 console.log('ServiceWorker registration successful');
+//             })
+//             .catch(err => {
+//                 console.log('ServiceWorker registration failed: ', err);
+//             });
+//     });
+// }
 
 // Replace the Coming Soon Popup functionality with a toast
 document.getElementById('profile-button').addEventListener('click', function() {
